@@ -4,8 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productivity Monitor Dashboard</title>
+    <title>Snapdragon Productivity Monitor</title>
     <style>
+        :root {
+            --snapdragon-red: #e31e24;
+            --snapdragon-dark-red: #c41e3a;
+            --snapdragon-gold: #ffd700;
+            --snapdragon-light-gold: #ffed4a;
+            --snapdragon-white: #ffffff;
+            --snapdragon-silver: #c0c0c0;
+            --snapdragon-black: #1a1a1a;
+
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+            --glass-glow: 0 0 30px rgba(227, 30, 36, 0.3);
+
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-muted: rgba(255, 255, 255, 0.65);
+            --text-gold: #ffd700;
+
+            --sidebar-width: 300px;
+            --header-height: 90px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,400 +36,661 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 30%, #2a1a1a 60%, #0a0a0a 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
             min-height: 100vh;
-            padding: 20px;
-            color: #333;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(227, 30, 36, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(227, 30, 36, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 60% 40%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                conic-gradient(from 45deg at 25% 25%, transparent 0deg, rgba(227, 30, 36, 0.03) 90deg, transparent 180deg),
+                conic-gradient(from 225deg at 75% 75%, transparent 0deg, rgba(255, 215, 0, 0.02) 90deg, transparent 180deg);
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            color: #4a5568;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            color: #718096;
-            font-size: 1.1em;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            text-align: center;
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(25px);
+            border-right: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow:
+                var(--glass-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 2rem 0;
             transition: transform 0.3s ease;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
+        .sidebar-header {
+            padding: 0 2rem 2rem;
+            border-bottom: 1px solid var(--glass-border);
+            margin-bottom: 2rem;
         }
 
-        .stat-card:first-child {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--snapdragon-red), var(--snapdragon-dark-red));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow:
+                0 0 25px rgba(227, 30, 36, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .nav-menu {
+            padding: 0 1rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(227, 30, 36, 0.1);
+            color: var(--text-primary);
+            box-shadow:
+                0 0 25px rgba(227, 30, 36, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 70%;
+            background: linear-gradient(135deg, var(--snapdragon-red), var(--snapdragon-gold));
+            border-radius: 0 3px 3px 0;
+            box-shadow: 0 0 15px var(--snapdragon-red);
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover .nav-icon {
+            opacity: 1;
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            height: var(--header-height);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            box-shadow:
+                0 8px 25px rgba(227, 30, 36, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--snapdragon-red), var(--snapdragon-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 10px rgba(227, 30, 36, 0.3));
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-welcome {
+            text-align: right;
+        }
+
+        .user-welcome h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .user-welcome p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .status-indicator {
+            width: 14px;
+            height: 14px;
+            background: var(--snapdragon-gold);
+            border-radius: 50%;
+            box-shadow:
+                0 0 15px var(--snapdragon-gold),
+                0 0 30px rgba(255, 215, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* Content Area */
+        .content-area {
+            padding: 2rem;
+            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .stat-card:first-child::before {
+        .stat-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--snapdragon-red), var(--snapdragon-gold));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 16px 16px 0 0;
         }
 
-        .stat-card:first-child .value {
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow:
+                0 15px 50px rgba(227, 30, 36, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
-        .stat-card:first-child .unit {
-            color: rgba(255, 255, 255, 0.9);
+        .stat-card:hover::before {
+            opacity: 1;
         }
 
-        .stat-card:first-child h3 {
-            color: white;
+        .stat-card.primary {
+            background: linear-gradient(135deg, rgba(227, 30, 36, 0.15), rgba(255, 215, 0, 0.1));
+            border-color: rgba(227, 30, 36, 0.4);
+            box-shadow:
+                var(--glass-shadow),
+                0 0 30px rgba(227, 30, 36, 0.2);
+        }
+
+        .stat-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            justify-content: space-between;
+            margin-bottom: 1rem;
         }
 
-        .stat-card:first-child h3::before {
-            content: '⏱️';
-            font-size: 1.2em;
+        .stat-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .session-progress {
-            width: 100%;
+        .stat-icon {
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card.primary .stat-value {
+            background: linear-gradient(135deg, var(--snapdragon-red), var(--snapdragon-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 8px rgba(227, 30, 36, 0.3));
+        }
+
+        .stat-unit {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .stat-progress {
+            margin-top: 1rem;
             height: 4px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 2px;
-            margin-top: 15px;
             overflow: hidden;
         }
 
-        .session-progress-bar {
+        .stat-progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #48bb78, #38b2ac);
+            background: linear-gradient(90deg, var(--snapdragon-red), var(--snapdragon-gold));
             border-radius: 2px;
             transition: width 0.5s ease;
-            animation: progressPulse 2s ease-in-out infinite alternate;
+            box-shadow:
+                0 0 15px rgba(227, 30, 36, 0.6),
+                0 0 25px rgba(255, 215, 0, 0.3);
         }
 
-        @keyframes progressPulse {
-            0% {
-                opacity: 0.8;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
-        }
-
-        .stat-card h3 {
-            font-size: 1.2em;
-            color: #4a5568;
-            margin-bottom: 10px;
-        }
-
-        .stat-card .value {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .stat-card .unit {
-            color: #718096;
-            font-size: 0.9em;
-        }
-
-        .section {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-
-        .section h2 {
-            color: #4a5568;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-        }
-
-        .app-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .app-tag {
-            background: #e6fffa;
-            color: #319795;
-            padding: 8px 15px;
+        /* Section Cards */
+        .section-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 215, 0, 0.15);
             border-radius: 20px;
-            font-size: 0.9em;
-            border: 1px solid #81e6d9;
+            padding: 2.5rem;
+            box-shadow:
+                var(--glass-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 40px rgba(227, 30, 36, 0.05);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
         }
 
-        .app-card {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                0 0 50px rgba(227, 30, 36, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .section-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--snapdragon-red), var(--snapdragon-dark-red));
             border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow:
+                0 0 20px rgba(227, 30, 36, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* App Cards */
+        .app-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
             transition: all 0.3s ease;
             position: relative;
         }
 
         .app-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+            box-shadow:
+                0 10px 30px rgba(227, 30, 36, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .app-card.current-app {
-            background: #e6fffa;
-            border-color: #38b2ac;
-            box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2);
+            background: linear-gradient(135deg, rgba(227, 30, 36, 0.15), rgba(255, 215, 0, 0.1));
+            border-color: rgba(227, 30, 36, 0.4);
+            box-shadow:
+                var(--glass-shadow),
+                0 0 25px rgba(227, 30, 36, 0.2);
         }
 
-        .app-card.idle-app {
-            background: #fff5f5;
-            border-color: #feb2b2;
+        .app-card.current-app::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--snapdragon-red), var(--snapdragon-gold));
+            border-radius: 12px 12px 0 0;
         }
 
         .app-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
         }
 
         .app-name {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #2d3748;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
             display: flex;
             align-items: center;
+            gap: 0.5rem;
         }
 
-        .app-name .current-indicator {
-            width: 8px;
-            height: 8px;
+        .app-status-dot {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: #38b2ac;
-            margin-right: 8px;
+            background: var(--snapdragon-gold);
+            box-shadow:
+                0 0 12px var(--snapdragon-gold),
+                0 0 20px rgba(255, 215, 0, 0.3);
             animation: pulse 2s infinite;
-        }
-
-        .app-name .instance-count {
-            background: #e2e8f0;
-            color: #4a5568;
-            font-size: 0.8em;
-            padding: 2px 6px;
-            border-radius: 12px;
-            margin-left: 8px;
-            font-weight: normal;
-        }
-
-        .app-name .instance-count.multiple {
-            background: #fed7d7;
-            color: #742a2a;
         }
 
         .app-timing {
             text-align: right;
-            font-size: 0.9em;
+            font-size: 0.9rem;
         }
 
-        .app-timing .duration {
-            color: #4a5568;
+        .app-duration {
+            color: var(--text-primary);
             font-weight: 500;
         }
 
-        .app-timing .last-used {
-            color: #718096;
-            font-size: 0.8em;
+        .app-last-used {
+            color: var(--text-muted);
+            font-size: 0.8rem;
         }
 
-        .app-title {
-            color: #718096;
-            font-size: 0.9em;
-            margin-top: 8px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+        /* Browser Tabs */
+        .browser-tab {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
         }
 
-        .app-status {
+        .browser-tab:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            box-shadow:
+                0 8px 25px rgba(227, 30, 36, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .browser-tab.active {
+            background: linear-gradient(135deg, rgba(227, 30, 36, 0.12), rgba(255, 215, 0, 0.08));
+            border-color: rgba(227, 30, 36, 0.3);
+            box-shadow:
+                0 0 20px rgba(227, 30, 36, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .browser-tab-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #e2e8f0;
+            margin-bottom: 0.5rem;
         }
 
-        .app-status .status-badge {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.8em;
+        .browser-tab-title {
             font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.95rem;
         }
 
-        .app-status .status-badge.active {
-            background: #c6f6d5;
-            color: #22543d;
+        .browser-tab-time {
+            color: var(--text-muted);
+            font-size: 0.8rem;
         }
 
-        .app-status .status-badge.idle {
-            background: #fed7d7;
-            color: #742a2a;
+        .browser-tab-url {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            opacity: 0.8;
         }
 
-        .app-status .status-badge.normal {
-            background: #bee3f8;
-            color: #2a4365;
+        /* Settings Panel */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
-        .resource-info {
+        .setting-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .setting-item:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+            transform: translateY(-1px);
+            box-shadow:
+                0 8px 25px rgba(227, 30, 36, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .setting-item label {
             display: flex;
-            gap: 10px;
-            margin: 8px 0;
-        }
-
-        .resource-item {
-            background: #f7fafc;
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-size: 0.85em;
-            color: #4a5568;
-            border: 1px solid #e2e8f0;
-        }
-
-        .alert-history {
-            margin: 8px 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        .alert-badge {
-            padding: 2px 6px;
-            border-radius: 8px;
-            font-size: 0.75em;
+            align-items: center;
+            gap: 1rem;
             font-weight: 500;
-        }
-
-        .alert-badge.info {
-            background: #bee3f8;
-            color: #2a4365;
-        }
-
-        .alert-badge.warning {
-            background: #fbd38d;
-            color: #744210;
-        }
-
-        .alert-badge.critical {
-            background: #feb2b2;
-            color: #742a2a;
-        }
-
-        .alert-controls {
-            margin-top: 10px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-snooze,
-        .btn-whitelist {
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.85em;
-            border: 1px solid #e2e8f0;
-            background: white;
+            color: var(--text-primary);
             cursor: pointer;
-            transition: all 0.2s ease;
         }
 
-        .btn-snooze {
-            color: #4a5568;
+        .setting-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--snapdragon-red);
+            cursor: pointer;
         }
 
-        .btn-snooze:hover {
-            background: #f0f9ff;
-            border-color: #0ea5e9;
-            color: #0ea5e9;
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-whitelist {
-            color: #4a5568;
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
         }
 
-        .btn-whitelist:hover {
-            background: #f0fff4;
-            border-color: #22c55e;
-            color: #22c55e;
+        .btn:hover::before {
+            left: 100%;
         }
 
-        .btn-whitelist.whitelisted {
-            background: #dcfce7;
-            border-color: #22c55e;
-            color: #15803d;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--snapdragon-red), var(--snapdragon-dark-red));
+            color: white;
+            box-shadow:
+                0 6px 20px rgba(227, 30, 36, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 10px 30px rgba(227, 30, 36, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow:
+                var(--glass-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+            box-shadow:
+                0 8px 25px rgba(227, 30, 36, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        /* Notification Toast */
         .notification-toast {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #1f2937;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, rgba(227, 30, 36, 0.9), rgba(196, 30, 58, 0.9));
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            color: var(--text-primary);
+            padding: 1.25rem 2rem;
+            border-radius: 16px;
+            box-shadow:
+                var(--glass-shadow),
+                0 0 30px rgba(227, 30, 36, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
             z-index: 1000;
             animation: slideIn 0.3s ease-out;
+            font-weight: 600;
         }
 
         @keyframes slideIn {
@@ -421,533 +705,255 @@
             }
         }
 
-        .alert-settings-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .setting-item {
-            background: #f7fafc;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .setting-item label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-            color: #4a5568;
-            cursor: pointer;
-        }
-
-        .setting-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #667eea;
-        }
-
-        .alert-levels {
-            margin-bottom: 20px;
-        }
-
-        .alert-levels h3 {
-            margin-bottom: 10px;
-            color: #4a5568;
-        }
-
-        .alert-levels-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
-
-        .alert-levels-grid label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #f7fafc;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .alert-levels-grid label:hover {
-            background: #edf2f7;
-            border-color: #667eea;
-        }
-
-        .alert-levels-grid input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: #667eea;
-        }
-
-        .alert-controls-main {
-            text-align: center;
-        }
-
-        .btn-save-settings {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-save-settings:hover {
-            background: #5a67d8;
-            transform: translateY(-1px);
-        }
-
-        .break-reminder-interval {
-            margin-bottom: 20px;
-        }
-
-        .break-reminder-interval h3 {
-            margin-bottom: 10px;
-            color: #4a5568;
-        }
-
-        .interval-setting {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #f7fafc;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .interval-setting label {
-            font-weight: 500;
-            color: #4a5568;
-        }
-
-        .interval-setting select {
-            padding: 8px 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            background: white;
-            font-size: 0.95em;
-            color: #4a5568;
-            min-width: 120px;
-        }
-
-        .interval-setting select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .browser-stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .browser-stat {
-            background: #f7fafc;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-        }
-
-        .browser-stat h4 {
-            margin: 0 0 8px 0;
-            color: #4a5568;
-            font-size: 0.9em;
-        }
-
-        .browser-stat span {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .browser-tab {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .browser-tab:hover {
-            background: #edf2f7;
-            transform: translateY(-1px);
-        }
-
-        .browser-tab.active {
-            background: #e6fffa;
-            border-color: #38b2ac;
-        }
-
-        .browser-tab-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .browser-tab-title {
-            font-weight: 500;
-            color: #2d3748;
-            font-size: 0.95em;
-        }
-
-        .browser-tab-time {
-            color: #718096;
-            font-size: 0.85em;
-        }
-
-        .browser-tab-url {
-            color: #4a5568;
-            font-size: 0.85em;
-            margin-bottom: 5px;
-        }
-
-        .browser-tab-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .browser-tab-category {
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.75em;
-            font-weight: 500;
-        }
-
-        .browser-tab-category.productive {
-            background: #c6f6d5;
-            color: #22543d;
-        }
-
-        .browser-tab-category.social {
-            background: #fbb6ce;
-            color: #702459;
-        }
-
-        .browser-tab-category.entertainment {
-            background: #fbd38d;
-            color: #744210;
-        }
-
-        .browser-tab-category.general {
-            background: #bee3f8;
-            color: #2a4365;
-        }
-
-        .browser-tab.inactive-tab {
-            opacity: 0.7;
-        }
-
-        .visit-count {
-            font-size: 0.8em;
-            color: #718096;
-            font-weight: normal;
-        }
-
-        .search-query {
-            background: #fff5b8;
-            color: #744210;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.85em;
-            margin: 5px 0;
-            border-left: 3px solid #fbd38d;
-        }
-
-        .browser-stat {
-            position: relative;
-        }
-
-        .browser-stat:nth-child(3) {
-            background: linear-gradient(135deg, #e6fffa 0%, #c6f6d5 100%);
-        }
-
-        .browser-stat:nth-child(3) span {
-            color: #22543d;
-        }
-
-        .debug-info {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 10px;
-            margin-top: 15px;
-            font-size: 0.85em;
-            color: #4a5568;
-        }
-
-        .log-entry {
-            background: #f7fafc;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-        }
-
-        .log-entry h4 {
-            color: #4a5568;
-            margin-bottom: 5px;
-        }
-
-        .log-entry p {
-            color: #718096;
-            font-size: 0.9em;
-        }
-
-        .session-item {
-            background: #f7fafc;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .session-item .session-info {
-            flex: 1;
-        }
-
-        .session-item .session-duration {
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #48bb78;
-            margin-right: 10px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .last-updated {
-            text-align: center;
-            color: #718096;
-            font-size: 0.9em;
-            margin-top: 20px;
-        }
-
+        /* No Data State */
         .no-data {
             text-align: center;
-            color: #718096;
+            color: var(--text-muted);
             font-style: italic;
-            padding: 20px;
+            padding: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
+            .content-area {
+                padding: 1rem;
+            }
+
             .stats-grid {
                 grid-template-columns: 1fr;
             }
 
-            .container {
-                padding: 20px;
+            .header {
+                padding: 0 1rem;
             }
 
-            .header h1 {
-                font-size: 2em;
+            .page-title {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🚀 Productivity Monitor</h1>
-            <p><span class="status-indicator"></span>Live Dashboard - Real-time Activity Tracking</p>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="logo">
+                <div class="logo-icon">🚀</div>
+                <span>Snapdragon</span>
+            </a>
         </div>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Current Session</h3>
-                <div class="value" id="currentSession">0s</div>
-                <div class="unit">active now</div>
-                <div class="session-progress">
-                    <div class="session-progress-bar" id="sessionProgress" style="width: 0%"></div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <h3>Keystrokes</h3>
-                <div class="value" id="keystrokes">0</div>
-                <div class="unit">this session</div>
-            </div>
-            <div class="stat-card">
-                <h3>Open Apps</h3>
-                <div class="value" id="openApps">0</div>
-                <div class="unit">currently</div>
-            </div>
-            <div class="stat-card">
-                <h3>Total Sessions</h3>
-                <div class="value" id="totalSessions">0</div>
-                <div class="unit">all time</div>
-            </div>
-            <div class="stat-card">
-                <h3>Today's Time</h3>
-                <div class="value" id="todayTime">0</div>
-                <div class="unit">minutes</div>
-            </div>
-            <div class="stat-card">
-                <h3>Total Time</h3>
-                <div class="value" id="totalTime">0</div>
-                <div class="unit">hours</div>
-            </div>
-        </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active">
+                <div class="nav-icon">📊</div>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon">📱</div>
+                <span>Applications</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon">🌐</div>
+                <span>Browser</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon">📈</div>
+                <span>Analytics</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon">⚙️</div>
+                <span>Settings</span>
+            </a>
+        </nav>
+    </div>
 
-        <div class="section">
-            <h2>📱 Currently Open Applications</h2>
-            <div id="appList">
-                <div class="no-data">No applications detected</div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1 class="page-title">Productivity Monitor</h1>
+                <div class="status-indicator"></div>
             </div>
-        </div>
+            <div class="header-right">
+                <div class="user-welcome">
+                    <h3>Hello, Facundo</h3>
+                    <p>Good to have you back</p>
+                </div>
+            </div>
+        </header>
 
-        <div class="section">
-            <h2>🔔 Alert Settings</h2>
-            <div class="alert-settings-grid">
-                <div class="setting-item">
-                    <label>
-                        <input type="checkbox" id="alertsEnabled" checked>
-                        Enable idle app alerts
-                    </label>
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card primary">
+                    <div class="stat-header">
+                        <div class="stat-title">Current Session</div>
+                        <div class="stat-icon">⏱️</div>
+                    </div>
+                    <div class="stat-value" id="currentSession">0s</div>
+                    <div class="stat-unit">active now</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" id="sessionProgress" style="width: 0%"></div>
+                    </div>
                 </div>
-                <div class="setting-item">
-                    <label>
-                        <input type="checkbox" id="showResourceUsage" checked>
-                        Show resource usage in alerts
-                    </label>
-                </div>
-                <div class="setting-item">
-                    <label>
-                        <input type="checkbox" id="smartFiltering" checked>
-                        Smart filtering (exclude system apps)
-                    </label>
-                </div>
-                <div class="setting-item">
-                    <label>
-                        <input type="checkbox" id="breakRemindersEnabled" checked>
-                        Enable break reminders
-                    </label>
-                </div>
-            </div>
-            <div class="break-reminder-interval">
-                <h3>Break Reminder Interval</h3>
-                <div class="interval-setting">
-                    <label for="breakInterval">Remind me every:</label>
-                    <select id="breakInterval">
-                        <option value="60">1 minute</option>
-                        <option value="180" selected>3 minutes</option>
-                        <option value="300">5 minutes</option>
-                        <option value="600">10 minutes</option>
-                        <option value="900">15 minutes</option>
-                        <option value="1800">30 minutes</option>
-                    </select>
-                </div>
-            </div>
-            <div class="alert-levels">
-                <h3>Alert Levels</h3>
-                <div class="alert-levels-grid">
-                    <label>
-                        <input type="checkbox" id="level1" checked>
-                        💡 3 minutes (Info)
-                    </label>
-                    <label>
-                        <input type="checkbox" id="level2" checked>
-                        ⚠️ 10 minutes (Warning)
-                    </label>
-                    <label>
-                        <input type="checkbox" id="level3" checked>
-                        🚨 30 minutes (Critical)
-                    </label>
-                </div>
-            </div>
-            <div class="alert-controls-main">
-                <button class="btn-save-settings" onclick="saveAlertSettings()">Save Settings</button>
-            </div>
-        </div>
 
-        <div class="section">
-            <h2>🌐 Browser Activity</h2>
-            <div class="browser-stats-grid">
-                <div class="browser-stat">
-                    <h4>Active Tabs</h4>
-                    <span id="activeTabs">0</span>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Keystrokes</div>
+                        <div class="stat-icon">⌨️</div>
+                    </div>
+                    <div class="stat-value" id="keystrokes">0</div>
+                    <div class="stat-unit">this session</div>
                 </div>
-                <div class="browser-stat">
-                    <h4>Browsers</h4>
-                    <span id="activeBrowsers">0</span>
-                </div>
-                <div class="browser-stat">
-                    <h4>Recent URLs</h4>
-                    <span id="recentUrls">0</span>
-                </div>
-                <div class="browser-stat">
-                    <h4>Most Active</h4>
-                    <span id="mostActiveTab">None</span>
-                </div>
-            </div>
-            <div id="browserTabsList">
-                <div class="no-data">No browser activity detected</div>
-            </div>
-            <div class="debug-info">
-                <strong>Debug Info:</strong>
-                <span id="debugInfo">Initializing browser tracking...</span>
-            </div>
-        </div>
 
-        <div class="section">
-            <h2>📊 Recent Activity</h2>
-            <div id="recentLogs">
-                <div class="no-data">No recent activity</div>
-            </div>
-        </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Open Apps</div>
+                        <div class="stat-icon">🖥️</div>
+                    </div>
+                    <div class="stat-value" id="openApps">0</div>
+                    <div class="stat-unit">currently</div>
+                </div>
 
-        <div class="section">
-            <h2>🕐 Recent Sessions</h2>
-            <div id="recentSessions">
-                <div class="no-data">No sessions recorded</div>
-            </div>
-        </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Total Sessions</div>
+                        <div class="stat-icon">📊</div>
+                    </div>
+                    <div class="stat-value" id="totalSessions">0</div>
+                    <div class="stat-unit">all time</div>
+                </div>
 
-        <div class="last-updated">
-            Last updated: <span id="lastUpdated">Never</span>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Today's Time</div>
+                        <div class="stat-icon">📅</div>
+                    </div>
+                    <div class="stat-value" id="todayTime">0</div>
+                    <div class="stat-unit">minutes</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Total Time</div>
+                        <div class="stat-icon">⏰</div>
+                    </div>
+                    <div class="stat-value" id="totalTime">0</div>
+                    <div class="stat-unit">hours</div>
+                </div>
+            </div>
+
+            <!-- Applications Section -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">📱</div>
+                    <h2 class="section-title">Currently Open Applications</h2>
+                </div>
+                <div id="appList">
+                    <div class="no-data">No applications detected</div>
+                </div>
+            </div>
+
+            <!-- Browser Activity Section -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">🌐</div>
+                    <h2 class="section-title">Browser Activity</h2>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Active Tabs</div>
+                            <div class="stat-icon">🔗</div>
+                        </div>
+                        <div class="stat-value" id="activeTabs">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Browsers</div>
+                            <div class="stat-icon">🌐</div>
+                        </div>
+                        <div class="stat-value" id="activeBrowsers">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Recent URLs</div>
+                            <div class="stat-icon">🔍</div>
+                        </div>
+                        <div class="stat-value" id="recentUrls">0</div>
+                    </div>
+                </div>
+
+                <div id="browserTabsList">
+                    <div class="no-data">No browser activity detected</div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">⚙️</div>
+                    <h2 class="section-title">Alert Settings</h2>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="alertsEnabled" checked>
+                            Enable idle app alerts
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="showResourceUsage" checked>
+                            Show resource usage
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="smartFiltering" checked>
+                            Smart filtering
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="breakRemindersEnabled" checked>
+                            Break reminders
+                        </label>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="saveAlertSettings()">
+                        💾 Save Settings
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
+        // Store session start time globally
+        let sessionStartTime = null;
+
         function formatTime(seconds) {
             if (seconds < 60) return Math.round(seconds);
             if (seconds < 3600) return Math.round(seconds / 60);
@@ -988,50 +994,32 @@
             }
         }
 
-        // Store session start time globally
-        let sessionStartTime = null;
-
         function updateSessionTime() {
             if (sessionStartTime) {
                 const currentTime = Date.now();
                 const sessionTime = Math.floor((currentTime - sessionStartTime) / 1000);
                 const sessionFormatted = formatSessionTime(sessionTime);
                 document.getElementById('currentSession').textContent = sessionFormatted;
-
-                // Debug: Update page title with session time for easy monitoring
-                document.title = `${sessionFormatted} - Productivity Monitor`;
-
-                // Update the unit dynamically based on session length
-                const sessionUnit = document.querySelector('#currentSession').nextElementSibling;
-                const liveIndicator = '<span style="display: inline-block; width: 8px; height: 8px; background: #48bb78; border-radius: 50%; margin-left: 8px; animation: pulse 2s infinite;"></span>';
-
-                if (sessionTime < 60) {
-                    sessionUnit.innerHTML = 'live session' + liveIndicator;
-                } else if (sessionTime < 3600) {
-                    sessionUnit.innerHTML = 'active session' + liveIndicator;
-                } else {
-                    sessionUnit.innerHTML = 'long session' + liveIndicator;
-                }
+                document.title = `${sessionFormatted} - Snapdragon Monitor`;
 
                 // Update session progress bar
                 const progressBar = document.getElementById('sessionProgress');
                 let progressPercentage = 0;
 
-                if (sessionTime <= 1800) { // 0-30 minutes
+                if (sessionTime <= 1800) {
                     progressPercentage = (sessionTime / 1800) * 100;
-                } else if (sessionTime <= 3600) { // 30-60 minutes  
+                } else if (sessionTime <= 3600) {
                     progressPercentage = 100;
-                } else if (sessionTime <= 7200) { // 1-2 hours
+                } else if (sessionTime <= 7200) {
                     progressPercentage = ((sessionTime - 3600) / 3600) * 100;
-                } else { // 2+ hours
+                } else {
                     progressPercentage = 100;
                 }
 
                 progressBar.style.width = progressPercentage + '%';
             } else {
-                // Fallback: show that we're waiting for session data
                 document.getElementById('currentSession').textContent = 'Loading...';
-                document.title = 'Loading... - Productivity Monitor';
+                document.title = 'Loading... - Snapdragon Monitor';
             }
         }
 
@@ -1039,24 +1027,17 @@
             fetch('/api/stats')
                 .then(response => response.json())
                 .then(data => {
-                    // Update session start time if it changed
+                    // Update session start time
                     if (data.session_start_time) {
                         const newSessionStartTime = new Date(data.session_start_time).getTime();
                         if (sessionStartTime !== newSessionStartTime) {
                             sessionStartTime = newSessionStartTime;
-                            console.log('Session start time updated:', new Date(sessionStartTime));
                         }
-                    } else {
-                        console.warn('No session start time in API response');
                     }
 
-                    // Debug: Log session information
-                    console.log('API Response - Total sessions:', data.total_sessions);
-                    console.log('API Response - Session data:', data.sessions?.length || 0, 'recent sessions');
-
-                    // Update session time immediately
                     updateSessionTime();
 
+                    // Update stats
                     document.getElementById('keystrokes').textContent = data.keystrokes;
                     document.getElementById('openApps').textContent = Object.keys(data.open_apps_details || {}).length;
                     document.getElementById('totalSessions').textContent = data.total_sessions;
@@ -1072,7 +1053,7 @@
                     totalTimeCard.textContent = totalTimeValue;
                     totalTimeCard.nextElementSibling.textContent = formatTimeUnit(data.total_time);
 
-                    // Update open apps list with detailed information
+                    // Update applications
                     const appList = document.getElementById('appList');
                     const openAppsDetails = data.open_apps_details || {};
                     const currentApp = data.current_app || '';
@@ -1082,74 +1063,22 @@
                             const durationOpen = formatDuration(appInfo.duration_open_sec || 0);
                             const lastUsed = formatDuration(appInfo.duration_since_used_sec || 0);
                             const isCurrentApp = appInfo.is_current || appName === currentApp;
-                            const isIdle = appInfo.duration_since_used_sec > 180; // 3 minutes
-
-                            let statusClass = 'normal';
-                            let statusText = 'Background';
-
-                            if (isCurrentApp) {
-                                statusClass = 'active';
-                                statusText = 'Active';
-                            } else if (isIdle) {
-                                statusClass = 'idle';
-                                statusText = 'Idle';
-                            }
-
-                            const cardClass = isCurrentApp ? 'current-app' : (isIdle ? 'idle-app' : '');
-
-                            const instanceCount = appInfo.instance_count || 1;
-                            const instanceBadge = instanceCount > 1 ?
-                                `<span class="instance-count multiple">${instanceCount} instances</span>` :
-                                '';
-
-                            // Alert history
-                            const alertHistory = appInfo.alert_history || [];
-                            const alertBadges = alertHistory.map(minutes => {
-                                const severity = minutes <= 3 ? 'info' : minutes <= 10 ? 'warning' : 'critical';
-                                const emoji = minutes <= 3 ? '💡' : minutes <= 10 ? '⚠️' : '🚨';
-                                return `<span class="alert-badge ${severity}">${emoji} ${minutes}min</span>`;
-                            }).join('');
-
-                            // Resource usage
-                            const resourceUsage = appInfo.resource_usage;
-                            const resourceInfo = resourceUsage ?
-                                `<div class="resource-info">
-                                    <span class="resource-item">💾 ${resourceUsage.memory_mb}MB</span>
-                                    <span class="resource-item">⚡ ${resourceUsage.cpu_percent}%</span>
-                                </div>` : '';
-
-                            // Alert controls
-                            const isWhitelisted = data.alert_config?.whitelist?.includes(appName) || false;
-                            const alertControls = `
-                                <div class="alert-controls">
-                                    <button class="btn-snooze" onclick="snoozeApp('${appName}', 30)">Snooze 30m</button>
-                                    <button class="btn-whitelist ${isWhitelisted ? 'whitelisted' : ''}" 
-                                            onclick="toggleWhitelist('${appName}')">
-                                        ${isWhitelisted ? '✓ Whitelisted' : '+ Whitelist'}
-                                    </button>
-                                </div>
-                            `;
 
                             return `
-                                <div class="app-card ${cardClass}">
+                                <div class="app-card ${isCurrentApp ? 'current-app' : ''}">
                                     <div class="app-header">
                                         <div class="app-name">
-                                            ${isCurrentApp ? '<span class="current-indicator"></span>' : ''}
-                                            ${appName}${instanceBadge}
+                                            ${isCurrentApp ? '<div class="app-status-dot"></div>' : ''}
+                                            ${appName}
                                         </div>
                                         <div class="app-timing">
-                                            <div class="duration">Running: ${durationOpen}</div>
-                                            <div class="last-used">Last used: ${lastUsed} ago</div>
+                                            <div class="app-duration">Running: ${durationOpen}</div>
+                                            <div class="app-last-used">Last used: ${lastUsed} ago</div>
                                         </div>
                                     </div>
-                                    <div class="app-title">${appInfo.title || 'No title'}</div>
-                                    ${resourceInfo}
-                                    ${alertBadges ? `<div class="alert-history">${alertBadges}</div>` : ''}
-                                    <div class="app-status">
-                                        <div>Started: ${new Date(appInfo.start_time).toLocaleTimeString()}</div>
-                                        <div class="status-badge ${statusClass}">${statusText}</div>
+                                    <div style="color: var(--text-muted); font-size: 0.9rem;">
+                                        ${appInfo.title || 'No title'}
                                     </div>
-                                    ${alertControls}
                                 </div>
                             `;
                         }).join('');
@@ -1166,14 +1095,9 @@
                     document.getElementById('activeBrowsers').textContent = (browserStats.active_browsers || []).length;
                     document.getElementById('recentUrls').textContent = browserData.recent_urls_count || 0;
 
-                    const mostActiveTab = browserStats.most_active_tab;
-                    document.getElementById('mostActiveTab').textContent = mostActiveTab ?
-                        mostActiveTab.title.substring(0, 25) + '...' : 'None';
-
-                    // Update browser tabs list
+                    // Update browser tabs
                     const browserTabsList = document.getElementById('browserTabsList');
                     if (Object.keys(activeTabs).length > 0) {
-                        // Sort tabs by activity (active first, then by total time)
                         const sortedTabs = Object.entries(activeTabs).sort(([keyA, tabA], [keyB, tabB]) => {
                             if (tabA.is_active && !tabB.is_active) return -1;
                             if (!tabA.is_active && tabB.is_active) return 1;
@@ -1183,212 +1107,36 @@
                         browserTabsList.innerHTML = sortedTabs.map(([tabKey, tabData]) => {
                             const timeSpent = formatDuration(tabData.total_time || 0);
                             const isActive = tabData.is_active || tabKey === browserData.current_browser;
-                            const category = tabData.category || 'general';
-                            const searchQuery = tabData.search_query;
-                            const visitCount = tabData.visit_count || 1;
-
-                            // Truncate URL for display
                             const displayUrl = tabData.url && tabData.url.length > 60 ?
                                 tabData.url.substring(0, 60) + '...' : tabData.url || 'No URL';
 
                             return `
-                                <div class="browser-tab ${isActive ? 'active' : ''} ${!tabData.is_active ? 'inactive-tab' : ''}">
+                                <div class="browser-tab ${isActive ? 'active' : ''}">
                                     <div class="browser-tab-header">
                                         <div class="browser-tab-title">
                                             ${isActive ? '🔵 ' : ''}${tabData.title || 'Unknown Tab'}
-                                            ${visitCount > 1 ? `<span class="visit-count">(${visitCount} visits)</span>` : ''}
                                         </div>
                                         <div class="browser-tab-time">${timeSpent}</div>
                                     </div>
-                                    <div class="browser-tab-url" title="${tabData.url || 'No URL'}">${displayUrl}</div>
-                                    ${searchQuery ? `<div class="search-query">🔍 "${searchQuery}"</div>` : ''}
-                                    <div class="browser-tab-meta">
-                                        <div class="browser-tab-category ${category}">${category}</div>
-                                        <div style="font-size: 0.8em; color: #718096;">
-                                            ${tabData.browser} ${isActive ? '(Active)' : '(Background)'}
-                                        </div>
-                                    </div>
+                                    <div class="browser-tab-url">${displayUrl}</div>
                                 </div>
                             `;
                         }).join('');
                     } else {
-                        browserTabsList.innerHTML = '<div class="no-data">No browser activity detected. Make sure you have browser windows open and try refreshing the page.</div>';
+                        browserTabsList.innerHTML = '<div class="no-data">No browser activity detected</div>';
                     }
 
-                    // Update debug info
-                    const debugInfo = document.getElementById('debugInfo');
-                    const totalWindows = browserData.browser_windows ? browserData.browser_windows.length : 0;
-                    const recentUrlsCount = browserData.recent_urls_count || 0;
-                    const currentBrowser = browserData.current_browser || 'None';
-
-                    debugInfo.innerHTML = `
-                        Browser windows: ${totalWindows} | 
-                        Recent URLs: ${recentUrlsCount} | 
-                        Current: ${currentBrowser !== 'None' ? currentBrowser.split('_')[0] : 'None'} |
-                        Last update: ${new Date().toLocaleTimeString()}
-                    `;
-
-                    // Update recent logs
-                    const recentLogs = document.getElementById('recentLogs');
-                    if (data.recent_logs.length > 0) {
-                        recentLogs.innerHTML = data.recent_logs.map(log => `
-                            <div class="log-entry">
-                                <h4>${log.app || 'Unknown App'}</h4>
-                                <p>${log.title || 'No title'}</p>
-                                <p>Duration: ${formatDuration(log.duration_sec || 0)} | 
-                                   ${new Date(log.start).toLocaleTimeString()} - ${new Date(log.end).toLocaleTimeString()}</p>
-                            </div>
-                        `).join('');
-                    } else {
-                        recentLogs.innerHTML = '<div class="no-data">No recent activity</div>';
-                    }
-
-                    // Update recent sessions
-                    const recentSessions = document.getElementById('recentSessions');
-                    if (data.sessions.length > 0) {
-                        recentSessions.innerHTML = data.sessions.map(session => `
-                            <div class="session-item">
-                                <div class="session-info">
-                                    <div>${new Date(session.start).toLocaleDateString()} 
-                                         ${new Date(session.start).toLocaleTimeString()}</div>
-                                    <div style="font-size: 0.9em; color: #718096;">
-                                        ${new Date(session.start).toLocaleTimeString()} - ${new Date(session.end).toLocaleTimeString()}
-                                    </div>
-                                </div>
-                                <div class="session-duration">${formatDuration(session.duration_sec)}</div>
-                            </div>
-                        `).join('');
-                    } else {
-                        recentSessions.innerHTML = '<div class="no-data">No sessions recorded</div>';
-                    }
-
-                    // Update last updated time
-                    if (data.last_updated) {
-                        document.getElementById('lastUpdated').textContent = new Date(data.last_updated).toLocaleString();
-                    }
-
-                    // Update alert settings UI
-                    updateAlertSettingsUI(data.alert_config);
-
-                    // Debug: Log current session information
-                    if (sessionStartTime) {
-                        const currentSessionTime = Math.floor((Date.now() - sessionStartTime) / 1000);
-                        console.log(`Current session: ${formatSessionTime(currentSessionTime)} (started: ${new Date(sessionStartTime).toLocaleTimeString()})`);
+                    // Update alert settings
+                    if (data.alert_config) {
+                        document.getElementById('alertsEnabled').checked = data.alert_config.enabled !== false;
+                        document.getElementById('showResourceUsage').checked = data.alert_config.show_resource_usage !== false;
+                        document.getElementById('smartFiltering').checked = data.alert_config.smart_filtering !== false;
+                        document.getElementById('breakRemindersEnabled').checked = data.alert_config.break_reminders_enabled !== false;
                     }
                 })
                 .catch(error => {
                     console.error('Error fetching stats:', error);
-                    document.getElementById('lastUpdated').textContent = 'Error loading data';
                 });
-        }
-
-        // Update dashboard every 2 seconds
-        updateDashboard();
-        setInterval(updateDashboard, 2000);
-
-        // Update session time every second for real-time display
-        setInterval(updateSessionTime, 1000);
-
-        // Alert management functions
-        function showNotificationToast(message, type = 'info') {
-            const toast = document.createElement('div');
-            toast.className = 'notification-toast';
-            toast.textContent = message;
-
-            // Add color based on type
-            if (type === 'success') {
-                toast.style.background = '#059669';
-            } else if (type === 'error') {
-                toast.style.background = '#dc2626';
-            } else if (type === 'warning') {
-                toast.style.background = '#d97706';
-            }
-
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.remove();
-            }, 3000);
-        }
-
-        function snoozeApp(appName, minutes) {
-            fetch('/api/alerts/snooze', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    app_name: appName,
-                    minutes: minutes
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        showNotificationToast(`✅ ${data.message}`, 'success');
-                    } else {
-                        showNotificationToast(`❌ ${data.message}`, 'error');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error snoozing app:', error);
-                    showNotificationToast('❌ Failed to snooze app', 'error');
-                });
-        }
-
-        function toggleWhitelist(appName) {
-            // Get current whitelist status
-            fetch('/api/stats')
-                .then(response => response.json())
-                .then(data => {
-                    const isWhitelisted = data.alert_config?.whitelist?.includes(appName) || false;
-                    const action = isWhitelisted ? 'remove' : 'add';
-
-                    return fetch('/api/alerts/whitelist', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            app_name: appName,
-                            action: action
-                        })
-                    });
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        showNotificationToast(`✅ ${data.message}`, 'success');
-                        // Refresh the dashboard to update the button state
-                        setTimeout(updateDashboard, 1000);
-                    } else {
-                        showNotificationToast(`❌ ${data.message}`, 'error');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error updating whitelist:', error);
-                    showNotificationToast('❌ Failed to update whitelist', 'error');
-                });
-        }
-
-        function updateAlertSettingsUI(alertConfig) {
-            if (!alertConfig) return;
-
-            // Update main settings checkboxes
-            document.getElementById('alertsEnabled').checked = alertConfig.enabled !== false;
-            document.getElementById('showResourceUsage').checked = alertConfig.show_resource_usage !== false;
-            document.getElementById('smartFiltering').checked = alertConfig.smart_filtering !== false;
-            document.getElementById('breakRemindersEnabled').checked = alertConfig.break_reminders_enabled !== false;
-
-            // Update break reminder interval
-            const interval = alertConfig.break_reminder_interval || 180;
-            document.getElementById('breakInterval').value = interval;
-
-            // Update alert levels
-            const levels = alertConfig.alert_levels_enabled || [true, true, true];
-            document.getElementById('level1').checked = levels[0] !== false;
-            document.getElementById('level2').checked = levels[1] !== false;
-            document.getElementById('level3').checked = levels[2] !== false;
         }
 
         function saveAlertSettings() {
@@ -1396,51 +1144,47 @@
                 enabled: document.getElementById('alertsEnabled').checked,
                 show_resource_usage: document.getElementById('showResourceUsage').checked,
                 smart_filtering: document.getElementById('smartFiltering').checked,
-                break_reminders_enabled: document.getElementById('breakRemindersEnabled').checked,
-                break_reminder_interval: parseInt(document.getElementById('breakInterval').value),
-                alert_levels_enabled: [
-                    document.getElementById('level1').checked,
-                    document.getElementById('level2').checked,
-                    document.getElementById('level3').checked
-                ]
+                break_reminders_enabled: document.getElementById('breakRemindersEnabled').checked
             };
 
-            // Get current config to preserve whitelist and snooze settings
-            fetch('/api/alerts/config')
-                .then(response => response.json())
-                .then(currentConfig => {
-                    // Merge with current config to preserve whitelist and snooze settings
-                    const mergedConfig = {
-                        ...currentConfig,
-                        ...config
-                    };
-
-                    return fetch('/api/alerts/config', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(mergedConfig)
-                    });
-                })
+            fetch('/api/alerts/config', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(config)
+            })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        showNotificationToast('✅ Alert settings saved successfully!', 'success');
+                        showNotificationToast('⚡ Settings saved successfully!');
                     } else {
-                        showNotificationToast('❌ Failed to save settings', 'error');
+                        showNotificationToast('❌ Failed to save settings');
                     }
                 })
                 .catch(error => {
                     console.error('Error saving settings:', error);
-                    showNotificationToast('❌ Failed to save settings', 'error');
+                    showNotificationToast('❌ Failed to save settings');
                 });
         }
 
-        // Initial load message
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log('Productivity Monitor Dashboard loaded');
-        });
+        function showNotificationToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'notification-toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Update dashboard every 2 seconds
+        updateDashboard();
+        setInterval(updateDashboard, 2000);
+
+        // Update session time every second
+        setInterval(updateSessionTime, 1000);
     </script>
 </body>
 

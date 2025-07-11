@@ -223,23 +223,35 @@ def check_break_reminder(current_time):
         )
 
 
+# Activity tracking
+last_activity_time = time.time()
+
+
 # Keystroke listener
 def on_key_press(key):
-    global keystroke_count, last_mouse_move_time, last_break_reminder_time
+    global \
+        keystroke_count, \
+        last_mouse_move_time, \
+        last_break_reminder_time, \
+        last_activity_time
     keystroke_count += 1
-    last_mouse_move_time = time.time()  # Reset inactivity timer on keyboard input
+    current_time = time.time()
+    last_mouse_move_time = current_time  # Reset inactivity timer on keyboard input
+    last_activity_time = current_time
     # Don't reset break reminder on every keystroke, only on mouse movement
 
 
 # Mouse movement listener
 def on_mouse_move(x, y):
-    global last_mouse_move_time, last_break_reminder_time
-    last_mouse_move_time = time.time()
+    global last_mouse_move_time, last_break_reminder_time, last_activity_time
+    current_time = time.time()
+    last_mouse_move_time = current_time
+    last_activity_time = current_time
     # Reset break reminder time when user moves mouse (indicates active break)
     if (
-        time.time() - last_break_reminder_time > 60
+        current_time - last_break_reminder_time > 60
     ):  # Only reset if last reminder was more than 1 minute ago
-        last_break_reminder_time = time.time()
+        last_break_reminder_time = current_time
 
 
 keyboard_listener = keyboard.Listener(on_press=on_key_press)
@@ -270,7 +282,11 @@ def load_existing_sessions():
 
 def load_current_session_state():
     """Load current session state from status file to resume session"""
-    global session_start_time, keystroke_count, last_break_reminder_time
+    global \
+        session_start_time, \
+        keystroke_count, \
+        last_break_reminder_time, \
+        last_activity_time
     try:
         if os.path.exists(STATUS_FILE):
             with open(STATUS_FILE, "r") as f:
@@ -292,6 +308,9 @@ def load_current_session_state():
                         last_break_reminder_time = (
                             session_start_time  # Reset break reminder
                         )
+                        last_activity_time = (
+                            time.time()
+                        )  # Set current time as last activity
 
                         resumed_duration = time.time() - session_start_time
                         print(
@@ -309,9 +328,11 @@ def load_current_session_state():
         print(f"[Tracker] Error loading session state: {e}")
 
     # If we couldn't resume, start fresh
-    session_start_time = time.time()
+    current_time = time.time()
+    session_start_time = current_time
     keystroke_count = 0
-    last_break_reminder_time = time.time()
+    last_break_reminder_time = current_time
+    last_activity_time = current_time  # Initialize for new session
     return False
 
 
@@ -520,38 +541,71 @@ def update_tracker():
         start_time, \
         open_apps, \
         session_start_time, \
-        keystroke_count
+        keystroke_count, \
+        last_activity_time
     try:
+        session_ended_recently = False
         while True:
             now = time.time()
 
-            # End session after 5 minutes of no mouse movement
-            if now - last_mouse_move_time > 300:
-                session_duration = round(now - session_start_time, 2)
+            # More robust session management - only end after true inactivity
+            time_since_last_activity = now - last_activity_time
+            session_duration = now - session_start_time
+
+            # Debug logging every 30 seconds
+            if int(now) % 30 == 0:
+                print(
+                    f"[Debug] Session duration: {session_duration:.1f}s, "
+                    f"Time since activity: {time_since_last_activity:.1f}s, "
+                    f"Keystrokes: {keystroke_count}"
+                )
+
+            # End session after 10 minutes of no activity (increased for stability)
+            # Also prevent ending sessions that just started
+            if (
+                time_since_last_activity > 600  # 10 minutes of inactivity
+                and session_duration > 60  # Session must be at least 1 minute
+                and not session_ended_recently
+            ):  # Prevent rapid session endings
                 new_session = {
                     "start": datetime.fromtimestamp(session_start_time).isoformat(),
                     "end": datetime.fromtimestamp(now).isoformat(),
-                    "duration_sec": session_duration,
+                    "duration_sec": round(session_duration, 2),
                 }
                 sessions.append(new_session)
                 save_sessions()
 
                 print(
-                    f"[Tracker] Session ended: {session_duration} seconds, total sessions: {len(sessions)}"
+                    f"[Tracker] Session ended after {time_since_last_activity / 60:.1f} minutes of inactivity. "
+                    f"Session duration: {session_duration / 60:.1f} minutes, total sessions: {len(sessions)}"
                 )
 
                 show_notification(
                     "Session Ended",
-                    f"No activity for 5 minutes. Session recorded ({session_duration} sec). Total sessions: {len(sessions)}",
+                    f"No activity for {int(time_since_last_activity / 60)} minutes. "
+                    f"Session recorded ({session_duration / 60:.1f} min). Total sessions: {len(sessions)}",
                     duration=5,
                 )
                 save_log()
-                session_start_time = time.time()
-                start_time = session_start_time
-                keystroke_count = 0  # Reset keystroke counter for new session
-                # Reset break reminder time for new session
-                last_break_reminder_time = time.time()
+
+                # Start new session
+                session_start_time = now
+                start_time = now
+                keystroke_count = 0
+                last_break_reminder_time = now
+                last_activity_time = now  # Reset activity time for new session
+                session_ended_recently = True
+
+                # Reset the flag after 30 seconds to allow new sessions
+                def reset_session_flag():
+                    global session_ended_recently
+                    time.sleep(30)
+                    session_ended_recently = False
+
+                threading.Thread(target=reset_session_flag, daemon=True).start()
                 continue
+
+            session_ended_recently = False  # Reset if we get here
 
             open_windows = get_open_windows()
             for app in open_windows:
@@ -614,6 +668,9 @@ def update_tracker():
 
                 current_app, current_title = app, title
                 start_time = now
+
+                # Update activity time when switching apps
+                last_activity_time = now
 
             # Update status file with current session time
             current_session_time = round(now - session_start_time, 2)
