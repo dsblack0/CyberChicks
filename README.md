@@ -1,9 +1,13 @@
-# CyberChicks
-
+# Project Name 
 An app description 
 
-Dev names and a way to connect (linkedin or email) 
+##**Developer Names:**
+- [Eduarda Koop](https://www.linkedin.com/in/eduarda-koop)
+- [Facundo Fernandez](https://www.linkedin.com/in/facufernandez/en)
+- [Natalia Ojeda](https://www.linkedin.com/in/natalia-ojeda)
+- [Samhitha Duggirala](https://www.linkedin.com/in/samhitha-duggirala)
+- [Yazhisai Rajaraman](https://www.linkedin.com/in/yazhisai-rajaraman-72a0281b3)
 
-Setup instructions from scratch, including dependencies if applicable 
+##**Setup Instructions:**
 
-Run and usage instructions 
+##**Run and Usage Instructions:**
