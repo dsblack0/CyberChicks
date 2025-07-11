@@ -15,6 +15,40 @@ from browser_tracker import update_browser_tracking, get_browser_status
 LOG_FILE = "data/logs.json"
 STATUS_FILE = "data/status.json"
 SESSIONS_FILE = "data/sessions.json"
+ALERT_CONFIG_FILE = "data/alert_config.json"
+
+# Alert configuration
+ALERT_LEVELS = [
+    {"minutes": 3, "title": "Idle App Alert", "severity": "info"},
+    {"minutes": 10, "title": "Long Idle App", "severity": "warning"},
+    {"minutes": 30, "title": "Very Long Idle App", "severity": "critical"},
+]
+
+# Break reminder configuration
+BREAK_REMINDER_INTERVAL = 180  # 3 minutes in seconds
+
+# Apps to exclude from alerts (system apps, etc.)
+EXCLUDED_APPS = {
+    "dwm.exe",
+    "explorer.exe",
+    "winlogon.exe",
+    "csrss.exe",
+    "wininit.exe",
+    "services.exe",
+    "lsass.exe",
+    "svchost.exe",
+    "taskhost.exe",
+    "dllhost.exe",
+    "conhost.exe",
+    "RuntimeBroker.exe",
+    "ApplicationFrameHost.exe",
+    "ShellExperienceHost.exe",
+    "StartMenuExperienceHost.exe",
+    "SearchApp.exe",
+    "UserOOBEBroker.exe",
+    "SettingsApp.exe",
+    "SystemSettings.exe",
+}
 
 log_buffer = []
 keystroke_count = 0
@@ -26,6 +60,8 @@ open_apps = {}
 sessions = []
 notifier = None
 last_mouse_move_time = time.time()
+last_break_reminder_time = time.time()
+alert_config = {}
 
 # Initialize notifier with error handling
 try:
@@ -37,6 +73,95 @@ except Exception as e:
 
 # Ensure data directory exists
 os.makedirs("data", exist_ok=True)
+
+
+def load_alert_config():
+    """Load alert configuration from file"""
+    global alert_config
+    try:
+        if os.path.exists(ALERT_CONFIG_FILE):
+            with open(ALERT_CONFIG_FILE, "r") as f:
+                alert_config = json.load(f)
+        else:
+            alert_config = {
+                "enabled": True,
+                "whitelist": [],  # Apps to never alert for
+                "snooze_until": {},  # App -> timestamp when snooze expires
+                "alert_levels_enabled": [True, True, True],  # Which levels are enabled
+                "show_resource_usage": True,
+                "smart_filtering": True,
+                "break_reminders_enabled": True,
+                "break_reminder_interval": 180,  # 3 minutes in seconds
+            }
+            save_alert_config()
+    except Exception as e:
+        print(f"Error loading alert config: {e}")
+        alert_config = {
+            "enabled": True,
+            "whitelist": [],
+            "snooze_until": {},
+            "alert_levels_enabled": [True, True, True],
+            "show_resource_usage": True,
+            "smart_filtering": True,
+            "break_reminders_enabled": True,
+            "break_reminder_interval": 180,  # 3 minutes in seconds
+        }
+
+
+def save_alert_config():
+    """Save alert configuration to file"""
+    try:
+        with open(ALERT_CONFIG_FILE, "w") as f:
+            json.dump(alert_config, f, indent=2)
+    except Exception as e:
+        print(f"Error saving alert config: {e}")
+
+
+def get_process_resource_usage(app_name):
+    """Get memory and CPU usage for an app"""
+    try:
+        total_memory = 0
+        total_cpu = 0
+        process_count = 0
+
+        for proc in psutil.process_iter(["pid", "name", "memory_info", "cpu_percent"]):
+            try:
+                if proc.info["name"] == app_name:
+                    process_count += 1
+                    total_memory += proc.info["memory_info"].rss
+                    total_cpu += proc.info["cpu_percent"]
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+
+        return {
+            "memory_mb": round(total_memory / (1024 * 1024), 1),
+            "cpu_percent": round(total_cpu, 1),
+            "process_count": process_count,
+        }
+    except Exception as e:
+        print(f"Error getting resource usage for {app_name}: {e}")
+        return {"memory_mb": 0, "cpu_percent": 0, "process_count": 0}
+
+
+def should_alert_for_app(app_name, current_time):
+    """Check if we should alert for this app based on configuration"""
+    if not alert_config.get("enabled", True):
+        return False
+
+    # Check whitelist (apps to never alert for)
+    if app_name in alert_config.get("whitelist", []):
+        return False
+
+    # Check system apps exclusion
+    if alert_config.get("smart_filtering", True) and app_name in EXCLUDED_APPS:
+        return False
+
+    # Check snooze status
+    snooze_until = alert_config.get("snooze_until", {}).get(app_name, 0)
+    if current_time < snooze_until:
+        return False
+
+    return True
 
 
 def show_notification(title, message, duration=5):
@@ -58,17 +183,63 @@ def show_notification(title, message, duration=5):
             print(f"[Notification] Fallback - {title}: {message}")
 
 
+def snooze_app_alerts(app_name, minutes=30):
+    """Snooze alerts for an app for specified minutes"""
+    snooze_until = time.time() + (minutes * 60)
+    alert_config["snooze_until"][app_name] = snooze_until
+    save_alert_config()
+    print(f"[Alert] Snoozed alerts for {app_name} for {minutes} minutes")
+
+
+def check_break_reminder(current_time):
+    """Check if it's time to send a break reminder"""
+    global last_break_reminder_time
+
+    if not alert_config.get("break_reminders_enabled", True):
+        return
+
+    reminder_interval = alert_config.get("break_reminder_interval", 180)
+    time_since_last_reminder = current_time - last_break_reminder_time
+
+    if time_since_last_reminder >= reminder_interval:
+        # Calculate how many minutes since last reminder
+        minutes_elapsed = int(time_since_last_reminder / 60)
+
+        # Send break reminder
+        show_notification(
+            "💪 Break Time!",
+            f"Hey! You've been working for {minutes_elapsed} minutes. "
+            f"Time to take a break! 🚶‍♂️\n"
+            f"• Stand up and stretch\n"
+            f"• Look away from the screen\n"
+            f"• Take a deep breath",
+            duration=10,
+        )
+
+        # Update last reminder time
+        last_break_reminder_time = current_time
+        print(
+            f"[Break Reminder] Sent reminder after {minutes_elapsed} minutes of activity"
+        )
+
+
 # Keystroke listener
 def on_key_press(key):
-    global keystroke_count, last_mouse_move_time
+    global keystroke_count, last_mouse_move_time, last_break_reminder_time
     keystroke_count += 1
     last_mouse_move_time = time.time()  # Reset inactivity timer on keyboard input
+    # Don't reset break reminder on every keystroke, only on mouse movement
 
 
 # Mouse movement listener
 def on_mouse_move(x, y):
-    global last_mouse_move_time
+    global last_mouse_move_time, last_break_reminder_time
     last_mouse_move_time = time.time()
+    # Reset break reminder time when user moves mouse (indicates active break)
+    if (
+        time.time() - last_break_reminder_time > 60
+    ):  # Only reset if last reminder was more than 1 minute ago
+        last_break_reminder_time = time.time()
 
 
 keyboard_listener = keyboard.Listener(on_press=on_key_press)
@@ -76,6 +247,77 @@ keyboard_listener.start()
 
 mouse_listener = mouse.Listener(on_move=on_mouse_move)
 mouse_listener.start()
+
+# Load alert configuration on startup
+load_alert_config()
+
+
+def load_existing_sessions():
+    """Load existing sessions from file on startup"""
+    global sessions
+    try:
+        if os.path.exists(SESSIONS_FILE):
+            with open(SESSIONS_FILE, "r") as f:
+                sessions = json.load(f)
+            print(f"[Tracker] Loaded {len(sessions)} existing sessions")
+        else:
+            sessions = []
+            print("[Tracker] No existing sessions file found, starting fresh")
+    except Exception as e:
+        print(f"[Tracker] Error loading sessions: {e}")
+        sessions = []
+
+
+def load_current_session_state():
+    """Load current session state from status file to resume session"""
+    global session_start_time, keystroke_count, last_break_reminder_time
+    try:
+        if os.path.exists(STATUS_FILE):
+            with open(STATUS_FILE, "r") as f:
+                status = json.load(f)
+
+            # Check if there's an active session (recent last_updated)
+            if "last_updated" in status:
+                last_updated = datetime.fromisoformat(status["last_updated"])
+                time_since_update = (datetime.now() - last_updated).total_seconds()
+
+                # If last update was less than 10 minutes ago, resume the session
+                if time_since_update < 600:  # 10 minutes
+                    if "session_start_time" in status:
+                        session_start_from_file = datetime.fromisoformat(
+                            status["session_start_time"]
+                        )
+                        session_start_time = session_start_from_file.timestamp()
+                        keystroke_count = status.get("keystrokes", 0)
+                        last_break_reminder_time = (
+                            session_start_time  # Reset break reminder
+                        )
+
+                        resumed_duration = time.time() - session_start_time
+                        print(
+                            f"[Tracker] Resumed existing session (running for {resumed_duration:.0f} seconds)"
+                        )
+                        return True
+
+            print(
+                "[Tracker] Starting new session (previous session too old or invalid)"
+            )
+        else:
+            print("[Tracker] No status file found, starting new session")
+
+    except Exception as e:
+        print(f"[Tracker] Error loading session state: {e}")
+
+    # If we couldn't resume, start fresh
+    session_start_time = time.time()
+    keystroke_count = 0
+    last_break_reminder_time = time.time()
+    return False
+
+
+# Load existing data on startup
+load_existing_sessions()
+load_current_session_state()
 
 
 def get_active_window():
@@ -131,27 +373,75 @@ def get_open_windows():
 
 
 def check_idle_apps(current_time):
+    """Enhanced idle app checking with multiple alert levels"""
     for app, info in list(open_apps.items()):
+        if not should_alert_for_app(app, current_time):
+            continue
+
         last_used = info.get("last_used_time", info["start_time"])
         duration_since_used = current_time - last_used
+        minutes_unused = duration_since_used / 60
 
-        already_alerted = info.get("alerted", False)
+        # Get current alert history
+        alert_history = info.get("alert_history", [])
 
-        if (
-            duration_since_used > 180 and not already_alerted
-        ):  # 3 minutes and not already alerted
-            minutes_unused = max(1, int(duration_since_used / 60))
-            instance_count = info.get("instance_count", 1)
-            instance_text = (
-                f" ({instance_count} instances)" if instance_count > 1 else ""
-            )
-            show_notification(
-                "Unused App Alert",
-                f"You haven't used {app}{instance_text} for {minutes_unused} minutes. Consider closing it to save resources.",
-                duration=8,
-            )
-            # Mark as alerted to avoid repeated notifications
-            open_apps[app]["alerted"] = True
+        # Check each alert level
+        for level_index, level in enumerate(ALERT_LEVELS):
+            if not alert_config.get("alert_levels_enabled", [True, True, True])[
+                level_index
+            ]:
+                continue
+
+            threshold_seconds = level["minutes"] * 60
+
+            # Check if we should alert for this level
+            if (
+                minutes_unused >= level["minutes"]
+                and level["minutes"] not in alert_history
+            ):
+                # Get resource usage if enabled
+                resource_info = ""
+                if alert_config.get("show_resource_usage", True):
+                    usage = get_process_resource_usage(app)
+                    if usage["memory_mb"] > 0:
+                        resource_info = f"\n💾 Memory: {usage['memory_mb']}MB, CPU: {usage['cpu_percent']}%"
+
+                # Build notification message
+                instance_count = info.get("instance_count", 1)
+                instance_text = (
+                    f" ({instance_count} instances)" if instance_count > 1 else ""
+                )
+
+                severity_emoji = {"info": "💡", "warning": "⚠️", "critical": "🚨"}
+                emoji = severity_emoji.get(level["severity"], "💡")
+
+                message = (
+                    f"{emoji} {app}{instance_text} has been idle for "
+                    f"{int(minutes_unused)} minutes.{resource_info}\n"
+                    f"Consider closing it to save resources."
+                )
+
+                show_notification(
+                    level["title"],
+                    message,
+                    duration=8
+                    + (level_index * 2),  # Longer duration for higher severity
+                )
+
+                # Record that we've alerted for this level
+                alert_history.append(level["minutes"])
+                open_apps[app]["alert_history"] = alert_history
+
+                # Log the alert
+                print(
+                    f"[Alert] {level['title']} - {app} idle for {int(minutes_unused)} minutes"
+                )
+
+                # Auto-snooze very frequent alerts (30min+ idle apps)
+                if level["minutes"] >= 30:
+                    snooze_app_alerts(app, 60)  # Snooze for 1 hour
+
+                break  # Only show one alert per check cycle
 
 
 def save_log():
@@ -162,8 +452,12 @@ def save_log():
 
 
 def save_sessions():
-    with open(SESSIONS_FILE, "w") as f:
-        json.dump(sessions, f, indent=2)
+    try:
+        with open(SESSIONS_FILE, "w") as f:
+            json.dump(sessions, f, indent=2)
+        print(f"[Tracker] Saved {len(sessions)} sessions to file")
+    except Exception as e:
+        print(f"[Tracker] Error saving sessions: {e}")
 
 
 def update_status_file(session_time, keystrokes):
@@ -183,10 +477,13 @@ def update_status_file(session_time, keystrokes):
             "duration_open_sec": round(duration_open, 2),
             "last_used_time": datetime.fromtimestamp(last_used).isoformat(),
             "duration_since_used_sec": round(duration_since_used, 2),
-            "alerted": app_info.get("alerted", False),
+            "alert_history": app_info.get("alert_history", []),
             "is_current": app_name == current_app,
             "instance_count": app_info.get("instance_count", 1),
             "instances": app_info.get("instances", []),
+            "resource_usage": get_process_resource_usage(app_name)
+            if alert_config.get("show_resource_usage", True)
+            else None,
         }
 
     # Get browser data
@@ -200,6 +497,9 @@ def update_status_file(session_time, keystrokes):
         json.dump(
             {
                 "session_time": session_time,
+                "session_start_time": datetime.fromtimestamp(
+                    session_start_time
+                ).isoformat(),
                 "keystrokes": keystrokes,
                 "last_updated": datetime.now().isoformat(),
                 "open_apps": list(open_apps.keys()),
@@ -207,6 +507,7 @@ def update_status_file(session_time, keystrokes):
                 "current_app": current_app,
                 "sessions": sessions[-5:],  # most recent 5 sessions
                 "browser_data": browser_data,
+                "alert_config": alert_config,
             },
             f,
         )
@@ -227,23 +528,29 @@ def update_tracker():
             # End session after 5 minutes of no mouse movement
             if now - last_mouse_move_time > 300:
                 session_duration = round(now - session_start_time, 2)
-                sessions.append(
-                    {
-                        "start": datetime.fromtimestamp(session_start_time).isoformat(),
-                        "end": datetime.fromtimestamp(now).isoformat(),
-                        "duration_sec": session_duration,
-                    }
-                )
+                new_session = {
+                    "start": datetime.fromtimestamp(session_start_time).isoformat(),
+                    "end": datetime.fromtimestamp(now).isoformat(),
+                    "duration_sec": session_duration,
+                }
+                sessions.append(new_session)
                 save_sessions()
+
+                print(
+                    f"[Tracker] Session ended: {session_duration} seconds, total sessions: {len(sessions)}"
+                )
+
                 show_notification(
                     "Session Ended",
-                    f"No activity for 5 minutes. Session recorded ({session_duration} sec).",
+                    f"No activity for 5 minutes. Session recorded ({session_duration} sec). Total sessions: {len(sessions)}",
                     duration=5,
                 )
                 save_log()
                 session_start_time = time.time()
                 start_time = session_start_time
                 keystroke_count = 0  # Reset keystroke counter for new session
+                # Reset break reminder time for new session
+                last_break_reminder_time = time.time()
                 continue
 
             open_windows = get_open_windows()
@@ -268,6 +575,9 @@ def update_tracker():
                     open_apps[app]["instance_count"] = open_windows[app]["count"]
                     open_apps[app]["instances"] = open_windows[app]["instances"]
             check_idle_apps(now)
+
+            # Check for break reminders
+            check_break_reminder(now)
 
             # Update browser tracking
             try:
@@ -295,12 +605,20 @@ def update_tracker():
                 # Update the last_used_time for the newly focused app
                 if app and app in open_apps:
                     open_apps[app]["last_used_time"] = now
-                    open_apps[app]["alerted"] = (
-                        False  # Reset alert status when app is used
-                    )
+                    # Reset alert history when app is used
+                    open_apps[app]["alert_history"] = []
+                    # Clear any snooze for this app since it's being used
+                    if app in alert_config.get("snooze_until", {}):
+                        del alert_config["snooze_until"][app]
+                        save_alert_config()
 
                 current_app, current_title = app, title
                 start_time = now
+
+            # Update status file with current session time
+            current_session_time = round(now - session_start_time, 2)
+            update_status_file(current_session_time, keystroke_count)
+
             time.sleep(2)
     except KeyboardInterrupt:
         print("\n[Tracker] Stopping and saving log...")
