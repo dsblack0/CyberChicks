@@ -65,6 +65,83 @@
             transform: translateY(-5px);
         }
 
+        .stat-card:first-child {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:first-child::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .stat-card:first-child .value {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card:first-child .unit {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .stat-card:first-child h3 {
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .stat-card:first-child h3::before {
+            content: '⏱️';
+            font-size: 1.2em;
+        }
+
+        .session-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .session-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #48bb78, #38b2ac);
+            border-radius: 2px;
+            transition: width 0.5s ease;
+            animation: progressPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes progressPulse {
+            0% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
         .stat-card h3 {
             font-size: 1.2em;
             color: #4a5568;
@@ -232,6 +309,151 @@
             color: #2a4365;
         }
 
+        .browser-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .browser-stat {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .browser-stat h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+            font-size: 0.9em;
+        }
+
+        .browser-stat span {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .browser-tab {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .browser-tab:hover {
+            background: #edf2f7;
+            transform: translateY(-1px);
+        }
+
+        .browser-tab.active {
+            background: #e6fffa;
+            border-color: #38b2ac;
+        }
+
+        .browser-tab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .browser-tab-title {
+            font-weight: 500;
+            color: #2d3748;
+            font-size: 0.95em;
+        }
+
+        .browser-tab-time {
+            color: #718096;
+            font-size: 0.85em;
+        }
+
+        .browser-tab-url {
+            color: #4a5568;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+
+        .browser-tab-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .browser-tab-category {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .browser-tab-category.productive {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .browser-tab-category.social {
+            background: #fbb6ce;
+            color: #702459;
+        }
+
+        .browser-tab-category.entertainment {
+            background: #fbd38d;
+            color: #744210;
+        }
+
+        .browser-tab-category.general {
+            background: #bee3f8;
+            color: #2a4365;
+        }
+
+        .browser-tab.inactive-tab {
+            opacity: 0.7;
+        }
+
+        .visit-count {
+            font-size: 0.8em;
+            color: #718096;
+            font-weight: normal;
+        }
+
+        .search-query {
+            background: #fff5b8;
+            color: #744210;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin: 5px 0;
+            border-left: 3px solid #fbd38d;
+        }
+
+        .browser-stat {
+            position: relative;
+        }
+
+        .browser-stat:nth-child(3) {
+            background: linear-gradient(135deg, #e6fffa 0%, #c6f6d5 100%);
+        }
+
+        .browser-stat:nth-child(3) span {
+            color: #22543d;
+        }
+
+        .debug-info {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+            font-size: 0.85em;
+            color: #4a5568;
+        }
+
         .log-entry {
             background: #f7fafc;
             padding: 15px;
@@ -333,8 +555,11 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Current Session</h3>
-                <div class="value" id="currentSession">0</div>
-                <div class="unit">seconds</div>
+                <div class="value" id="currentSession">0s</div>
+                <div class="unit">active now</div>
+                <div class="session-progress">
+                    <div class="session-progress-bar" id="sessionProgress" style="width: 0%"></div>
+                </div>
             </div>
             <div class="stat-card">
                 <h3>Keystrokes</h3>
@@ -367,6 +592,35 @@
             <h2>📱 Currently Open Applications</h2>
             <div id="appList">
                 <div class="no-data">No applications detected</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌐 Browser Activity</h2>
+            <div class="browser-stats-grid">
+                <div class="browser-stat">
+                    <h4>Active Tabs</h4>
+                    <span id="activeTabs">0</span>
+                </div>
+                <div class="browser-stat">
+                    <h4>Browsers</h4>
+                    <span id="activeBrowsers">0</span>
+                </div>
+                <div class="browser-stat">
+                    <h4>Recent URLs</h4>
+                    <span id="recentUrls">0</span>
+                </div>
+                <div class="browser-stat">
+                    <h4>Most Active</h4>
+                    <span id="mostActiveTab">None</span>
+                </div>
+            </div>
+            <div id="browserTabsList">
+                <div class="no-data">No browser activity detected</div>
+            </div>
+            <div class="debug-info">
+                <strong>Debug Info:</strong>
+                <span id="debugInfo">Initializing browser tracking...</span>
             </div>
         </div>
 
@@ -416,12 +670,57 @@
             }
         }
 
+        function formatSessionTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = Math.floor(seconds % 60);
+
+            if (hours > 0) {
+                return `${hours}h ${minutes}m`;
+            } else if (minutes > 0) {
+                return `${minutes}m ${secs}s`;
+            } else {
+                return `${secs}s`;
+            }
+        }
+
         function updateDashboard() {
             fetch('/api/stats')
                 .then(response => response.json())
                 .then(data => {
                     // Update stats cards
-                    document.getElementById('currentSession').textContent = Math.round(data.current_session_time);
+                    const sessionTime = data.current_session_time || 0;
+                    const sessionFormatted = formatSessionTime(sessionTime);
+                    document.getElementById('currentSession').textContent = sessionFormatted;
+
+                    // Update the unit dynamically based on session length
+                    const sessionUnit = document.querySelector('#currentSession').nextElementSibling;
+                    const liveIndicator = '<span style="display: inline-block; width: 8px; height: 8px; background: #48bb78; border-radius: 50%; margin-left: 8px; animation: pulse 2s infinite;"></span>';
+
+                    if (sessionTime < 60) {
+                        sessionUnit.innerHTML = 'live session' + liveIndicator;
+                    } else if (sessionTime < 3600) {
+                        sessionUnit.innerHTML = 'active session' + liveIndicator;
+                    } else {
+                        sessionUnit.innerHTML = 'long session' + liveIndicator;
+                    }
+
+                    // Update session progress bar
+                    const progressBar = document.getElementById('sessionProgress');
+                    let progressPercentage = 0;
+
+                    if (sessionTime <= 1800) { // 0-30 minutes
+                        progressPercentage = (sessionTime / 1800) * 100;
+                    } else if (sessionTime <= 3600) { // 30-60 minutes  
+                        progressPercentage = 100;
+                    } else if (sessionTime <= 7200) { // 1-2 hours
+                        progressPercentage = ((sessionTime - 3600) / 3600) * 100;
+                    } else { // 2+ hours
+                        progressPercentage = 100;
+                    }
+
+                    progressBar.style.width = progressPercentage + '%';
+
                     document.getElementById('keystrokes').textContent = data.keystrokes;
                     document.getElementById('openApps').textContent = Object.keys(data.open_apps_details || {}).length;
                     document.getElementById('totalSessions').textContent = data.total_sessions;
@@ -490,6 +789,77 @@
                     } else {
                         appList.innerHTML = '<div class="no-data">No applications detected</div>';
                     }
+
+                    // Update browser activity
+                    const browserData = data.browser_data || {};
+                    const browserStats = browserData.stats || {};
+                    const activeTabs = browserData.active_tabs || {};
+
+                    document.getElementById('activeTabs').textContent = browserStats.total_tabs || 0;
+                    document.getElementById('activeBrowsers').textContent = (browserStats.active_browsers || []).length;
+                    document.getElementById('recentUrls').textContent = browserData.recent_urls_count || 0;
+
+                    const mostActiveTab = browserStats.most_active_tab;
+                    document.getElementById('mostActiveTab').textContent = mostActiveTab ?
+                        mostActiveTab.title.substring(0, 25) + '...' : 'None';
+
+                    // Update browser tabs list
+                    const browserTabsList = document.getElementById('browserTabsList');
+                    if (Object.keys(activeTabs).length > 0) {
+                        // Sort tabs by activity (active first, then by total time)
+                        const sortedTabs = Object.entries(activeTabs).sort(([keyA, tabA], [keyB, tabB]) => {
+                            if (tabA.is_active && !tabB.is_active) return -1;
+                            if (!tabA.is_active && tabB.is_active) return 1;
+                            return (tabB.total_time || 0) - (tabA.total_time || 0);
+                        });
+
+                        browserTabsList.innerHTML = sortedTabs.map(([tabKey, tabData]) => {
+                            const timeSpent = formatDuration(tabData.total_time || 0);
+                            const isActive = tabData.is_active || tabKey === browserData.current_browser;
+                            const category = tabData.category || 'general';
+                            const searchQuery = tabData.search_query;
+                            const visitCount = tabData.visit_count || 1;
+
+                            // Truncate URL for display
+                            const displayUrl = tabData.url && tabData.url.length > 60 ?
+                                tabData.url.substring(0, 60) + '...' : tabData.url || 'No URL';
+
+                            return `
+                                <div class="browser-tab ${isActive ? 'active' : ''} ${!tabData.is_active ? 'inactive-tab' : ''}">
+                                    <div class="browser-tab-header">
+                                        <div class="browser-tab-title">
+                                            ${isActive ? '🔵 ' : ''}${tabData.title || 'Unknown Tab'}
+                                            ${visitCount > 1 ? `<span class="visit-count">(${visitCount} visits)</span>` : ''}
+                                        </div>
+                                        <div class="browser-tab-time">${timeSpent}</div>
+                                    </div>
+                                    <div class="browser-tab-url" title="${tabData.url || 'No URL'}">${displayUrl}</div>
+                                    ${searchQuery ? `<div class="search-query">🔍 "${searchQuery}"</div>` : ''}
+                                    <div class="browser-tab-meta">
+                                        <div class="browser-tab-category ${category}">${category}</div>
+                                        <div style="font-size: 0.8em; color: #718096;">
+                                            ${tabData.browser} ${isActive ? '(Active)' : '(Background)'}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+                    } else {
+                        browserTabsList.innerHTML = '<div class="no-data">No browser activity detected. Make sure you have browser windows open and try refreshing the page.</div>';
+                    }
+
+                    // Update debug info
+                    const debugInfo = document.getElementById('debugInfo');
+                    const totalWindows = browserData.browser_windows ? browserData.browser_windows.length : 0;
+                    const recentUrlsCount = browserData.recent_urls_count || 0;
+                    const currentBrowser = browserData.current_browser || 'None';
+
+                    debugInfo.innerHTML = `
+                        Browser windows: ${totalWindows} | 
+                        Recent URLs: ${recentUrlsCount} | 
+                        Current: ${currentBrowser !== 'None' ? currentBrowser.split('_')[0] : 'None'} |
+                        Last update: ${new Date().toLocaleTimeString()}
+                    `;
 
                     // Update recent logs
                     const recentLogs = document.getElementById('recentLogs');

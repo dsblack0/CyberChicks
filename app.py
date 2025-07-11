@@ -101,6 +101,7 @@ def get_stats():
             "recent_logs": recent_logs,
             "last_updated": status.get("last_updated", ""),
             "sessions": sessions[-10:],  # Last 10 sessions
+            "browser_data": status.get("browser_data", {}),
         }
     )
 

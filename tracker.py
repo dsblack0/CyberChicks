@@ -10,6 +10,7 @@ from pynput import keyboard, mouse
 import tkinter as tk
 import os
 from win10toast import ToastNotifier
+from browser_tracker import update_browser_tracking, get_browser_status
 
 LOG_FILE = "data/logs.json"
 STATUS_FILE = "data/status.json"
@@ -23,11 +24,38 @@ current_title = None
 start_time = time.time()
 open_apps = {}
 sessions = []
-notifier = ToastNotifier()
+notifier = None
 last_mouse_move_time = time.time()
+
+# Initialize notifier with error handling
+try:
+    notifier = ToastNotifier()
+    print("[Tracker] Toast notifications initialized successfully")
+except Exception as e:
+    print(f"[Tracker] Toast notification initialization failed: {e}")
+    notifier = None
 
 # Ensure data directory exists
 os.makedirs("data", exist_ok=True)
+
+
+def show_notification(title, message, duration=5):
+    """Show notification with error handling"""
+    global notifier
+    try:
+        if notifier is not None:
+            notifier.show_toast(title, message, duration=duration)
+            print(f"[Notification] {title}: {message}")
+        else:
+            print(f"[Notification] {title}: {message}")
+    except Exception as e:
+        print(f"[Notification Error] {title}: {message} (Error: {e})")
+        # Try to reinitialize notifier
+        try:
+            notifier = ToastNotifier()
+            notifier.show_toast(title, message, duration=duration)
+        except:
+            print(f"[Notification] Fallback - {title}: {message}")
 
 
 # Keystroke listener
@@ -117,7 +145,7 @@ def check_idle_apps(current_time):
             instance_text = (
                 f" ({instance_count} instances)" if instance_count > 1 else ""
             )
-            notifier.show_toast(
+            show_notification(
                 "Unused App Alert",
                 f"You haven't used {app}{instance_text} for {minutes_unused} minutes. Consider closing it to save resources.",
                 duration=8,
@@ -161,6 +189,13 @@ def update_status_file(session_time, keystrokes):
             "instances": app_info.get("instances", []),
         }
 
+    # Get browser data
+    browser_data = {}
+    try:
+        browser_data = get_browser_status()
+    except Exception as e:
+        print(f"Error getting browser data: {e}")
+
     with open(STATUS_FILE, "w") as f:
         json.dump(
             {
@@ -171,6 +206,7 @@ def update_status_file(session_time, keystrokes):
                 "open_apps_details": open_apps_details,
                 "current_app": current_app,
                 "sessions": sessions[-5:],  # most recent 5 sessions
+                "browser_data": browser_data,
             },
             f,
         )
@@ -199,7 +235,7 @@ def update_tracker():
                     }
                 )
                 save_sessions()
-                notifier.show_toast(
+                show_notification(
                     "Session Ended",
                     f"No activity for 5 minutes. Session recorded ({session_duration} sec).",
                     duration=5,
@@ -232,6 +268,12 @@ def update_tracker():
                     open_apps[app]["instance_count"] = open_windows[app]["count"]
                     open_apps[app]["instances"] = open_windows[app]["instances"]
             check_idle_apps(now)
+
+            # Update browser tracking
+            try:
+                update_browser_tracking()
+            except Exception as e:
+                print(f"Browser tracking error: {e}")
 
             app, title = get_active_window()
             if app != current_app:
