@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Monitor Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.1em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 1.2em;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .unit {
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .app-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .app-tag {
+            background: #e6fffa;
+            color: #319795;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            border: 1px solid #81e6d9;
+        }
+
+        .app-card {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .app-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .app-card.current-app {
+            background: #e6fffa;
+            border-color: #38b2ac;
+            box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2);
+        }
+
+        .app-card.idle-app {
+            background: #fff5f5;
+            border-color: #feb2b2;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .app-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+        }
+
+        .app-name .current-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #38b2ac;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        .app-name .instance-count {
+            background: #e2e8f0;
+            color: #4a5568;
+            font-size: 0.8em;
+            padding: 2px 6px;
+            border-radius: 12px;
+            margin-left: 8px;
+            font-weight: normal;
+        }
+
+        .app-name .instance-count.multiple {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .app-timing {
+            text-align: right;
+            font-size: 0.9em;
+        }
+
+        .app-timing .duration {
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .app-timing .last-used {
+            color: #718096;
+            font-size: 0.8em;
+        }
+
+        .app-title {
+            color: #718096;
+            font-size: 0.9em;
+            margin-top: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .app-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .app-status .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+
+        .app-status .status-badge.active {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .app-status .status-badge.idle {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .app-status .status-badge.normal {
+            background: #bee3f8;
+            color: #2a4365;
+        }
+
+        .log-entry {
+            background: #f7fafc;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .log-entry h4 {
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+
+        .log-entry p {
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .session-item {
+            background: #f7fafc;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .session-item .session-info {
+            flex: 1;
+        }
+
+        .session-item .session-duration {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #48bb78;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #718096;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #718096;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Productivity Monitor</h1>
+            <p><span class="status-indicator"></span>Live Dashboard - Real-time Activity Tracking</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Current Session</h3>
+                <div class="value" id="currentSession">0</div>
+                <div class="unit">seconds</div>
+            </div>
+            <div class="stat-card">
+                <h3>Keystrokes</h3>
+                <div class="value" id="keystrokes">0</div>
+                <div class="unit">this session</div>
+            </div>
+            <div class="stat-card">
+                <h3>Open Apps</h3>
+                <div class="value" id="openApps">0</div>
+                <div class="unit">currently</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Sessions</h3>
+                <div class="value" id="totalSessions">0</div>
+                <div class="unit">all time</div>
+            </div>
+            <div class="stat-card">
+                <h3>Today's Time</h3>
+                <div class="value" id="todayTime">0</div>
+                <div class="unit">minutes</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Time</h3>
+                <div class="value" id="totalTime">0</div>
+                <div class="unit">hours</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📱 Currently Open Applications</h2>
+            <div id="appList">
+                <div class="no-data">No applications detected</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Recent Activity</h2>
+            <div id="recentLogs">
+                <div class="no-data">No recent activity</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🕐 Recent Sessions</h2>
+            <div id="recentSessions">
+                <div class="no-data">No sessions recorded</div>
+            </div>
+        </div>
+
+        <div class="last-updated">
+            Last updated: <span id="lastUpdated">Never</span>
+        </div>
+    </div>
+
+    <script>
+        function formatTime(seconds) {
+            if (seconds < 60) return Math.round(seconds);
+            if (seconds < 3600) return Math.round(seconds / 60);
+            return Math.round(seconds / 3600 * 10) / 10;
+        }
+
+        function formatTimeUnit(seconds) {
+            if (seconds < 60) return 'seconds';
+            if (seconds < 3600) return 'minutes';
+            return 'hours';
+        }
+
+        function formatDuration(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = Math.floor(seconds % 60);
+
+            if (hours > 0) {
+                return `${hours}h ${minutes}m ${secs}s`;
+            } else if (minutes > 0) {
+                return `${minutes}m ${secs}s`;
+            } else {
+                return `${secs}s`;
+            }
+        }
+
+        function updateDashboard() {
+            fetch('/api/stats')
+                .then(response => response.json())
+                .then(data => {
+                    // Update stats cards
+                    document.getElementById('currentSession').textContent = Math.round(data.current_session_time);
+                    document.getElementById('keystrokes').textContent = data.keystrokes;
+                    document.getElementById('openApps').textContent = Object.keys(data.open_apps_details || {}).length;
+                    document.getElementById('totalSessions').textContent = data.total_sessions;
+
+                    // Update time displays
+                    const todayTimeCard = document.getElementById('todayTime');
+                    const todayTimeValue = formatTime(data.today_time);
+                    todayTimeCard.textContent = todayTimeValue;
+                    todayTimeCard.nextElementSibling.textContent = formatTimeUnit(data.today_time);
+
+                    const totalTimeCard = document.getElementById('totalTime');
+                    const totalTimeValue = formatTime(data.total_time);
+                    totalTimeCard.textContent = totalTimeValue;
+                    totalTimeCard.nextElementSibling.textContent = formatTimeUnit(data.total_time);
+
+                    // Update open apps list with detailed information
+                    const appList = document.getElementById('appList');
+                    const openAppsDetails = data.open_apps_details || {};
+                    const currentApp = data.current_app || '';
+
+                    if (Object.keys(openAppsDetails).length > 0) {
+                        appList.innerHTML = Object.entries(openAppsDetails).map(([appName, appInfo]) => {
+                            const durationOpen = formatDuration(appInfo.duration_open_sec || 0);
+                            const lastUsed = formatDuration(appInfo.duration_since_used_sec || 0);
+                            const isCurrentApp = appInfo.is_current || appName === currentApp;
+                            const isIdle = appInfo.duration_since_used_sec > 180; // 3 minutes
+
+                            let statusClass = 'normal';
+                            let statusText = 'Background';
+
+                            if (isCurrentApp) {
+                                statusClass = 'active';
+                                statusText = 'Active';
+                            } else if (isIdle) {
+                                statusClass = 'idle';
+                                statusText = 'Idle';
+                            }
+
+                            const cardClass = isCurrentApp ? 'current-app' : (isIdle ? 'idle-app' : '');
+
+                            const instanceCount = appInfo.instance_count || 1;
+                            const instanceBadge = instanceCount > 1 ?
+                                `<span class="instance-count multiple">${instanceCount} instances</span>` :
+                                '';
+
+                            return `
+                                <div class="app-card ${cardClass}">
+                                    <div class="app-header">
+                                        <div class="app-name">
+                                            ${isCurrentApp ? '<span class="current-indicator"></span>' : ''}
+                                            ${appName}${instanceBadge}
+                                        </div>
+                                        <div class="app-timing">
+                                            <div class="duration">Running: ${durationOpen}</div>
+                                            <div class="last-used">Last used: ${lastUsed} ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="app-title">${appInfo.title || 'No title'}</div>
+                                    <div class="app-status">
+                                        <div>Started: ${new Date(appInfo.start_time).toLocaleTimeString()}</div>
+                                        <div class="status-badge ${statusClass}">${statusText}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+                    } else {
+                        appList.innerHTML = '<div class="no-data">No applications detected</div>';
+                    }
+
+                    // Update recent logs
+                    const recentLogs = document.getElementById('recentLogs');
+                    if (data.recent_logs.length > 0) {
+                        recentLogs.innerHTML = data.recent_logs.map(log => `
+                            <div class="log-entry">
+                                <h4>${log.app || 'Unknown App'}</h4>
+                                <p>${log.title || 'No title'}</p>
+                                <p>Duration: ${formatDuration(log.duration_sec || 0)} | 
+                                   ${new Date(log.start).toLocaleTimeString()} - ${new Date(log.end).toLocaleTimeString()}</p>
+                            </div>
+                        `).join('');
+                    } else {
+                        recentLogs.innerHTML = '<div class="no-data">No recent activity</div>';
+                    }
+
+                    // Update recent sessions
+                    const recentSessions = document.getElementById('recentSessions');
+                    if (data.sessions.length > 0) {
+                        recentSessions.innerHTML = data.sessions.map(session => `
+                            <div class="session-item">
+                                <div class="session-info">
+                                    <div>${new Date(session.start).toLocaleDateString()} 
+                                         ${new Date(session.start).toLocaleTimeString()}</div>
+                                    <div style="font-size: 0.9em; color: #718096;">
+                                        ${new Date(session.start).toLocaleTimeString()} - ${new Date(session.end).toLocaleTimeString()}
+                                    </div>
+                                </div>
+                                <div class="session-duration">${formatDuration(session.duration_sec)}</div>
+                            </div>
+                        `).join('');
+                    } else {
+                        recentSessions.innerHTML = '<div class="no-data">No sessions recorded</div>';
+                    }
+
+                    // Update last updated time
+                    if (data.last_updated) {
+                        document.getElementById('lastUpdated').textContent = new Date(data.last_updated).toLocaleString();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching stats:', error);
+                    document.getElementById('lastUpdated').textContent = 'Error loading data';
+                });
+        }
+
+        // Update dashboard every 2 seconds
+        updateDashboard();
+        setInterval(updateDashboard, 2000);
+
+        // Initial load message
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Productivity Monitor Dashboard loaded');
+        });
+    </script>
+</body>
+
+</html>
