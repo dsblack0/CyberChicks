@@ -76,8 +76,14 @@ def get_stats():
     sessions = read_sessions()
     recent_logs = read_recent_logs(5)
 
-    # Calculate total time from all sessions
-    total_time = sum(session.get("duration_sec", 0) for session in sessions)
+    # Get current session time
+    current_session_time = status.get("session_time", 0)
+
+    # Calculate total time from all completed sessions + current session
+    completed_sessions_time = sum(
+        session.get("duration_sec", 0) for session in sessions
+    )
+    total_time = completed_sessions_time + current_session_time
 
     # Get today's sessions
     today = datetime.now().date()
@@ -86,11 +92,21 @@ def get_stats():
         for session in sessions
         if datetime.fromisoformat(session.get("start", "")).date() == today
     ]
-    today_time = sum(session.get("duration_sec", 0) for session in today_sessions)
+    today_completed_time = sum(
+        session.get("duration_sec", 0) for session in today_sessions
+    )
+    today_time = today_completed_time + current_session_time
+
+    # Debug logging
+    print(
+        f"[API Debug] Current session: {current_session_time}s, "
+        f"Completed sessions: {completed_sessions_time}s, "
+        f"Total: {total_time}s, Today: {today_time}s"
+    )
 
     return jsonify(
         {
-            "current_session_time": status.get("session_time", 0),
+            "current_session_time": current_session_time,
             "session_start_time": status.get(
                 "session_start_time", datetime.now().isoformat()
             ),

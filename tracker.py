@@ -552,12 +552,12 @@ def update_tracker():
             time_since_last_activity = now - last_activity_time
             session_duration = now - session_start_time
 
-            # Debug logging every 30 seconds
-            if int(now) % 30 == 0:
+            # Debug logging every 60 seconds (reduced frequency)
+            if int(now) % 60 == 0:
                 print(
-                    f"[Debug] Session duration: {session_duration:.1f}s, "
-                    f"Time since activity: {time_since_last_activity:.1f}s, "
-                    f"Keystrokes: {keystroke_count}"
+                    f"[Debug] Session: {session_duration / 60:.1f}min, "
+                    f"Activity: {time_since_last_activity:.1f}s ago, "
+                    f"Keys: {keystroke_count}, App: {current_app or 'None'}"
                 )
 
             # End session after 10 minutes of no activity (increased for stability)
