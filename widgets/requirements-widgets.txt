@@ -1,0 +1,17 @@
+# Additional requirements for SnapAlert Desktop Widgets
+
+# System tray widget
+pystray>=0.19.4
+Pillow>=9.0.0
+
+# Advanced notifications (optional, fallback if not available)
+plyer>=2.1.0
+win10toast-click>=0.1.0
+
+# GUI enhancements (optional)
+tkinter-tooltip>=1.3.0
+
+# Performance monitoring (already in main requirements)
+# psutil>=5.9.0
+# pynput>=1.7.6
+# pywin32>=304 

@@ -6,6 +6,7 @@ from datetime import datetime
 import subprocess
 import winreg
 from pathlib import Path
+from ai_analysis import get_scheduler, init_scheduler, start_scheduler, stop_scheduler
 
 app = Flask(__name__)
 
@@ -18,6 +19,8 @@ STATUS_FILE = "data/status.json"
 SESSIONS_FILE = "data/sessions.json"
 ALERT_CONFIG_FILE = "data/alert_config.json"
 CUSTOM_ALERTS_FILE = "data/custom_alerts.json"
+AI_ANALYSIS_CONFIG_FILE = "data/ai_analysis_config.json"
+INSIGHTS_FILE = "data/insights.json"
 
 
 def ensure_app_id_registered():
@@ -170,6 +173,8 @@ def get_stats():
             "browser_data": status.get("browser_data", {}),
             "alert_config": status.get("alert_config", {}),
             "custom_alerts": read_custom_alerts(),
+            "ai_insights": read_insights()[-10:],  # Last 10 insights
+            "ai_analysis_config": read_ai_analysis_config(),
         }
     )
 
@@ -241,6 +246,47 @@ def save_custom_alerts(alerts):
     except Exception as e:
         print(f"Error saving custom alerts: {e}")
         return False
+
+
+def read_ai_analysis_config():
+    """Read AI analysis configuration"""
+    try:
+        if os.path.exists(AI_ANALYSIS_CONFIG_FILE):
+            with open(AI_ANALYSIS_CONFIG_FILE, "r") as f:
+                return json.load(f)
+        return {
+            "enabled": True,
+            "analysis_interval_minutes": 20,
+            "ollama_url": "http://localhost:11434",
+            "model_name": "mistral",
+            "data_dir": "data",
+        }
+    except Exception as e:
+        print(f"Error reading AI analysis config: {e}")
+        return {}
+
+
+def save_ai_analysis_config(config):
+    """Save AI analysis configuration"""
+    try:
+        with open(AI_ANALYSIS_CONFIG_FILE, "w") as f:
+            json.dump(config, f, indent=2)
+        return True
+    except Exception as e:
+        print(f"Error saving AI analysis config: {e}")
+        return False
+
+
+def read_insights():
+    """Read AI insights from file"""
+    try:
+        if os.path.exists(INSIGHTS_FILE):
+            with open(INSIGHTS_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        return []
+    except Exception as e:
+        print(f"Error reading insights: {e}")
+        return []
 
 
 @app.route("/api/alerts/config")
@@ -764,6 +810,165 @@ def test_basic_alerts():
         return jsonify({"success": False, "message": str(e)}), 400
 
 
+# AI Analysis API Endpoints
+@app.route("/api/ai-analysis/config")
+def get_ai_analysis_config():
+    """Get AI analysis configuration"""
+    try:
+        config = read_ai_analysis_config()
+        scheduler = get_scheduler()
+        status = scheduler.get_status()
+
+        return jsonify({"success": True, "config": config, "status": status})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/ai-analysis/config", methods=["POST"])
+def update_ai_analysis_config():
+    """Update AI analysis configuration"""
+    try:
+        data = request.get_json()
+
+        # Validate required fields
+        if "analysis_interval_minutes" in data:
+            if (
+                not isinstance(data["analysis_interval_minutes"], int)
+                or data["analysis_interval_minutes"] < 1
+            ):
+                return jsonify({"success": False, "message": "Invalid interval"}), 400
+
+        # Save configuration
+        if save_ai_analysis_config(data):
+            # Update scheduler with new config
+            scheduler = get_scheduler()
+            scheduler.update_config(data)
+
+            return jsonify(
+                {"success": True, "message": "AI analysis configuration updated"}
+            )
+        else:
+            return jsonify(
+                {"success": False, "message": "Failed to save configuration"}
+            ), 500
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/ai-analysis/start", methods=["POST"])
+def start_ai_analysis():
+    """Start AI analysis scheduler"""
+    try:
+        scheduler = get_scheduler()
+        if scheduler.start():
+            return jsonify(
+                {"success": True, "message": "AI analysis scheduler started"}
+            )
+        else:
+            return jsonify(
+                {"success": False, "message": "Failed to start scheduler"}
+            ), 500
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/ai-analysis/stop", methods=["POST"])
+def stop_ai_analysis():
+    """Stop AI analysis scheduler"""
+    try:
+        scheduler = get_scheduler()
+        if scheduler.stop():
+            return jsonify(
+                {"success": True, "message": "AI analysis scheduler stopped"}
+            )
+        else:
+            return jsonify(
+                {"success": False, "message": "Failed to stop scheduler"}
+            ), 500
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/ai-analysis/run-now", methods=["POST"])
+def run_ai_analysis_now():
+    """Run AI analysis immediately"""
+    try:
+        scheduler = get_scheduler()
+        result = scheduler.run_analysis_now()
+
+        if result:
+            return jsonify(
+                {
+                    "success": True,
+                    "message": "Analysis completed successfully",
+                    "result": result,
+                }
+            )
+        else:
+            return jsonify({"success": False, "message": "Analysis failed"}), 500
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/ai-analysis/test-ollama", methods=["POST"])
+def test_ollama_connection():
+    """Test Ollama connection"""
+    try:
+        scheduler = get_scheduler()
+        is_connected = scheduler.test_ollama_connection()
+
+        return jsonify(
+            {
+                "success": True,
+                "connected": is_connected,
+                "message": "Ollama is accessible"
+                if is_connected
+                else "Ollama is not accessible",
+            }
+        )
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/ai-analysis/insights")
+def get_ai_insights():
+    """Get AI insights"""
+    try:
+        insights = read_insights()
+
+        return jsonify(
+            {"success": True, "insights": insights, "total_count": len(insights)}
+        )
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/ai-analysis/insights/<int:limit>")
+def get_ai_insights_limited(limit):
+    """Get limited number of recent AI insights"""
+    try:
+        insights = read_insights()
+        limited_insights = insights[-limit:] if limit > 0 else insights
+
+        return jsonify(
+            {
+                "success": True,
+                "insights": limited_insights,
+                "total_count": len(insights),
+                "returned_count": len(limited_insights),
+            }
+        )
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
 if __name__ == "__main__":
     # Ensure data directory exists
     os.makedirs("data", exist_ok=True)
@@ -771,5 +976,22 @@ if __name__ == "__main__":
     # Register SnapAlert app ID with Windows automatically
     print("🔺 Starting SnapAlert...")
     ensure_app_id_registered()
+
+    # Initialize AI analysis scheduler
+    try:
+        print("🤖 Initializing AI analysis scheduler...")
+        config = read_ai_analysis_config()
+        scheduler = init_scheduler(config)
+
+        if config.get("enabled", True):
+            if scheduler.start():
+                print("✅ AI analysis scheduler started successfully")
+            else:
+                print("⚠️ Failed to start AI analysis scheduler")
+        else:
+            print("⏸️ AI analysis scheduler is disabled")
+
+    except Exception as e:
+        print(f"❌ Error initializing AI analysis: {e}")
 
     app.run(debug=True, host="0.0.0.0", port=5000)

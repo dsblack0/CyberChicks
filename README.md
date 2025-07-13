@@ -5,8 +5,6 @@
 
 SnapAlert revolutionizes workplace productivity by bringing sophisticated AI capabilities directly to your device - no cloud required, no data shared, no barriers to entry. This comprehensive productivity monitoring system embodies the vision of democratized AI by making advanced machine learning accessible to every worker, in every environment, regardless of their technical expertise or internet connectivity.
 
-## AI for Everyone, Everywhere - Our Mission
-
 **Breaking Down AI Barriers in the Workplace:**
 
 SnapAlert addresses the critical challenge that while AI promises to transform productivity, most solutions require cloud connectivity, technical expertise, or compromise user privacy. Our edge AI approach ensures that **everyone** - from remote workers in areas with poor internet to privacy-conscious professionals in sensitive environments - can access personalized productivity intelligence.
@@ -27,7 +25,7 @@ SnapAlert is a complete edge AI productivity monitoring solution that provides:
 - **Goal-based notifications** triggered by AI understanding your work context
 - **Automated Windows notifications** with proper SnapAlert branding
 - **Manual alert testing** with instant trigger buttons
-- **Comprehensive web dashboard** with live indicators
+- **Comprehensive web dashboard and Desktop Widget** with live indicators
 - **Privacy-preserving AI** that learns your patterns while keeping all data local
 - **Offline-first design** ensuring functionality regardless of connectivity
 
@@ -86,7 +84,50 @@ The SnapAlert notification system provides proper Windows branding and clear mes
 *Keystroke Alert: Tracks typing activity and triggers when thresholds are reached*
 
 ![Session Time Alert](screenshots/3.png)
-*Session Time Alert: Monitors work session duration and provides timely reminders*
+*Session Time Alert: Notifies you when you need to step up and take a break*
+
+## 🖥️ Desktop Widget - Real-Time Productivity Dashboard
+
+Transform your productivity monitoring with a stunning **desktop widget** that displays real-time metrics directly on your desktop. Built with Apple-inspired design principles, this widget provides an elegant, always-visible productivity dashboard.
+
+### ✨ Widget Features
+
+- **🎨 Apple-Style Design**: Professional typography, clean color palette, and subtle shadows
+- **📜 Scrollable Interface**: Mouse wheel support for effortless navigation through metrics
+- **🎛️ Advanced Customization**: Choose exactly which metrics to display (Session Time, Keystrokes, Current App, Browser Tabs, etc.)
+- **⚙️ Professional Settings Panel**: Opacity control, always-on-top mode, and persistent configuration
+- **🔄 Live Updates**: Real-time data synchronization with your SnapAlert tracker
+- **💾 Lightweight**: ~15-25MB memory usage with <1% CPU impact
+
+### 🚀 Quick Start
+
+```bash
+# Navigate to widgets directory
+cd widgets
+
+# Launch the desktop widget
+python desktop_widget.py
+```
+
+**First Launch:**
+1. Widget appears with beautiful Apple-style design
+2. Drag the title bar to position where you want
+3. Use mouse wheel to scroll through your metrics
+4. Click ⚙ settings to customize fields and appearance
+5. Select your preferred metrics and opacity level
+
+### 🎯 Perfect For
+
+- **Developers**: Track coding sessions, keystrokes, and active applications
+- **Writers**: Monitor writing time and productivity metrics
+- **Professionals**: Comprehensive productivity monitoring at a glance
+- **Anyone**: Who wants beautiful, real-time productivity insights on their desktop
+
+### 🤖 Future AI Integration
+
+The widget architecture is designed to support advanced AI-driven insights including productivity AI scores, focus quality metrics, burnout prevention, and smart recommendations - all maintaining the same beautiful Apple-style design.
+
+**📖 For complete widget documentation, customization options, and advanced features, see:** [widgets/WIDGETS_README.md](widgets/WIDGETS_README.md)
 
 ## 📁 File Structure
 
@@ -126,14 +167,14 @@ Key dependencies include:
 
 ### 2. Start the System
 
-#### Option A: Web Interface + Tracker (Recommended)
+#### 2: Web Interface + Tracker
 ```bash
 python app.py
 ```
 - Starts web interface at http://localhost:5000
 - Includes all features: custom alerts, testing, session management, AI insights
 
-#### Option B: Tracker Only
+#### 1: Tracker Only
 ```bash
 python tracker.py
 ```
@@ -229,7 +270,9 @@ After setup:
 - **Condition Checking**: Evaluates greater_than, less_than, equal_to conditions
 - **Placeholder Replacement**: Replaces {threshold}, {app}, {value} in messages
 
-## 🤖 Edge AI Features - Democratizing Workplace Intelligence
+## 🤖 Edge AI Features - Workplace Intelligence
+
+![Diagram](screenshots/diagram.png)
 
 ### Revolutionary On-Device AI Processing
 **Pushing Creative Boundaries with Edge AI:**

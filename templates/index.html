@@ -178,6 +178,101 @@
             text-shadow: 0 0 10px currentColor;
         }
 
+        /* Sidebar Footer */
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 215, 0, 0.15);
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-content:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.4);
+            transform: translateY(-2px);
+            box-shadow:
+                0 8px 25px rgba(227, 30, 36, 0.2),
+                0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .snapdragon-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--snapdragon-red), var(--snapdragon-dark-red));
+            border-radius: 8px;
+            color: var(--snapdragon-white);
+            box-shadow:
+                0 0 15px rgba(227, 30, 36, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .footer-content:hover .snapdragon-logo {
+            box-shadow:
+                0 0 20px rgba(227, 30, 36, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .footer-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+            flex: 1;
+        }
+
+        .powered-by {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .snapdragon-brand {
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--snapdragon-red), var(--snapdragon-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.3px;
+            filter: drop-shadow(0 0 8px rgba(227, 30, 36, 0.3));
+        }
+
+        .footer-content:hover .snapdragon-brand {
+            filter: drop-shadow(0 0 12px rgba(227, 30, 36, 0.4));
+        }
+
+        .snapdragon-logo svg {
+            width: 16px;
+            height: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-content:hover .snapdragon-logo svg {
+            transform: rotate(5deg);
+        }
+
         /* Main Content */
         .main-content {
             margin-left: var(--sidebar-width);
@@ -886,6 +981,848 @@
                 font-size: 1.5rem;
             }
         }
+
+        /* Analytics & Insights Styles */
+        .productivity-overview {
+            margin-bottom: 1.5rem;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .overview-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(227, 30, 36, 0.15);
+        }
+
+        .overview-card.primary {
+            background: linear-gradient(135deg, rgba(227, 30, 36, 0.1), rgba(255, 215, 0, 0.05));
+            border-color: rgba(227, 30, 36, 0.3);
+        }
+
+        .overview-card.score {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(227, 30, 36, 0.05));
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .overview-card.balance {
+            background: linear-gradient(135deg, rgba(50, 205, 50, 0.1), rgba(255, 215, 0, 0.05));
+            border-color: rgba(50, 205, 50, 0.3);
+        }
+
+        .overview-icon {
+            font-size: 2rem;
+            opacity: 0.8;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .overview-content {
+            flex: 1;
+        }
+
+        .overview-content h3 {
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .overview-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .score-max {
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+
+        .overview-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .score-ring {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin-left: auto;
+        }
+
+        .score-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .time-balance {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .balance-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .balance-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .balance-item.productive .balance-dot {
+            background: var(--snapdragon-gold);
+        }
+
+        .balance-item.distracting .balance-dot {
+            background: var(--snapdragon-red);
+        }
+
+        .balance-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .balance-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--snapdragon-gold), var(--snapdragon-red));
+            transition: width 0.5s ease;
+        }
+
+        /* App Behavior Styles */
+        .behavior-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .behavior-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .behavior-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .behavior-card.warning {
+            background: rgba(255, 193, 7, 0.1);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+
+        .behavior-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .behavior-icon {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .behavior-header h4 {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .behavior-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .behavior-detail {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .behavior-trend {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .behavior-trend.up {
+            color: var(--snapdragon-red);
+        }
+
+        .behavior-trend.down {
+            color: var(--snapdragon-gold);
+        }
+
+        .behavior-action {
+            margin-top: 0.5rem;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ffc107, #f0ad4e);
+            color: #212529;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        }
+
+        /* Smart Suggestions Styles */
+        .suggestions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .suggestion-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .suggestion-card.goal {
+            background: rgba(50, 205, 50, 0.05);
+            border-color: rgba(50, 205, 50, 0.2);
+        }
+
+        .suggestion-card.alert {
+            background: rgba(255, 193, 7, 0.05);
+            border-color: rgba(255, 193, 7, 0.2);
+        }
+
+        .suggestion-card.encouragement {
+            background: rgba(138, 43, 226, 0.05);
+            border-color: rgba(138, 43, 226, 0.2);
+        }
+
+        .suggestion-icon {
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .suggestion-content {
+            flex: 1;
+        }
+
+        .suggestion-content h4 {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .suggestion-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .suggestion-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--snapdragon-gold), var(--snapdragon-red));
+            transition: width 0.5s ease;
+        }
+
+        .suggestion-progress span {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .suggestion-meta {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        /* Weekly Trends Styles */
+        .trends-overview {
+            margin-bottom: 2rem;
+        }
+
+        .trend-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .trend-stat {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .trend-stat:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(227, 30, 36, 0.1);
+        }
+
+        .trend-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .trend-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .trend-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Hourly Chart Styles */
+        .hourly-chart {
+            margin-top: 1.5rem;
+        }
+
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hour-bars {
+            display: flex;
+            align-items: end;
+            gap: 0.5rem;
+            height: 200px;
+            padding: 0 1rem;
+        }
+
+        .hour-bar {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px 4px 0 0;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            padding-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .hour-bar:hover {
+            background: rgba(227, 30, 36, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hour-bar.peak {
+            background: linear-gradient(180deg, var(--snapdragon-gold), var(--snapdragon-red));
+        }
+
+        .hour-bar.low {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hour-bar span {
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        .legend-color.peak {
+            background: linear-gradient(90deg, var(--snapdragon-gold), var(--snapdragon-red));
+        }
+
+        .legend-color.low {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Daily Analysis Styles */
+        .daily-analysis {
+            margin-top: 1.5rem;
+        }
+
+        .day-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .day-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(227, 30, 36, 0.15);
+        }
+
+        .day-card.best {
+            background: linear-gradient(135deg, rgba(50, 205, 50, 0.1), rgba(255, 215, 0, 0.05));
+            border-color: rgba(50, 205, 50, 0.3);
+        }
+
+        .day-card.worst {
+            background: linear-gradient(135deg, rgba(255, 69, 58, 0.1), rgba(255, 215, 0, 0.05));
+            border-color: rgba(255, 69, 58, 0.3);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .day-icon {
+            font-size: 1.5rem;
+        }
+
+        .day-header h4 {
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .day-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .day-stats {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+        }
+
+        .day-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* App Switching Chart Styles */
+        .switching-chart {
+            margin-top: 1.5rem;
+        }
+
+        .chart-area {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-labels {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 0 2rem;
+        }
+
+        /* Trending Apps Styles */
+        .trending-apps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .app-trend {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .app-trend:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .app-trend.up {
+            border-left: 4px solid var(--snapdragon-red);
+        }
+
+        .app-trend.down {
+            border-left: 4px solid var(--snapdragon-gold);
+        }
+
+        .app-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex: 1;
+        }
+
+        .app-icon {
+            font-size: 1.2rem;
+        }
+
+        .app-name {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .trend-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-right: 0.5rem;
+        }
+
+        .trend-indicator {
+            font-size: 1.2rem;
+        }
+
+        /* Alerts & Goals Styles */
+        .trends-bottom {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .alerts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .alert-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .alert-icon {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .alert-content {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .alert-name {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .alert-count {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .goals-progress {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .goals-summary {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+        }
+
+        .goal-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1rem;
+            flex: 1;
+        }
+
+        .goal-stat.hit {
+            background: rgba(50, 205, 50, 0.05);
+            border-color: rgba(50, 205, 50, 0.2);
+        }
+
+        .goal-stat.missed {
+            background: rgba(255, 69, 58, 0.05);
+            border-color: rgba(255, 69, 58, 0.2);
+        }
+
+        .goal-icon {
+            font-size: 1.5rem;
+        }
+
+        .goal-count {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .goal-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .goals-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .goal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .goal-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .goal-item.hit {
+            border-left: 4px solid var(--snapdragon-gold);
+        }
+
+        .goal-item.missed {
+            border-left: 4px solid var(--snapdragon-red);
+        }
+
+        .goal-name {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .goal-status {
+            font-size: 1.1rem;
+        }
+
+        /* AI Insights Styles */
+        .ai-insights {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .insight-bubble {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(255, 215, 0, 0.05));
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            border-radius: 16px;
+            padding: 1.25rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .insight-bubble::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 8px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .insight-bubble:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.2);
+        }
+
+        .insight-icon {
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .insight-content p {
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* Responsive adjustments for new sections */
+        @media (max-width: 768px) {
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .behavior-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .day-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .trends-bottom {
+                grid-template-columns: 1fr;
+            }
+
+            .hour-bars {
+                height: 150px;
+            }
+
+            .goals-summary {
+                flex-direction: column;
+            }
+
+            /* Mobile sidebar footer adjustments */
+            .sidebar-footer {
+                padding: 1rem;
+            }
+
+            .footer-content {
+                padding: 0.5rem 0.75rem;
+            }
+
+            .footer-text {
+                gap: 0.05rem;
+            }
+
+            .powered-by {
+                font-size: 0.65rem;
+            }
+
+            .snapdragon-brand {
+                font-size: 0.85rem;
+            }
+
+            .snapdragon-logo {
+                width: 28px;
+                height: 28px;
+            }
+
+            .snapdragon-logo svg {
+                width: 14px;
+                height: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -900,7 +1837,7 @@
         </div>
 
         <nav class="nav-menu">
-            <a href="#" class="nav-item active" onclick="showSection('dashboard'); return false;">
+            <a href="#" class="nav-item" onclick="showSection('dashboard'); return false;">
                 <div class="nav-icon">📊</div>
                 <span>Dashboard</span>
             </a>
@@ -912,15 +1849,38 @@
                 <div class="nav-icon">🌐</div>
                 <span>Browser</span>
             </a>
-            <a href="#" class="nav-item" onclick="showSection('analytics'); return false;">
+            <a href="#" class="nav-item active" onclick="showSection('analytics'); return false;">
                 <div class="nav-icon">📈</div>
                 <span>Analytics</span>
+            </a>
+            <a href="#" class="nav-item" onclick="showSection('trends'); return false;">
+                <div class="nav-icon">📊</div>
+                <span>Weekly Trends</span>
             </a>
             <a href="#" class="nav-item" onclick="showSection('settings'); return false;">
                 <div class="nav-icon">⚙️</div>
                 <span>Settings</span>
             </a>
         </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <div class="footer-content">
+                <div class="snapdragon-logo">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-width="2"
+                            stroke-linejoin="round" />
+                        <path d="M12 12L2 7L12 2L22 7L12 12Z" stroke="currentColor" stroke-width="2"
+                            stroke-linejoin="round" />
+                        <path d="M12 12V22" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                </div>
+                <div class="footer-text">
+                    <span class="powered-by">Powered by</span>
+                    <span class="snapdragon-brand">Snapdragon X Elite</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Main Content -->
@@ -928,7 +1888,7 @@
         <!-- Header -->
         <header class="header">
             <div class="header-left">
-                <h1 class="page-title">SnapAlert Monitor</h1>
+                <h1 class="page-title">SnapAlert - Analytics & Insights</h1>
                 <div class="status-indicator"></div>
             </div>
             <div class="header-right">
@@ -942,7 +1902,7 @@
         <!-- Content Area -->
         <div class="content-area">
             <!-- Dashboard Section -->
-            <div id="dashboard-section" class="section-content">
+            <div id="dashboard-section" class="section-content" style="display: none;">
                 <!-- Stats Grid -->
                 <div class="stats-grid">
                     <div class="stat-card primary">
@@ -1070,13 +2030,470 @@
             </div>
 
             <!-- Analytics Section -->
-            <div id="analytics-section" class="section-content" style="display: none;">
+            <div id="analytics-section" class="section-content">
+                <!-- Productivity Overview -->
                 <div class="section-card">
                     <div class="section-header">
-                        <div class="section-icon">📈</div>
-                        <h2 class="section-title">Analytics & Insights</h2>
+                        <div class="section-icon">🟩</div>
+                        <h2 class="section-title">Productivity Overview</h2>
                     </div>
-                    <div class="no-data">Analytics features coming soon...</div>
+
+                    <div class="productivity-overview">
+                        <div class="overview-grid">
+                            <div class="overview-card primary">
+                                <div class="overview-icon">🕒</div>
+                                <div class="overview-content">
+                                    <h3>Most Productive Hours</h3>
+                                    <p class="overview-value">9AM–11AM</p>
+                                    <span class="overview-subtitle">Peak focus time</span>
+                                </div>
+                            </div>
+
+                            <div class="overview-card score">
+                                <div class="overview-icon">📊</div>
+                                <div class="overview-content">
+                                    <h3>Productivity Score</h3>
+                                    <p class="overview-value">82<span class="score-max">/100</span></p>
+                                    <span class="overview-subtitle">+5 from yesterday</span>
+                                </div>
+                                <div class="score-ring">
+                                    <svg width="80" height="80">
+                                        <circle cx="40" cy="40" r="35" fill="none" stroke="rgba(255,255,255,0.1)"
+                                            stroke-width="6" />
+                                        <circle cx="40" cy="40" r="35" fill="none" stroke="var(--snapdragon-gold)"
+                                            stroke-width="6" stroke-dasharray="220" stroke-dashoffset="40"
+                                            transform="rotate(-90 40 40)" />
+                                    </svg>
+                                    <div class="score-text">82</div>
+                                </div>
+                            </div>
+
+                            <div class="overview-card balance">
+                                <div class="overview-icon">📈</div>
+                                <div class="overview-content">
+                                    <h3>Time Balance</h3>
+                                    <div class="time-balance">
+                                        <div class="balance-item productive">
+                                            <span class="balance-dot"></span>
+                                            <span>5h 12m productive</span>
+                                        </div>
+                                        <div class="balance-item distracting">
+                                            <span class="balance-dot"></span>
+                                            <span>2h 45m distracting</span>
+                                        </div>
+                                    </div>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Behavior -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🔁</div>
+                        <h2 class="section-title">App Behavior</h2>
+                    </div>
+
+                    <div class="behavior-grid">
+                        <div class="behavior-card">
+                            <div class="behavior-header">
+                                <div class="behavior-icon">🔄</div>
+                                <h4>App Switches Today</h4>
+                            </div>
+                            <div class="behavior-value">27 times</div>
+                            <div class="behavior-trend down">↓ 12% from yesterday</div>
+                        </div>
+
+                        <div class="behavior-card">
+                            <div class="behavior-header">
+                                <div class="behavior-icon">💻</div>
+                                <h4>VS Code</h4>
+                            </div>
+                            <div class="behavior-value">4h total</div>
+                            <div class="behavior-detail">Used 35m, idle 3h 25m</div>
+                        </div>
+
+                        <div class="behavior-card">
+                            <div class="behavior-header">
+                                <div class="behavior-icon">💤</div>
+                                <h4>Chrome</h4>
+                            </div>
+                            <div class="behavior-value">Open 3h</div>
+                            <div class="behavior-detail">No typing 2h</div>
+                        </div>
+
+                        <div class="behavior-card">
+                            <div class="behavior-header">
+                                <div class="behavior-icon">📥</div>
+                                <h4>Outlook Checks</h4>
+                            </div>
+                            <div class="behavior-value">Every 9m</div>
+                            <div class="behavior-trend up">↑ 15% frequency</div>
+                        </div>
+
+                        <div class="behavior-card warning">
+                            <div class="behavior-header">
+                                <div class="behavior-icon">🎥</div>
+                                <h4>YouTube Usage</h4>
+                            </div>
+                            <div class="behavior-value">27m today</div>
+                            <div class="behavior-action">
+                                <button class="btn-small btn-warning">Set Limit?</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Suggestions -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">💡</div>
+                        <h2 class="section-title">Smart Suggestions</h2>
+                    </div>
+
+                    <div class="suggestions-container">
+                        <div class="suggestion-card goal">
+                            <div class="suggestion-icon">🎯</div>
+                            <div class="suggestion-content">
+                                <h4>Goal Recommendation</h4>
+                                <p>Limit YouTube to 30m/day</p>
+                                <div class="suggestion-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 90%"></div>
+                                    </div>
+                                    <span>27m / 30m</span>
+                                </div>
+                            </div>
+                            <button class="btn-small btn-primary">Accept</button>
+                        </div>
+
+                        <div class="suggestion-card alert">
+                            <div class="suggestion-icon">⚠️</div>
+                            <div class="suggestion-content">
+                                <h4>Real-time Alert</h4>
+                                <p>On YouTube for 20m+</p>
+                                <div class="suggestion-meta">Active now</div>
+                            </div>
+                            <button class="btn-small btn-secondary">Dismiss</button>
+                        </div>
+
+                        <div class="suggestion-card encouragement">
+                            <div class="suggestion-icon">👍</div>
+                            <div class="suggestion-content">
+                                <h4>Great Job!</h4>
+                                <p>Nice! Focused 41m straight</p>
+                                <div class="suggestion-meta">Your longest streak today</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Trends Section -->
+            <div id="trends-section" class="section-content" style="display: none;">
+                <!-- Weekly Productivity Overview -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">📊</div>
+                        <h2 class="section-title">Weekly Trends</h2>
+                    </div>
+
+                    <div class="trends-overview">
+                        <div class="trend-stats">
+                            <div class="trend-stat">
+                                <div class="trend-icon">📈</div>
+                                <div class="trend-value">+12%</div>
+                                <div class="trend-label">Productivity</div>
+                            </div>
+                            <div class="trend-stat">
+                                <div class="trend-icon">⏰</div>
+                                <div class="trend-value">35.2h</div>
+                                <div class="trend-label">Total Time</div>
+                            </div>
+                            <div class="trend-stat">
+                                <div class="trend-icon">🎯</div>
+                                <div class="trend-value">4/6</div>
+                                <div class="trend-label">Goals Hit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hourly Productivity -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🕓</div>
+                        <h2 class="section-title">Most/Least Productive Hours</h2>
+                    </div>
+
+                    <div class="hourly-chart">
+                        <div class="chart-container">
+                            <div class="hour-bars">
+                                <div class="hour-bar" style="height: 20%"><span>8AM</span></div>
+                                <div class="hour-bar peak" style="height: 85%"><span>9AM</span></div>
+                                <div class="hour-bar peak" style="height: 90%"><span>10AM</span></div>
+                                <div class="hour-bar peak" style="height: 88%"><span>11AM</span></div>
+                                <div class="hour-bar" style="height: 65%"><span>12PM</span></div>
+                                <div class="hour-bar" style="height: 45%"><span>1PM</span></div>
+                                <div class="hour-bar" style="height: 70%"><span>2PM</span></div>
+                                <div class="hour-bar" style="height: 78%"><span>3PM</span></div>
+                                <div class="hour-bar" style="height: 55%"><span>4PM</span></div>
+                                <div class="hour-bar low" style="height: 25%"><span>5PM</span></div>
+                            </div>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color peak"></span>
+                                    <span>Peak Hours (9AM-11AM)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color low"></span>
+                                    <span>Low Hours (8AM, 5PM)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Focus Analysis -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🗓️</div>
+                        <h2 class="section-title">Daily Focus Analysis</h2>
+                    </div>
+
+                    <div class="daily-analysis">
+                        <div class="day-comparison">
+                            <div class="day-card best">
+                                <div class="day-header">
+                                    <div class="day-icon">🏆</div>
+                                    <h4>Best Focus Day</h4>
+                                </div>
+                                <div class="day-name">Tuesday</div>
+                                <div class="day-stats">
+                                    <div class="day-stat">
+                                        <span class="stat-value">6h 45m</span>
+                                        <span class="stat-label">focused</span>
+                                    </div>
+                                    <div class="day-stat">
+                                        <span class="stat-value">12</span>
+                                        <span class="stat-label">switches</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="day-card worst">
+                                <div class="day-header">
+                                    <div class="day-icon">😵</div>
+                                    <h4>Most Distracted</h4>
+                                </div>
+                                <div class="day-name">Friday</div>
+                                <div class="day-stats">
+                                    <div class="day-stat">
+                                        <span class="stat-value">3h 12m</span>
+                                        <span class="stat-label">focused</span>
+                                    </div>
+                                    <div class="day-stat">
+                                        <span class="stat-value">47</span>
+                                        <span class="stat-label">switches</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Switching Trend -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🔀</div>
+                        <h2 class="section-title">App Switching Trend</h2>
+                    </div>
+
+                    <div class="switching-chart">
+                        <div class="chart-area">
+                            <svg width="100%" height="200" viewBox="0 0 700 200">
+                                <path d="M 50 150 Q 150 120 250 100 Q 350 80 450 90 Q 550 100 650 70"
+                                    stroke="var(--snapdragon-red)" stroke-width="3" fill="none" />
+                                <path
+                                    d="M 50 150 Q 150 120 250 100 Q 350 80 450 90 Q 550 100 650 70 L 650 180 L 50 180 Z"
+                                    fill="url(#gradient)" opacity="0.3" />
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:var(--snapdragon-red);stop-opacity:0.8" />
+                                        <stop offset="100%" style="stop-color:var(--snapdragon-red);stop-opacity:0" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="chart-labels">
+                            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending Apps -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">📉</div>
+                        <h2 class="section-title">Trending Apps</h2>
+                    </div>
+
+                    <div class="trending-apps">
+                        <div class="app-trend up">
+                            <div class="app-info">
+                                <div class="app-icon">🎥</div>
+                                <div class="app-name">YouTube</div>
+                            </div>
+                            <div class="trend-value">+30%</div>
+                            <div class="trend-indicator">📈</div>
+                        </div>
+
+                        <div class="app-trend down">
+                            <div class="app-info">
+                                <div class="app-icon">🧘</div>
+                                <div class="app-name">Breaks</div>
+                            </div>
+                            <div class="trend-value">-22%</div>
+                            <div class="trend-indicator">📉</div>
+                        </div>
+
+                        <div class="app-trend up">
+                            <div class="app-info">
+                                <div class="app-icon">📱</div>
+                                <div class="app-name">Teams</div>
+                            </div>
+                            <div class="trend-value">+15%</div>
+                            <div class="trend-indicator">📈</div>
+                        </div>
+
+                        <div class="app-trend down">
+                            <div class="app-info">
+                                <div class="app-icon">💻</div>
+                                <div class="app-name">VS Code</div>
+                            </div>
+                            <div class="trend-value">-8%</div>
+                            <div class="trend-indicator">📉</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Alerts & Goals -->
+                <div class="trends-bottom">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <div class="section-icon">🔔</div>
+                            <h2 class="section-title">Top Alerts Triggered</h2>
+                        </div>
+
+                        <div class="alerts-list">
+                            <div class="alert-item">
+                                <div class="alert-icon">💤</div>
+                                <div class="alert-content">
+                                    <span class="alert-name">Idle App</span>
+                                    <span class="alert-count">15 times</span>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-icon">🎥</div>
+                                <div class="alert-content">
+                                    <span class="alert-name">YouTube Limit</span>
+                                    <span class="alert-count">8 times</span>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-icon">🔄</div>
+                                <div class="alert-content">
+                                    <span class="alert-name">App Switch</span>
+                                    <span class="alert-count">5 times</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <div class="section-icon">🎯</div>
+                            <h2 class="section-title">Goals Progress</h2>
+                        </div>
+
+                        <div class="goals-progress">
+                            <div class="goals-summary">
+                                <div class="goal-stat hit">
+                                    <div class="goal-icon">✅</div>
+                                    <div class="goal-count">4</div>
+                                    <div class="goal-label">Hit</div>
+                                </div>
+                                <div class="goal-stat missed">
+                                    <div class="goal-icon">❌</div>
+                                    <div class="goal-count">2</div>
+                                    <div class="goal-label">Missed</div>
+                                </div>
+                            </div>
+
+                            <div class="goals-details">
+                                <div class="goal-item hit">
+                                    <span class="goal-name">Focus 4+ hours</span>
+                                    <span class="goal-status">✅</span>
+                                </div>
+                                <div class="goal-item hit">
+                                    <span class="goal-name">Limit YouTube 30m</span>
+                                    <span class="goal-status">✅</span>
+                                </div>
+                                <div class="goal-item missed">
+                                    <span class="goal-name">Take 6 breaks</span>
+                                    <span class="goal-status">❌</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Insights -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🤖</div>
+                        <h2 class="section-title">AI Insights</h2>
+                        <button class="btn btn-secondary" onclick="refreshAIInsights()" style="margin-left: auto;">
+                            🔄 Refresh
+                        </button>
+                    </div>
+
+                    <div class="ai-insights">
+                        <div class="insight-bubble">
+                            <div class="insight-icon">🎯</div>
+                            <div class="insight-content">
+                                <p>"You were most focused on Tuesday mornings"</p>
+                            </div>
+                        </div>
+
+                        <div class="insight-bubble">
+                            <div class="insight-icon">👍</div>
+                            <div class="insight-content">
+                                <p>"You switched apps 20% less — nice!"</p>
+                            </div>
+                        </div>
+
+                        <div class="insight-bubble">
+                            <div class="insight-icon">💡</div>
+                            <div class="insight-content">
+                                <p>"Consider scheduling deep work at 9AM"</p>
+                            </div>
+                        </div>
+
+                        <div class="insight-bubble">
+                            <div class="insight-icon">🤔</div>
+                            <div class="insight-content">
+                                <p>"You worked longer but typed less — fatigue?"</p>
+                            </div>
+                        </div>
+                        <div id="aiInsights" class="ai-insights">
+                            <div class="no-data">Loading AI insights...</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1219,13 +2636,87 @@
                         <div class="no-data">No custom alerts created yet</div>
                     </div>
                 </div>
+
+                <!-- AI Analysis Configuration -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🤖</div>
+                        <h2 class="section-title">AI Analysis Configuration</h2>
+                    </div>
+
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="aiAnalysisEnabled" checked>
+                                Enable AI analysis
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                Analysis interval (minutes)
+                                <input type="number" id="analysisInterval" min="5" max="120" value="20"
+                                    style="width: 100px; margin-left: 10px;" class="form-input">
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                Ollama URL
+                                <input type="text" id="ollamaUrl" value="http://localhost:11434"
+                                    style="width: 200px; margin-left: 10px;" class="form-input">
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                Model name
+                                <input type="text" id="modelName" value="mistral"
+                                    style="width: 150px; margin-left: 10px;" class="form-input">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- AI Analysis Status -->
+                    <div
+                        style="margin-top: 2rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 12px;">
+                        <h4 style="color: var(--text-primary); margin-bottom: 1rem;">📊 Status</h4>
+                        <div id="aiAnalysisStatus" style="color: var(--text-secondary); font-size: 0.9rem;">
+                            <div>Status: <span id="aiStatusText">Loading...</span></div>
+                            <div>Last analysis: <span id="aiLastAnalysis">Never</span></div>
+                            <div>Next analysis: <span id="aiNextAnalysis">Unknown</span></div>
+                            <div>Analysis count: <span id="aiAnalysisCount">0</span></div>
+                        </div>
+                    </div>
+
+                    <!-- AI Analysis Controls -->
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" onclick="saveAIAnalysisConfig()">
+                            💾 Save Configuration
+                        </button>
+                        <button class="btn btn-secondary" onclick="testOllamaConnection()" style="margin-left: 1rem;">
+                            🧪 Test Ollama Connection
+                        </button>
+                        <button class="btn btn-secondary" onclick="runAIAnalysisNow()" style="margin-left: 1rem;">
+                            🚀 Run Analysis Now
+                        </button>
+                    </div>
+
+                    <!-- AI Analysis Controls -->
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button class="btn btn-secondary" onclick="startAIAnalysis()" id="startAIBtn">
+                            ▶️ Start Scheduler
+                        </button>
+                        <button class="btn btn-secondary" onclick="stopAIAnalysis()" id="stopAIBtn"
+                            style="margin-left: 1rem;">
+                            ⏸️ Stop Scheduler
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         // Store current active section
-        let currentSection = 'dashboard';
+        let currentSection = 'analytics';
 
         // Live session timing variables
         let lastSessionSync = 0;
@@ -1464,6 +2955,12 @@
 
                     // Update recent activity for dashboard
                     updateRecentActivity(data.recent_logs || [], data.open_apps_details || {});
+
+                    // Update AI analysis configuration
+                    updateAIAnalysisConfig(data.ai_analysis_config || {});
+
+                    // Update AI insights
+                    updateAIInsights(data.ai_insights || []);
                 })
                 .catch(error => {
                     console.error('Error fetching stats:', error);
@@ -1570,7 +3067,8 @@
                 dashboard: 'SnapAlert Monitor',
                 applications: 'SnapAlert - Applications',
                 browser: 'SnapAlert - Browser Activity',
-                analytics: 'SnapAlert - Analytics',
+                analytics: 'SnapAlert - Analytics & Insights',
+                trends: 'SnapAlert - Weekly Trends',
                 settings: 'SnapAlert - Settings'
             };
 
@@ -1833,9 +3331,209 @@
                 });
         }
 
+        // AI Analysis Functions
+        function updateAIAnalysisConfig(config) {
+            if (!config) return;
+
+            document.getElementById('aiAnalysisEnabled').checked = config.enabled !== false;
+            document.getElementById('analysisInterval').value = config.analysis_interval_minutes || 20;
+            document.getElementById('ollamaUrl').value = config.ollama_url || 'http://localhost:11434';
+            document.getElementById('modelName').value = config.model_name || 'mistral';
+        }
+
+        function updateAIAnalysisStatus() {
+            fetch('/api/ai-analysis/config')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const status = data.status;
+                        document.getElementById('aiStatusText').textContent = status.is_running ? 'Running' : 'Stopped';
+                        document.getElementById('aiLastAnalysis').textContent = status.last_analysis_time
+                            ? new Date(status.last_analysis_time).toLocaleString()
+                            : 'Never';
+                        document.getElementById('aiNextAnalysis').textContent = status.next_run_time
+                            ? new Date(status.next_run_time).toLocaleString()
+                            : 'Unknown';
+                        document.getElementById('aiAnalysisCount').textContent = status.analysis_count || 0;
+
+                        // Update button states
+                        document.getElementById('startAIBtn').disabled = status.is_running;
+                        document.getElementById('stopAIBtn').disabled = !status.is_running;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating AI analysis status:', error);
+                });
+        }
+
+        function saveAIAnalysisConfig() {
+            const config = {
+                enabled: document.getElementById('aiAnalysisEnabled').checked,
+                analysis_interval_minutes: parseInt(document.getElementById('analysisInterval').value),
+                ollama_url: document.getElementById('ollamaUrl').value,
+                model_name: document.getElementById('modelName').value
+            };
+
+            fetch('/api/ai-analysis/config', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(config)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotificationToast('🤖 AI analysis configuration saved!');
+                        updateAIAnalysisStatus();
+                    } else {
+                        showNotificationToast('❌ Failed to save configuration: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error saving AI analysis config:', error);
+                    showNotificationToast('❌ Error saving configuration');
+                });
+        }
+
+        function testOllamaConnection() {
+            showNotificationToast('🧪 Testing Ollama connection...');
+
+            fetch('/api/ai-analysis/test-ollama', {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.connected) {
+                            showNotificationToast('✅ Ollama connection successful!');
+                        } else {
+                            showNotificationToast('❌ Ollama is not accessible. Make sure it\'s running.');
+                        }
+                    } else {
+                        showNotificationToast('❌ Connection test failed: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error testing Ollama connection:', error);
+                    showNotificationToast('❌ Error testing connection');
+                });
+        }
+
+        function runAIAnalysisNow() {
+            showNotificationToast('🚀 Running AI analysis...');
+
+            fetch('/api/ai-analysis/run-now', {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotificationToast('✅ AI analysis completed successfully!');
+                        updateAIAnalysisStatus();
+                        refreshAIInsights();
+                    } else {
+                        showNotificationToast('❌ AI analysis failed: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error running AI analysis:', error);
+                    showNotificationToast('❌ Error running analysis');
+                });
+        }
+
+        function startAIAnalysis() {
+            fetch('/api/ai-analysis/start', {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotificationToast('▶️ AI analysis scheduler started!');
+                        updateAIAnalysisStatus();
+                    } else {
+                        showNotificationToast('❌ Failed to start scheduler: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error starting AI analysis:', error);
+                    showNotificationToast('❌ Error starting scheduler');
+                });
+        }
+
+        function stopAIAnalysis() {
+            fetch('/api/ai-analysis/stop', {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotificationToast('⏸️ AI analysis scheduler stopped!');
+                        updateAIAnalysisStatus();
+                    } else {
+                        showNotificationToast('❌ Failed to stop scheduler: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error stopping AI analysis:', error);
+                    showNotificationToast('❌ Error stopping scheduler');
+                });
+        }
+
+        function refreshAIInsights() {
+            fetch('/api/ai-analysis/insights/5')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateAIInsights(data.insights);
+                    } else {
+                        console.error('Error refreshing AI insights:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error refreshing AI insights:', error);
+                });
+        }
+
+        function updateAIInsights(insights) {
+            const aiInsightsContainer = document.getElementById('aiInsights');
+            if (!aiInsightsContainer) return;
+
+            if (!insights || insights.length === 0) {
+                aiInsightsContainer.innerHTML = '<div class="no-data">No AI insights available yet. Run analysis to generate insights.</div>';
+                return;
+            }
+
+            // Show latest insights (most recent first)
+            const recentInsights = insights.slice(-5).reverse();
+
+            aiInsightsContainer.innerHTML = recentInsights.map(insight => {
+                const summary = insight.summary || ['No summary available'];
+                const timestamp = new Date(insight.timestamp).toLocaleString();
+
+                return summary.map(item => `
+                    <div class="insight-bubble">
+                        <div class="insight-icon">🤖</div>
+                        <div class="insight-content">
+                            <p>"${item}"</p>
+                            <div class="insight-meta" style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                                ${timestamp}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }).join('');
+        }
+
         // Update dashboard every 5 seconds (live session timing happens every 1 second)
         updateDashboard();
         setInterval(updateDashboard, 5000);
+
+        // Update AI analysis status every 30 seconds
+        setInterval(updateAIAnalysisStatus, 30000);
+
+        // Initial AI status update
+        setTimeout(updateAIAnalysisStatus, 2000);
     </script>
 </body>
 
