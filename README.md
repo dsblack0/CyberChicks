@@ -196,7 +196,7 @@ python tracker.py
 4. Click **"🧪 Test"** to test your alert immediately
 5. Enable the alert to have it monitored automatically
 
-### 4. Set Up AI Insights
+### 4. Set Up AI Intelligence
 
 1. Ensure you have a local AI model running (e.g., Ollama with Mistral)
 2. Configure your work goals in the web interface
@@ -219,15 +219,9 @@ After setup:
 ## 🎯 How It Works
 
 ### 1. Automatic Monitoring (tracker.py)
-```python
-# The tracker continuously monitors:
-# - Keystroke count
-# - Session duration
-# - App usage time
-# - Idle time
-# - Checks all enabled custom alerts every 5 seconds
-# - Triggers Windows notifications when conditions are met
-```
+
+
+- Set up AI Intelligence.[AI Intelligence](ai_analysis/README.md)
 
 ### 2. Custom Alert Format (data/custom_alerts.json)
 ```json
@@ -246,25 +240,15 @@ After setup:
 }
 ```
 
-### 3. AI Insights System (insights.py)
-```python
-# AI system analyzes:
-# - Work patterns and productivity cycles
-# - App usage and focus times
-# - Break patterns and session lengths
-# - Generates personalized suggestions
-# - Triggers goal-based notifications
-# - Provides actionable productivity insights
-```
 
-### 4. Notification System
+### 3. Notification System
 - **Primary Method**: `win10toast_click` (proper app source control)
 - **Fallback 1**: PowerShell Toast notifications (with registered app ID)
 - **Fallback 2**: `plyer` notifications
 - **Fallback 3**: `win10toast` (final fallback)
 - **Automatic Registration**: System registers "SnapAlert.ProductivityMonitor" with Windows
 
-### 5. Alert Prevention
+### 4. Alert Prevention
 - **Anti-Spam**: Same alert won't trigger within 5 minutes
 - **Smart Filtering**: Excludes system apps from idle alerts
 - **Condition Checking**: Evaluates greater_than, less_than, equal_to conditions

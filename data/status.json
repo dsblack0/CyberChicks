@@ -1,8 +1,8 @@
 {
-  "session_time": 8946.87,
+  "session_time": 9576.06,
   "session_start_time": "2025-07-12T23:18:54.057343",
-  "keystrokes": 8423,
-  "last_updated": "2025-07-13T01:48:00.952943",
+  "keystrokes": 8756,
+  "last_updated": "2025-07-13T01:58:30.125440",
   "open_apps": [
     "WindowsTerminal.exe",
     "Cursor.exe",
@@ -27,10 +27,12 @@
     "WindowsTerminal.exe": {
       "title": "Windows PowerShell",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 7148.76,
-      "last_used_time": "2025-07-13T01:45:56.845965",
-      "duration_since_used_sec": 124.08,
-      "alert_history": [],
+      "duration_open_sec": 7777.95,
+      "last_used_time": "2025-07-13T01:52:03.101906",
+      "duration_since_used_sec": 387.01,
+      "alert_history": [
+        3
+      ],
       "is_current": false,
       "instance_count": 1,
       "instances": [
@@ -45,16 +47,16 @@
     "Cursor.exe": {
       "title": "tracker.py - CyberChicks - Cursor",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 7148.76,
-      "last_used_time": "2025-07-13T01:45:06.829170",
-      "duration_since_used_sec": 174.1,
+      "duration_open_sec": 7777.95,
+      "last_used_time": "2025-07-13T01:56:49.304165",
+      "duration_since_used_sec": 100.81,
       "alert_history": [],
-      "is_current": false,
+      "is_current": true,
       "instance_count": 1,
       "instances": [
         {
           "hwnd": 198416,
-          "title": "analyzer.py - CyberChicks - Cursor",
+          "title": "\u25cf README.md - CyberChicks - Cursor",
           "pid": 24324
         }
       ],
@@ -63,21 +65,23 @@
     "chrome.exe": {
       "title": "29m 57s - SnapAlert Monitor - Google Chrome",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 7148.76,
-      "last_used_time": "2025-07-13T01:46:41.863084",
-      "duration_since_used_sec": 79.07,
-      "alert_history": [],
-      "is_current": true,
+      "duration_open_sec": 7777.95,
+      "last_used_time": "2025-07-13T01:52:56.127718",
+      "duration_since_used_sec": 333.99,
+      "alert_history": [
+        3
+      ],
+      "is_current": false,
       "instance_count": 2,
       "instances": [
         {
-          "hwnd": 67082,
-          "title": "Real-time AI Insight Diagram - Google Chrome",
+          "hwnd": 1510116,
+          "title": "OffSec | Overview - Google Chrome",
           "pid": 11452
         },
         {
-          "hwnd": 1510116,
-          "title": "OffSec | Overview - Google Chrome",
+          "hwnd": 67082,
+          "title": "Real-time AI Insight Diagram - Google Chrome",
           "pid": 11452
         }
       ],
@@ -86,9 +90,9 @@
     "SystemSettings.exe": {
       "title": "Settings",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 7148.76,
+      "duration_open_sec": 7777.95,
       "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 7148.76,
+      "duration_since_used_sec": 7777.95,
       "alert_history": [],
       "is_current": false,
       "instance_count": 1,
@@ -104,9 +108,9 @@
     "ApplicationFrameHost.exe": {
       "title": "Settings",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 7148.76,
+      "duration_open_sec": 7777.95,
       "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 7148.76,
+      "duration_since_used_sec": 7777.95,
       "alert_history": [],
       "is_current": false,
       "instance_count": 2,
@@ -127,12 +131,13 @@
     "Notepad.exe": {
       "title": "*\ud83c\udf89 Both features are now complete! - Notepad",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 7148.76,
+      "duration_open_sec": 7777.95,
       "last_used_time": "2025-07-13T01:24:50.180242",
-      "duration_since_used_sec": 1390.75,
+      "duration_since_used_sec": 2019.93,
       "alert_history": [
         3,
-        10
+        10,
+        30
       ],
       "is_current": false,
       "instance_count": 2,
@@ -153,9 +158,9 @@
     "Taskmgr.exe": {
       "title": "Task Manager",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 7148.76,
+      "duration_open_sec": 7777.95,
       "last_used_time": "2025-07-12T23:54:47.313094",
-      "duration_since_used_sec": 6793.62,
+      "duration_since_used_sec": 7422.8,
       "alert_history": [
         3,
         10,
@@ -175,9 +180,9 @@
     "Microsoft.Notes.exe": {
       "title": "Title",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 7148.76,
+      "duration_open_sec": 7777.95,
       "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 7148.76,
+      "duration_since_used_sec": 7777.95,
       "alert_history": [
         3,
         10,
@@ -202,9 +207,9 @@
     "TextInputHost.exe": {
       "title": "Windows Input Experience",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 7148.76,
+      "duration_open_sec": 7777.95,
       "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 7148.76,
+      "duration_since_used_sec": 7777.95,
       "alert_history": [
         3,
         10,
@@ -224,9 +229,9 @@
     "explorer.exe": {
       "title": "Program Manager",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 7148.76,
-      "last_used_time": "2025-07-13T01:45:51.845460",
-      "duration_since_used_sec": 129.08,
+      "duration_open_sec": 7777.95,
+      "last_used_time": "2025-07-13T01:52:49.040139",
+      "duration_since_used_sec": 341.08,
       "alert_history": [],
       "is_current": false,
       "instance_count": 2,
@@ -247,11 +252,12 @@
     "python.exe": {
       "title": "Productivity Monitor - Optimized",
       "start_time": "2025-07-12T23:49:07.171063",
-      "duration_open_sec": 7133.76,
+      "duration_open_sec": 7762.94,
       "last_used_time": "2025-07-13T01:44:56.827374",
-      "duration_since_used_sec": 184.1,
+      "duration_since_used_sec": 813.29,
       "alert_history": [
-        3
+        3,
+        10
       ],
       "is_current": false,
       "instance_count": 1,
@@ -267,9 +273,9 @@
     "SnippingTool.exe": {
       "title": "Snipping Tool Overlay",
       "start_time": "2025-07-12T23:52:17.242598",
-      "duration_open_sec": 6943.69,
+      "duration_open_sec": 7572.87,
       "last_used_time": "2025-07-13T01:29:45.261339",
-      "duration_since_used_sec": 1095.67,
+      "duration_since_used_sec": 1724.85,
       "alert_history": [
         3,
         10
@@ -288,9 +294,9 @@
     "PickerHost.exe": {
       "title": "Save As",
       "start_time": "2025-07-12T23:52:47.258518",
-      "duration_open_sec": 6913.67,
+      "duration_open_sec": 7542.86,
       "last_used_time": "2025-07-13T01:29:50.262062",
-      "duration_since_used_sec": 1090.67,
+      "duration_since_used_sec": 1719.85,
       "alert_history": [
         3,
         10
@@ -309,9 +315,9 @@
     "msedgewebview2.exe": {
       "title": "Widgets",
       "start_time": "2025-07-12T23:54:27.308591",
-      "duration_open_sec": 6813.62,
+      "duration_open_sec": 7442.81,
       "last_used_time": "2025-07-12T23:54:27.308591",
-      "duration_since_used_sec": 6813.62,
+      "duration_since_used_sec": 7442.81,
       "alert_history": [
         3,
         10,
@@ -331,9 +337,9 @@
     "OllamaSetup.tmp": {
       "title": "Setup - Ollama version 0.9.6",
       "start_time": "2025-07-13T00:03:27.555936",
-      "duration_open_sec": 6273.37,
+      "duration_open_sec": 6902.56,
       "last_used_time": "2025-07-13T00:17:42.891669",
-      "duration_since_used_sec": 5418.04,
+      "duration_since_used_sec": 6047.22,
       "alert_history": [
         3,
         10,
@@ -353,9 +359,9 @@
     "ollama app.exe": {
       "title": "Ollama",
       "start_time": "2025-07-13T00:20:37.952787",
-      "duration_open_sec": 5242.98,
+      "duration_open_sec": 5872.16,
       "last_used_time": "2025-07-13T00:30:38.162896",
-      "duration_since_used_sec": 4642.77,
+      "duration_since_used_sec": 5271.95,
       "alert_history": [
         3,
         10,
@@ -375,9 +381,9 @@
     "python3.10.exe": {
       "title": "\ud83d\udd3a SnapAlert Widget Launcher",
       "start_time": "2025-07-13T00:32:08.198341",
-      "duration_open_sec": 4552.73,
+      "duration_open_sec": 5181.92,
       "last_used_time": "2025-07-13T01:00:39.655111",
-      "duration_since_used_sec": 2841.27,
+      "duration_since_used_sec": 3470.46,
       "alert_history": [
         3,
         10,
@@ -397,11 +403,12 @@
     "Copilot.exe": {
       "title": "Copilot",
       "start_time": "2025-07-13T01:44:11.810673",
-      "duration_open_sec": 229.12,
+      "duration_open_sec": 858.3,
       "last_used_time": "2025-07-13T01:44:11.810673",
-      "duration_since_used_sec": 229.12,
+      "duration_since_used_sec": 858.3,
       "alert_history": [
-        3
+        3,
+        10
       ],
       "is_current": false,
       "instance_count": 1,
@@ -415,48 +422,22 @@
       "resource_usage": null
     }
   },
-  "current_app": "chrome.exe",
+  "current_app": "Cursor.exe",
   "sessions": [],
   "browser_data": {
-    "timestamp": "2025-07-13T01:47:57.017140",
+    "timestamp": "2025-07-13T01:58:19.354445",
     "active_tabs": {
-      "Chrome_(312) WhatsApp - Google Chrome": {
+      "Chrome_OffSec | Overview - Google Chrome": {
         "browser": "Chrome",
-        "title": "(312) WhatsApp - Google Chrome",
-        "window_title": "(312) WhatsApp - Google Chrome",
-        "url": "(312) WhatsApp",
+        "title": "OffSec | Overview - Google Chrome",
+        "window_title": "OffSec | Overview - Google Chrome",
+        "url": "OffSec | Overview",
         "category": "general",
-        "start_time": 1752396251.8178356,
-        "last_active": 1752396191.8178356,
-        "total_time": 15.002408027648926,
+        "start_time": 1752396994.199661,
+        "last_active": 1752396934.199661,
+        "total_time": 105.15478420257568,
         "search_query": null,
         "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_(311) WhatsApp - Google Chrome": {
-        "browser": "Chrome",
-        "title": "(311) WhatsApp - Google Chrome",
-        "window_title": "(311) WhatsApp - Google Chrome",
-        "url": "(311) WhatsApp",
-        "category": "general",
-        "start_time": 1752396281.8337078,
-        "last_active": 1752396281.8337078,
-        "total_time": 105.02587080001831,
-        "search_query": null,
-        "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_ChatGPT - Presentation & Diagram Generator by <ShowMe> - Google Chrome": {
-        "browser": "Chrome",
-        "title": "ChatGPT - Presentation & Diagram Generator by <ShowMe> - Google Chrome",
-        "window_title": "ChatGPT - Presentation & Diagram Generator by <ShowMe> - Google Chrome",
-        "url": "ChatGPT",
-        "category": "general",
-        "start_time": 1752396401.8947122,
-        "last_active": 1752396401.8947122,
-        "total_time": 0,
-        "search_query": null,
-        "is_active": true,
         "visit_count": 1
       },
       "Chrome_Real-time AI Insight Diagram - Google Chrome": {
@@ -465,21 +446,8 @@
         "window_title": "Real-time AI Insight Diagram - Google Chrome",
         "url": "Real-time AI Insight Diagram",
         "category": "general",
-        "start_time": 1752396416.8686793,
-        "last_active": 1752396476.8881004,
-        "total_time": 60.019421100616455,
-        "search_query": null,
-        "is_active": true,
-        "visit_count": 1
-      },
-      "Chrome_OffSec | Overview - Google Chrome": {
-        "browser": "Chrome",
-        "title": "OffSec | Overview - Google Chrome",
-        "window_title": "OffSec | Overview - Google Chrome",
-        "url": "OffSec | Overview",
-        "category": "general",
-        "start_time": 1752396476.8881004,
-        "last_active": 1752396416.8881004,
+        "start_time": 1752397099.3544452,
+        "last_active": 1752397039.3544452,
         "total_time": 0,
         "search_query": null,
         "is_active": false,
@@ -488,29 +456,29 @@
     },
     "current_browser": "Chrome_Real-time AI Insight Diagram - Google Chrome",
     "stats": {
-      "total_tabs": 5,
+      "total_tabs": 2,
       "active_browsers": [
         "Chrome"
       ],
       "categories": {
-        "general": 5
+        "general": 2
       },
       "search_queries": [],
       "most_active_tab": {
         "browser": "Chrome",
-        "title": "(311) WhatsApp - Google Chrome",
-        "window_title": "(311) WhatsApp - Google Chrome",
-        "url": "(311) WhatsApp",
+        "title": "OffSec | Overview - Google Chrome",
+        "window_title": "OffSec | Overview - Google Chrome",
+        "url": "OffSec | Overview",
         "category": "general",
-        "start_time": 1752396281.8337078,
-        "last_active": 1752396281.8337078,
-        "total_time": 105.02587080001831,
+        "start_time": 1752396994.199661,
+        "last_active": 1752396934.199661,
+        "total_time": 105.15478420257568,
         "search_query": null,
         "is_active": false,
         "visit_count": 1
       },
       "browser_distribution": {
-        "Chrome": 5
+        "Chrome": 2
       }
     }
   },
@@ -531,8 +499,8 @@
       "enabled": true,
       "app_filter": "",
       "created_at": "2025-07-12T23:42:45.977850",
-      "last_triggered": 1752396476.8769453,
-      "trigger_count": 26
+      "last_triggered": 1752397084.3459768,
+      "trigger_count": 28
     },
     {
       "id": "test_session_2min",
@@ -544,8 +512,8 @@
       "enabled": true,
       "app_filter": "",
       "created_at": "2025-07-12T23:42:45.977850",
-      "last_triggered": 1752396476.8769453,
-      "trigger_count": 26
+      "last_triggered": 1752397084.3459768,
+      "trigger_count": 28
     },
     {
       "id": "test_app_time_1min",
@@ -570,8 +538,8 @@
       "enabled": true,
       "app_filter": "",
       "created_at": "2025-07-12T23:49:32.889173",
-      "last_triggered": 1752396281.8241098,
-      "trigger_count": 24
+      "last_triggered": 1752396884.04485,
+      "trigger_count": 26
     }
   ]
 }
