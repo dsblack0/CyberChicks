@@ -1,8 +1,8 @@
 {
-  "session_time": 2646.88,
+  "session_time": 3546.12,
   "session_start_time": "2025-07-12T23:18:54.057343",
-  "keystrokes": 2505,
-  "last_updated": "2025-07-13T00:03:00.955062",
+  "keystrokes": 3133,
+  "last_updated": "2025-07-13T00:18:00.196231",
   "open_apps": [
     "WindowsTerminal.exe",
     "Cursor.exe",
@@ -17,15 +17,16 @@
     "python.exe",
     "SnippingTool.exe",
     "PickerHost.exe",
-    "msedgewebview2.exe"
+    "msedgewebview2.exe",
+    "OllamaSetup.tmp"
   ],
   "open_apps_details": {
     "WindowsTerminal.exe": {
       "title": "Windows PowerShell",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 848.77,
+      "duration_open_sec": 1748.02,
       "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 848.77,
+      "duration_since_used_sec": 1748.02,
       "alert_history": [
         3,
         10
@@ -44,18 +45,16 @@
     "Cursor.exe": {
       "title": "tracker.py - CyberChicks - Cursor",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 848.77,
-      "last_used_time": "2025-07-12T23:59:17.427124",
-      "duration_since_used_sec": 223.51,
-      "alert_history": [
-        3
-      ],
-      "is_current": true,
+      "duration_open_sec": 1748.02,
+      "last_used_time": "2025-07-13T00:15:52.850088",
+      "duration_since_used_sec": 127.33,
+      "alert_history": [],
+      "is_current": false,
       "instance_count": 1,
       "instances": [
         {
           "hwnd": 198416,
-          "title": "README_LAUNCHER.md - CyberChicks - Cursor",
+          "title": "README.md - CyberChicks - Cursor",
           "pid": 24324
         }
       ],
@@ -64,12 +63,10 @@
     "chrome.exe": {
       "title": "29m 57s - SnapAlert Monitor - Google Chrome",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 848.77,
-      "last_used_time": "2025-07-12T23:58:27.400019",
-      "duration_since_used_sec": 273.54,
-      "alert_history": [
-        3
-      ],
+      "duration_open_sec": 1748.02,
+      "last_used_time": "2025-07-13T00:17:47.893059",
+      "duration_since_used_sec": 12.29,
+      "alert_history": [],
       "is_current": false,
       "instance_count": 2,
       "instances": [
@@ -80,7 +77,7 @@
         },
         {
           "hwnd": 67082,
-          "title": "44m 3s - SnapAlert Monitor - Google Chrome",
+          "title": "Edge AI Icon Design - Google Chrome",
           "pid": 11452
         }
       ],
@@ -89,9 +86,9 @@
     "SystemSettings.exe": {
       "title": "Settings",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 848.77,
+      "duration_open_sec": 1748.02,
       "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 848.77,
+      "duration_since_used_sec": 1748.02,
       "alert_history": [],
       "is_current": false,
       "instance_count": 1,
@@ -107,9 +104,9 @@
     "ApplicationFrameHost.exe": {
       "title": "Settings",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 848.77,
+      "duration_open_sec": 1748.02,
       "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 848.77,
+      "duration_since_used_sec": 1748.02,
       "alert_history": [],
       "is_current": false,
       "instance_count": 2,
@@ -130,11 +127,12 @@
     "Notepad.exe": {
       "title": "*\ud83c\udf89 Both features are now complete! - Notepad",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 848.77,
+      "duration_open_sec": 1748.02,
       "last_used_time": "2025-07-12T23:54:42.312292",
-      "duration_since_used_sec": 498.63,
+      "duration_since_used_sec": 1397.87,
       "alert_history": [
-        3
+        3,
+        10
       ],
       "is_current": false,
       "instance_count": 2,
@@ -155,11 +153,12 @@
     "Taskmgr.exe": {
       "title": "Task Manager",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 848.77,
+      "duration_open_sec": 1748.02,
       "last_used_time": "2025-07-12T23:54:47.313094",
-      "duration_since_used_sec": 493.63,
+      "duration_since_used_sec": 1392.87,
       "alert_history": [
-        3
+        3,
+        10
       ],
       "is_current": false,
       "instance_count": 1,
@@ -175,9 +174,9 @@
     "Microsoft.Notes.exe": {
       "title": "Title",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 848.77,
+      "duration_open_sec": 1748.02,
       "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 848.77,
+      "duration_since_used_sec": 1748.02,
       "alert_history": [
         3,
         10
@@ -201,9 +200,9 @@
     "TextInputHost.exe": {
       "title": "Windows Input Experience",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 848.77,
+      "duration_open_sec": 1748.02,
       "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 848.77,
+      "duration_since_used_sec": 1748.02,
       "alert_history": [
         3,
         10
@@ -222,13 +221,18 @@
     "explorer.exe": {
       "title": "Program Manager",
       "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 848.77,
-      "last_used_time": "2025-07-12T23:55:57.337615",
-      "duration_since_used_sec": 423.6,
+      "duration_open_sec": 1748.02,
+      "last_used_time": "2025-07-13T00:17:57.894789",
+      "duration_since_used_sec": 2.29,
       "alert_history": [],
-      "is_current": false,
-      "instance_count": 1,
+      "is_current": true,
+      "instance_count": 2,
       "instances": [
+        {
+          "hwnd": 394704,
+          "title": "Task Switching",
+          "pid": 12628
+        },
         {
           "hwnd": 66064,
           "title": "Program Manager",
@@ -240,9 +244,9 @@
     "python.exe": {
       "title": "Productivity Monitor - Optimized",
       "start_time": "2025-07-12T23:49:07.171063",
-      "duration_open_sec": 833.77,
+      "duration_open_sec": 1733.01,
       "last_used_time": "2025-07-12T23:49:07.171063",
-      "duration_since_used_sec": 833.77,
+      "duration_since_used_sec": 1733.01,
       "alert_history": [
         3,
         10
@@ -261,12 +265,10 @@
     "SnippingTool.exe": {
       "title": "Snipping Tool Overlay",
       "start_time": "2025-07-12T23:52:17.242598",
-      "duration_open_sec": 643.7,
-      "last_used_time": "2025-07-12T23:58:17.393911",
-      "duration_since_used_sec": 283.55,
-      "alert_history": [
-        3
-      ],
+      "duration_open_sec": 1542.94,
+      "last_used_time": "2025-07-13T00:15:42.848096",
+      "duration_since_used_sec": 137.33,
+      "alert_history": [],
       "is_current": false,
       "instance_count": 1,
       "instances": [
@@ -281,11 +283,12 @@
     "PickerHost.exe": {
       "title": "Save As",
       "start_time": "2025-07-12T23:52:47.258518",
-      "duration_open_sec": 613.68,
+      "duration_open_sec": 1512.92,
       "last_used_time": "2025-07-12T23:58:37.402363",
-      "duration_since_used_sec": 263.54,
+      "duration_since_used_sec": 1162.78,
       "alert_history": [
-        3
+        3,
+        10
       ],
       "is_current": false,
       "instance_count": 1,
@@ -301,11 +304,12 @@
     "msedgewebview2.exe": {
       "title": "Widgets",
       "start_time": "2025-07-12T23:54:27.308591",
-      "duration_open_sec": 513.63,
+      "duration_open_sec": 1412.87,
       "last_used_time": "2025-07-12T23:54:27.308591",
-      "duration_since_used_sec": 513.63,
+      "duration_since_used_sec": 1412.87,
       "alert_history": [
-        3
+        3,
+        10
       ],
       "is_current": false,
       "instance_count": 1,
@@ -317,115 +321,55 @@
         }
       ],
       "resource_usage": null
+    },
+    "OllamaSetup.tmp": {
+      "title": "Setup - Ollama version 0.9.6",
+      "start_time": "2025-07-13T00:03:27.555936",
+      "duration_open_sec": 872.62,
+      "last_used_time": "2025-07-13T00:17:42.891669",
+      "duration_since_used_sec": 17.29,
+      "alert_history": [],
+      "is_current": false,
+      "instance_count": 1,
+      "instances": [
+        {
+          "hwnd": 1051574,
+          "title": "Setup - Ollama version 0.9.6",
+          "pid": 25732
+        }
+      ],
+      "resource_usage": null
     }
   },
-  "current_app": "Cursor.exe",
+  "current_app": "explorer.exe",
   "sessions": [],
   "browser_data": {
-    "timestamp": "2025-07-13T00:02:52.649335",
+    "timestamp": "2025-07-13T00:17:52.987459",
     "active_tabs": {
-      "Chrome_39m 12s - SnapAlert Monitor - Google Chrome": {
+      "Chrome_dsblack0/CyberChicks - Google Chrome": {
         "browser": "Chrome",
-        "title": "39m 12s - SnapAlert Monitor - Google Chrome",
-        "window_title": "39m 12s - SnapAlert Monitor - Google Chrome",
-        "url": "39m 12s",
+        "title": "dsblack0/CyberChicks - Google Chrome",
+        "window_title": "dsblack0/CyberChicks - Google Chrome",
+        "url": "dsblack0/CyberChicks",
         "category": "general",
-        "start_time": 1752389887.4039965,
-        "last_active": 1752389887.4039965,
-        "total_time": 0,
+        "start_time": 1752390337.6326067,
+        "last_active": 1752390817.8282132,
+        "total_time": 480.19560647010803,
         "search_query": null,
         "is_active": true,
         "visit_count": 1
       },
-      "Chrome_40m 5s - SnapAlert Monitor - Google Chrome": {
+      "Chrome_(311) WhatsApp - Google Chrome": {
         "browser": "Chrome",
-        "title": "40m 5s - SnapAlert Monitor - Google Chrome",
-        "window_title": "40m 5s - SnapAlert Monitor - Google Chrome",
-        "url": "40m 5s",
+        "title": "(311) WhatsApp - Google Chrome",
+        "window_title": "(311) WhatsApp - Google Chrome",
+        "url": "(311) WhatsApp",
         "category": "general",
-        "start_time": 1752389947.4324365,
-        "last_active": 1752389887.4324365,
-        "total_time": 14.999701499938965,
+        "start_time": 1752390832.825834,
+        "last_active": 1752390892.8435996,
+        "total_time": 60.017765522003174,
         "search_query": null,
-        "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_40m 35s - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "40m 35s - SnapAlert Monitor - Google Chrome",
-        "window_title": "40m 35s - SnapAlert Monitor - Google Chrome",
-        "url": "40m 35s",
-        "category": "general",
-        "start_time": 1752389977.4477544,
-        "last_active": 1752389917.4477544,
-        "total_time": 0,
-        "search_query": null,
-        "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_40m 36s - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "40m 36s - SnapAlert Monitor - Google Chrome",
-        "window_title": "40m 36s - SnapAlert Monitor - Google Chrome",
-        "url": "40m 36s",
-        "category": "general",
-        "start_time": 1752389992.4449065,
-        "last_active": 1752389932.4449065,
-        "total_time": 0,
-        "search_query": null,
-        "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_41m 6s - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "41m 6s - SnapAlert Monitor - Google Chrome",
-        "window_title": "41m 6s - SnapAlert Monitor - Google Chrome",
-        "url": "41m 6s",
-        "category": "general",
-        "start_time": 1752390007.455664,
-        "last_active": 1752389947.455664,
-        "total_time": 15.001782417297363,
-        "search_query": null,
-        "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_41m 36s - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "41m 36s - SnapAlert Monitor - Google Chrome",
-        "window_title": "41m 36s - SnapAlert Monitor - Google Chrome",
-        "url": "41m 36s",
-        "category": "general",
-        "start_time": 1752390037.4622965,
-        "last_active": 1752389977.4622965,
-        "total_time": 15.01136565208435,
-        "search_query": null,
-        "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_42m 13s - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "42m 13s - SnapAlert Monitor - Google Chrome",
-        "window_title": "42m 13s - SnapAlert Monitor - Google Chrome",
-        "url": "42m 13s",
-        "category": "general",
-        "start_time": 1752390067.4830313,
-        "last_active": 1752390007.4830313,
-        "total_time": 0,
-        "search_query": null,
-        "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_42m 28s - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "42m 28s - SnapAlert Monitor - Google Chrome",
-        "window_title": "42m 28s - SnapAlert Monitor - Google Chrome",
-        "url": "42m 28s",
-        "category": "general",
-        "start_time": 1752390082.4942489,
-        "last_active": 1752390022.4942489,
-        "total_time": 0,
-        "search_query": null,
-        "is_active": false,
+        "is_active": true,
         "visit_count": 1
       },
       "Chrome_OffSec | Overview - Google Chrome": {
@@ -434,117 +378,78 @@
         "window_title": "OffSec | Overview - Google Chrome",
         "url": "OffSec | Overview",
         "category": "general",
-        "start_time": 1752390097.514215,
-        "last_active": 1752390037.514215,
-        "total_time": 75.02695751190186,
+        "start_time": 1752390862.8315098,
+        "last_active": 1752390802.8315098,
+        "total_time": 210.06878280639648,
         "search_query": null,
         "is_active": false,
         "visit_count": 1
       },
-      "Chrome_42m 43s - SnapAlert Monitor - Google Chrome": {
+      "Chrome_Dashboard Redesign Snapdragon Aesthetic - Google Chrome": {
         "browser": "Chrome",
-        "title": "42m 43s - SnapAlert Monitor - Google Chrome",
-        "window_title": "42m 43s - SnapAlert Monitor - Google Chrome",
-        "url": "42m 43s",
+        "title": "Dashboard Redesign Snapdragon Aesthetic - Google Chrome",
+        "window_title": "Dashboard Redesign Snapdragon Aesthetic - Google Chrome",
+        "url": "Dashboard Redesign Snapdragon Aesthetic",
         "category": "general",
-        "start_time": 1752390097.514215,
-        "last_active": 1752390037.514215,
+        "start_time": 1752390907.8488119,
+        "last_active": 1752390907.8488119,
         "total_time": 0,
         "search_query": null,
-        "is_active": false,
+        "is_active": true,
         "visit_count": 1
       },
-      "Chrome_42m 58s - SnapAlert Monitor - Google Chrome": {
+      "Chrome_ChatGPT - Google Chrome": {
         "browser": "Chrome",
-        "title": "42m 58s - SnapAlert Monitor - Google Chrome",
-        "window_title": "42m 58s - SnapAlert Monitor - Google Chrome",
-        "url": "42m 58s",
+        "title": "ChatGPT - Google Chrome",
+        "window_title": "ChatGPT - Google Chrome",
+        "url": "ChatGPT",
         "category": "general",
-        "start_time": 1752390112.5121446,
-        "last_active": 1752390052.5121446,
+        "start_time": 1752390922.8474355,
+        "last_active": 1752390922.8474355,
         "total_time": 0,
         "search_query": null,
-        "is_active": false,
+        "is_active": true,
         "visit_count": 1
       },
-      "Chrome_43m 13s - SnapAlert Monitor - Google Chrome": {
+      "Chrome_Edge AI Icon Design - Google Chrome": {
         "browser": "Chrome",
-        "title": "43m 13s - SnapAlert Monitor - Google Chrome",
-        "window_title": "43m 13s - SnapAlert Monitor - Google Chrome",
-        "url": "43m 13s",
+        "title": "Edge AI Icon Design - Google Chrome",
+        "window_title": "Edge AI Icon Design - Google Chrome",
+        "url": "Edge AI Icon Design",
         "category": "general",
-        "start_time": 1752390127.515275,
-        "last_active": 1752390067.515275,
-        "total_time": 0,
+        "start_time": 1752390937.851019,
+        "last_active": 1752391072.9002926,
+        "total_time": 135.04927372932434,
         "search_query": null,
-        "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_43m 28s - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "43m 28s - SnapAlert Monitor - Google Chrome",
-        "window_title": "43m 28s - SnapAlert Monitor - Google Chrome",
-        "url": "43m 28s",
-        "category": "general",
-        "start_time": 1752390142.5205605,
-        "last_active": 1752390082.5205605,
-        "total_time": 0,
-        "search_query": null,
-        "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_43m 43s - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "43m 43s - SnapAlert Monitor - Google Chrome",
-        "window_title": "43m 43s - SnapAlert Monitor - Google Chrome",
-        "url": "43m 43s",
-        "category": "general",
-        "start_time": 1752390157.5361748,
-        "last_active": 1752390097.5361748,
-        "total_time": 0,
-        "search_query": null,
-        "is_active": false,
-        "visit_count": 1
-      },
-      "Chrome_43m 58s - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "43m 58s - SnapAlert Monitor - Google Chrome",
-        "window_title": "43m 58s - SnapAlert Monitor - Google Chrome",
-        "url": "43m 58s",
-        "category": "general",
-        "start_time": 1752390172.5411725,
-        "last_active": 1752390112.5411725,
-        "total_time": 0,
-        "search_query": null,
-        "is_active": false,
+        "is_active": true,
         "visit_count": 1
       }
     },
-    "current_browser": "Chrome_39m 12s - SnapAlert Monitor - Google Chrome",
+    "current_browser": "Chrome_Edge AI Icon Design - Google Chrome",
     "stats": {
-      "total_tabs": 15,
+      "total_tabs": 6,
       "active_browsers": [
         "Chrome"
       ],
       "categories": {
-        "general": 15
+        "general": 6
       },
       "search_queries": [],
       "most_active_tab": {
         "browser": "Chrome",
-        "title": "OffSec | Overview - Google Chrome",
-        "window_title": "OffSec | Overview - Google Chrome",
-        "url": "OffSec | Overview",
+        "title": "dsblack0/CyberChicks - Google Chrome",
+        "window_title": "dsblack0/CyberChicks - Google Chrome",
+        "url": "dsblack0/CyberChicks",
         "category": "general",
-        "start_time": 1752390097.514215,
-        "last_active": 1752390037.514215,
-        "total_time": 75.02695751190186,
+        "start_time": 1752390337.6326067,
+        "last_active": 1752390817.8282132,
+        "total_time": 480.19560647010803,
         "search_query": null,
-        "is_active": false,
+        "is_active": true,
         "visit_count": 1
       },
       "browser_distribution": {
-        "Chrome": 15
+        "Chrome": 6
       }
     }
   },
@@ -565,8 +470,8 @@
       "enabled": true,
       "app_filter": "",
       "created_at": "2025-07-12T23:42:45.977850",
-      "last_triggered": 1752390172.5411725,
-      "trigger_count": 5
+      "last_triggered": 1752391072.8936706,
+      "trigger_count": 8
     },
     {
       "id": "test_session_2min",
@@ -578,8 +483,8 @@
       "enabled": true,
       "app_filter": "",
       "created_at": "2025-07-12T23:42:45.977850",
-      "last_triggered": 1752390172.5411725,
-      "trigger_count": 5
+      "last_triggered": 1752391072.8936706,
+      "trigger_count": 8
     },
     {
       "id": "test_app_time_1min",
@@ -604,8 +509,8 @@
       "enabled": true,
       "app_filter": "",
       "created_at": "2025-07-12T23:49:32.889173",
-      "last_triggered": 1752389977.438635,
-      "trigger_count": 3
+      "last_triggered": 1752390877.8386984,
+      "trigger_count": 6
     }
   ]
 }
