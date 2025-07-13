@@ -3,5 +3,7 @@ pywin32>=305
 psutil==5.9.5
 pynput==1.7.6
 win10toast==0.9
+win10toast_click==0.1.2
 selenium==4.15.2
-requests==2.31.0 
+requests==2.31.0
+plyer==2.1.0 

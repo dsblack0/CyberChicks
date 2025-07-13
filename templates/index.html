@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snapdragon Productivity Monitor</title>
+    <title>SnapAlert - Productivity Monitor</title>
     <style>
         :root {
             --snapdragon-red: #e31e24;
@@ -261,6 +261,140 @@
             50% {
                 opacity: 0.5;
             }
+        }
+
+        .live-indicator {
+            color: var(--snapdragon-red);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            animation: pulse 1.5s infinite;
+            text-shadow: 0 0 5px var(--snapdragon-red);
+        }
+
+        /* Custom Alert Form Styles */
+        .alert-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--snapdragon-red);
+            box-shadow: 0 0 0 2px rgba(227, 30, 36, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        /* Custom Alert Card Styles */
+        .custom-alert-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .custom-alert-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(227, 30, 36, 0.1);
+        }
+
+        .custom-alert-card.disabled {
+            opacity: 0.6;
+        }
+
+        .alert-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .alert-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alert-type-badge {
+            background: linear-gradient(135deg, var(--snapdragon-red), var(--snapdragon-gold));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .alert-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            border-radius: 8px;
+        }
+
+        .alert-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-stats {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.8rem;
         }
 
         /* Content Area */
@@ -713,6 +847,13 @@
             padding: 2rem;
         }
 
+        /* Section Content */
+        .section-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .sidebar {
@@ -753,29 +894,29 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <a href="#" class="logo">
-                <div class="logo-icon">🚀</div>
-                <span>Snapdragon</span>
+                <div class="logo-icon">🔺</div>
+                <span>SnapAlert</span>
             </a>
         </div>
 
         <nav class="nav-menu">
-            <a href="#" class="nav-item active">
+            <a href="#" class="nav-item active" onclick="showSection('dashboard'); return false;">
                 <div class="nav-icon">📊</div>
                 <span>Dashboard</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" onclick="showSection('applications'); return false;">
                 <div class="nav-icon">📱</div>
                 <span>Applications</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" onclick="showSection('browser'); return false;">
                 <div class="nav-icon">🌐</div>
                 <span>Browser</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" onclick="showSection('analytics'); return false;">
                 <div class="nav-icon">📈</div>
                 <span>Analytics</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" onclick="showSection('settings'); return false;">
                 <div class="nav-icon">⚙️</div>
                 <span>Settings</span>
             </a>
@@ -787,7 +928,7 @@
         <!-- Header -->
         <header class="header">
             <div class="header-left">
-                <h1 class="page-title">Productivity Monitor</h1>
+                <h1 class="page-title">SnapAlert Monitor</h1>
                 <div class="status-indicator"></div>
             </div>
             <div class="header-right">
@@ -800,159 +941,296 @@
 
         <!-- Content Area -->
         <div class="content-area">
-            <!-- Stats Grid -->
-            <div class="stats-grid">
-                <div class="stat-card primary">
-                    <div class="stat-header">
-                        <div class="stat-title">Current Session</div>
-                        <div class="stat-icon">⏱️</div>
+            <!-- Dashboard Section -->
+            <div id="dashboard-section" class="section-content">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card primary">
+                        <div class="stat-header">
+                            <div class="stat-title">Current Session</div>
+                            <div class="stat-icon">⏱️</div>
+                        </div>
+                        <div class="stat-value" id="currentSession">0s</div>
+                        <div class="stat-unit">
+                            <span id="sessionStatus">starting...</span>
+                            <span id="liveIndicator" class="live-indicator" style="display: none;">🔴 LIVE</span>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" id="sessionProgress" style="width: 0%"></div>
+                        </div>
                     </div>
-                    <div class="stat-value" id="currentSession">0s</div>
-                    <div class="stat-unit">active now</div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" id="sessionProgress" style="width: 0%"></div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Keystrokes</div>
+                            <div class="stat-icon">⌨️</div>
+                        </div>
+                        <div class="stat-value" id="keystrokes">0</div>
+                        <div class="stat-unit">this session</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Open Apps</div>
+                            <div class="stat-icon">🖥️</div>
+                        </div>
+                        <div class="stat-value" id="openApps">0</div>
+                        <div class="stat-unit">currently</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Total Sessions</div>
+                            <div class="stat-icon">📊</div>
+                        </div>
+                        <div class="stat-value" id="totalSessions">0</div>
+                        <div class="stat-unit">all time</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Today's Time</div>
+                            <div class="stat-icon">📅</div>
+                        </div>
+                        <div class="stat-value" id="todayTime">0</div>
+                        <div class="stat-unit">minutes</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Total Time</div>
+                            <div class="stat-icon">⏰</div>
+                        </div>
+                        <div class="stat-value" id="totalTime">0</div>
+                        <div class="stat-unit">hours</div>
                     </div>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-title">Keystrokes</div>
-                        <div class="stat-icon">⌨️</div>
+                <!-- Recent Activity -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">📊</div>
+                        <h2 class="section-title">Recent Activity Summary</h2>
                     </div>
-                    <div class="stat-value" id="keystrokes">0</div>
-                    <div class="stat-unit">this session</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-title">Open Apps</div>
-                        <div class="stat-icon">🖥️</div>
+                    <div id="recentActivity">
+                        <div class="no-data">Loading recent activity...</div>
                     </div>
-                    <div class="stat-value" id="openApps">0</div>
-                    <div class="stat-unit">currently</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-title">Total Sessions</div>
-                        <div class="stat-icon">📊</div>
-                    </div>
-                    <div class="stat-value" id="totalSessions">0</div>
-                    <div class="stat-unit">all time</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-title">Today's Time</div>
-                        <div class="stat-icon">📅</div>
-                    </div>
-                    <div class="stat-value" id="todayTime">0</div>
-                    <div class="stat-unit">minutes</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-title">Total Time</div>
-                        <div class="stat-icon">⏰</div>
-                    </div>
-                    <div class="stat-value" id="totalTime">0</div>
-                    <div class="stat-unit">hours</div>
                 </div>
             </div>
 
             <!-- Applications Section -->
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">📱</div>
-                    <h2 class="section-title">Currently Open Applications</h2>
-                </div>
-                <div id="appList">
-                    <div class="no-data">No applications detected</div>
+            <div id="applications-section" class="section-content" style="display: none;">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">📱</div>
+                        <h2 class="section-title">Currently Open Applications</h2>
+                    </div>
+                    <div id="appList">
+                        <div class="no-data">No applications detected</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Browser Activity Section -->
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">🌐</div>
-                    <h2 class="section-title">Browser Activity</h2>
-                </div>
+            <!-- Browser Section -->
+            <div id="browser-section" class="section-content" style="display: none;">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🌐</div>
+                        <h2 class="section-title">Browser Activity</h2>
+                    </div>
 
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Active Tabs</div>
-                            <div class="stat-icon">🔗</div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-title">Active Tabs</div>
+                                <div class="stat-icon">🔗</div>
+                            </div>
+                            <div class="stat-value" id="activeTabs">0</div>
                         </div>
-                        <div class="stat-value" id="activeTabs">0</div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-title">Browsers</div>
+                                <div class="stat-icon">🌐</div>
+                            </div>
+                            <div class="stat-value" id="activeBrowsers">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-title">Recent URLs</div>
+                                <div class="stat-icon">🔍</div>
+                            </div>
+                            <div class="stat-value" id="recentUrls">0</div>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Browsers</div>
-                            <div class="stat-icon">🌐</div>
-                        </div>
-                        <div class="stat-value" id="activeBrowsers">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Recent URLs</div>
-                            <div class="stat-icon">🔍</div>
-                        </div>
-                        <div class="stat-value" id="recentUrls">0</div>
+
+                    <div id="browserTabsList">
+                        <div class="no-data">No browser activity detected</div>
                     </div>
                 </div>
+            </div>
 
-                <div id="browserTabsList">
-                    <div class="no-data">No browser activity detected</div>
+            <!-- Analytics Section -->
+            <div id="analytics-section" class="section-content" style="display: none;">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">📈</div>
+                        <h2 class="section-title">Analytics & Insights</h2>
+                    </div>
+                    <div class="no-data">Analytics features coming soon...</div>
                 </div>
             </div>
 
             <!-- Settings Section -->
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">⚙️</div>
-                    <h2 class="section-title">Alert Settings</h2>
+            <div id="settings-section" class="section-content" style="display: none;">
+                <!-- Basic Alert Settings -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">⚙️</div>
+                        <h2 class="section-title">Basic Alert Settings</h2>
+                    </div>
+
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="alertsEnabled" checked>
+                                Enable idle app alerts
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="showResourceUsage" checked>
+                                Show resource usage
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="smartFiltering" checked>
+                                Smart filtering
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="breakRemindersEnabled" checked>
+                                Break reminders
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" onclick="saveAlertSettings()">
+                            💾 Save Settings
+                        </button>
+                    </div>
+
+                    <!-- Test Basic Alerts Section -->
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 215, 0, 0.2);">
+                        <h3 style="color: var(--text-primary); margin-bottom: 1rem; text-align: center;">🧪 Test Basic
+                            Alerts</h3>
+                        <p
+                            style="color: var(--text-secondary); text-align: center; margin-bottom: 1rem; font-size: 0.9rem;">
+                            Click to test Windows notifications without waiting for actual events
+                        </p>
+                        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                            <button class="btn btn-secondary btn-small" onclick="testBasicAlert('break_reminder')">
+                                💪 Test Break Reminder
+                            </button>
+                            <button class="btn btn-secondary btn-small" onclick="testBasicAlert('idle_app')">
+                                💡 Test Idle App Alert
+                            </button>
+                            <button class="btn btn-secondary btn-small" onclick="testBasicAlert('session_end')">
+                                📊 Test Session End
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="settings-grid">
-                    <div class="setting-item">
-                        <label>
-                            <input type="checkbox" id="alertsEnabled" checked>
-                            Enable idle app alerts
-                        </label>
+                <!-- Custom Alerts Section -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🔔</div>
+                        <h2 class="section-title">Custom Alerts</h2>
+                        <button class="btn btn-primary" onclick="showCreateAlertForm()" style="margin-left: auto;">
+                            ➕ Create Alert
+                        </button>
                     </div>
-                    <div class="setting-item">
-                        <label>
-                            <input type="checkbox" id="showResourceUsage" checked>
-                            Show resource usage
-                        </label>
-                    </div>
-                    <div class="setting-item">
-                        <label>
-                            <input type="checkbox" id="smartFiltering" checked>
-                            Smart filtering
-                        </label>
-                    </div>
-                    <div class="setting-item">
-                        <label>
-                            <input type="checkbox" id="breakRemindersEnabled" checked>
-                            Break reminders
-                        </label>
-                    </div>
-                </div>
 
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button class="btn btn-primary" onclick="saveAlertSettings()">
-                        💾 Save Settings
-                    </button>
+                    <!-- Create Alert Form (Initially Hidden) -->
+                    <div id="createAlertForm" style="display: none; margin-bottom: 2rem;">
+                        <div class="alert-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Alert Name</label>
+                                    <input type="text" id="alertName" placeholder="e.g., Long work session"
+                                        class="form-input">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Alert Type</label>
+                                    <select id="alertType" class="form-select" onchange="updateAlertForm()">
+                                        <option value="session_time">Session Time</option>
+                                        <option value="app_time">App Usage Time</option>
+                                        <option value="keystroke_count">Keystroke Count</option>
+                                        <option value="idle_time">Idle Time</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Condition</label>
+                                    <select id="alertCondition" class="form-select">
+                                        <option value="greater_than">Greater Than</option>
+                                        <option value="less_than">Less Than</option>
+                                        <option value="equal_to">Equal To</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label id="thresholdLabel">Threshold (minutes)</label>
+                                    <input type="number" id="alertThreshold" placeholder="60" class="form-input"
+                                        min="1">
+                                </div>
+
+                                <div class="form-group" id="appFilterGroup" style="display: none;">
+                                    <label>App Filter (optional)</label>
+                                    <input type="text" id="appFilter" placeholder="e.g., chrome.exe" class="form-input">
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label>Alert Message</label>
+                                    <textarea id="alertMessage"
+                                        placeholder="Time for a break! You've been working for {threshold} minutes."
+                                        class="form-textarea"></textarea>
+                                </div>
+                            </div>
+
+                            <div style="text-align: center; margin-top: 1rem;">
+                                <button class="btn btn-primary" onclick="createCustomAlert()">
+                                    ✅ Create Alert
+                                </button>
+                                <button class="btn btn-secondary" onclick="cancelCreateAlert()"
+                                    style="margin-left: 1rem;">
+                                    ❌ Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom Alerts List -->
+                    <div id="customAlertsList">
+                        <div class="no-data">No custom alerts created yet</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Store session start time globally
-        let sessionStartTime = null;
+        // Store current active section
+        let currentSection = 'dashboard';
+
+        // Live session timing variables
+        let lastSessionSync = 0;
+        let clientSessionStart = 0;
+        let liveSessionTimer = null;
 
         function formatTime(seconds) {
             if (seconds < 60) return Math.round(seconds);
@@ -994,48 +1272,95 @@
             }
         }
 
-        function updateSessionTime() {
-            if (sessionStartTime) {
-                const currentTime = Date.now();
-                const sessionTime = Math.floor((currentTime - sessionStartTime) / 1000);
-                const sessionFormatted = formatSessionTime(sessionTime);
-                document.getElementById('currentSession').textContent = sessionFormatted;
-                document.title = `${sessionFormatted} - Snapdragon Monitor`;
+        function updateSessionDisplay(sessionTime) {
+            const sessionFormatted = formatSessionTime(sessionTime);
+            document.getElementById('currentSession').textContent = sessionFormatted;
+            document.title = `${sessionFormatted} - SnapAlert Monitor`;
 
-                // Update session progress bar
-                const progressBar = document.getElementById('sessionProgress');
-                let progressPercentage = 0;
+            // Update session progress bar
+            const progressBar = document.getElementById('sessionProgress');
+            let progressPercentage = 0;
 
-                if (sessionTime <= 1800) {
-                    progressPercentage = (sessionTime / 1800) * 100;
-                } else if (sessionTime <= 3600) {
-                    progressPercentage = 100;
-                } else if (sessionTime <= 7200) {
-                    progressPercentage = ((sessionTime - 3600) / 3600) * 100;
-                } else {
-                    progressPercentage = 100;
-                }
-
-                progressBar.style.width = progressPercentage + '%';
+            if (sessionTime <= 1800) {
+                progressPercentage = (sessionTime / 1800) * 100;
+            } else if (sessionTime <= 3600) {
+                progressPercentage = 100;
+            } else if (sessionTime <= 7200) {
+                progressPercentage = ((sessionTime - 3600) / 3600) * 100;
             } else {
-                document.getElementById('currentSession').textContent = 'Loading...';
-                document.title = 'Loading... - Snapdragon Monitor';
+                progressPercentage = 100;
             }
+
+            progressBar.style.width = progressPercentage + '%';
+        }
+
+        function updateLiveSessionTime() {
+            if (clientSessionStart > 0) {
+                const currentTime = Date.now() / 1000;
+                const liveSessionTime = currentTime - clientSessionStart;
+                updateSessionDisplay(liveSessionTime);
+            }
+        }
+
+        function startLiveSessionTimer() {
+            // Clear existing timer
+            if (liveSessionTimer) {
+                clearInterval(liveSessionTimer);
+            }
+
+            // Start new timer that updates every second
+            liveSessionTimer = setInterval(updateLiveSessionTime, 1000);
+
+            // Show live indicator
+            document.getElementById('liveIndicator').style.display = 'inline';
+            document.getElementById('sessionStatus').textContent = 'active now';
+        }
+
+        function syncSessionTime(backendSessionTime, backendSessionStart) {
+            const currentTime = Date.now() / 1000;
+
+            // Parse backend session start time
+            if (backendSessionStart) {
+                const sessionStartTime = new Date(backendSessionStart).getTime() / 1000;
+
+                // Check if this is a new session
+                const isNewSession = Math.abs(clientSessionStart - sessionStartTime) > 5;
+
+                if (isNewSession) {
+                    clientSessionStart = sessionStartTime;
+                    console.log('New session detected - live timing started');
+
+                    // Show a subtle notification for new session
+                    if (backendSessionTime > 10) { // Only if session has been running for a bit
+                        showNotificationToast('🚀 Live session timing activated!');
+                    }
+                }
+            } else {
+                // Fallback: calculate start time from current session duration
+                clientSessionStart = currentTime - backendSessionTime;
+            }
+
+            // Update display with backend time for accuracy
+            updateSessionDisplay(backendSessionTime);
+
+            // Record sync time
+            lastSessionSync = currentTime;
         }
 
         function updateDashboard() {
             fetch('/api/stats')
                 .then(response => response.json())
                 .then(data => {
-                    // Update session start time
-                    if (data.session_start_time) {
-                        const newSessionStartTime = new Date(data.session_start_time).getTime();
-                        if (sessionStartTime !== newSessionStartTime) {
-                            sessionStartTime = newSessionStartTime;
-                        }
-                    }
+                    // Sync session time with backend
+                    const sessionTime = data.current_session_time || 0;
+                    const sessionStartTime = data.session_start_time;
 
-                    updateSessionTime();
+                    syncSessionTime(sessionTime, sessionStartTime);
+
+                    // Start live timer if not already running
+                    if (!liveSessionTimer) {
+                        startLiveSessionTimer();
+                    }
 
                     // Update stats
                     document.getElementById('keystrokes').textContent = data.keystrokes;
@@ -1133,10 +1458,45 @@
                         document.getElementById('smartFiltering').checked = data.alert_config.smart_filtering !== false;
                         document.getElementById('breakRemindersEnabled').checked = data.alert_config.break_reminders_enabled !== false;
                     }
+
+                    // Update custom alerts
+                    updateCustomAlertsList(data.custom_alerts || []);
+
+                    // Update recent activity for dashboard
+                    updateRecentActivity(data.recent_logs || [], data.open_apps_details || {});
                 })
                 .catch(error => {
                     console.error('Error fetching stats:', error);
                 });
+        }
+
+        function updateRecentActivity(recentLogs, openAppsDetails) {
+            const recentActivity = document.getElementById('recentActivity');
+            if (!recentActivity) return;
+
+            if (recentLogs.length === 0) {
+                recentActivity.innerHTML = '<div class="no-data">No recent activity</div>';
+                return;
+            }
+
+            // Show last 3 activities
+            const activities = recentLogs.slice(-3).reverse();
+            recentActivity.innerHTML = activities.map(log => {
+                const duration = formatDuration(log.duration_sec || 0);
+                return `
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-name">${log.app || 'Unknown App'}</div>
+                            <div class="app-timing">
+                                <div class="app-duration">${duration}</div>
+                            </div>
+                        </div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">
+                            ${log.title || 'No title'}
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         function saveAlertSettings() {
@@ -1179,12 +1539,303 @@
             }, 3000);
         }
 
-        // Update dashboard every 2 seconds
-        updateDashboard();
-        setInterval(updateDashboard, 2000);
+        // Section switching functionality
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
 
-        // Update session time every second
-        setInterval(updateSessionTime, 1000);
+            // Show selected section
+            const selectedSection = document.getElementById(sectionName + '-section');
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+            }
+
+            // Update navigation active state
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Find and activate the clicked nav item
+            const activeNavItem = document.querySelector(`[onclick*="${sectionName}"]`);
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+
+            // Update page title
+            const sectionTitles = {
+                dashboard: 'SnapAlert Monitor',
+                applications: 'SnapAlert - Applications',
+                browser: 'SnapAlert - Browser Activity',
+                analytics: 'SnapAlert - Analytics',
+                settings: 'SnapAlert - Settings'
+            };
+
+            const pageTitle = document.querySelector('.page-title');
+            if (pageTitle) {
+                pageTitle.textContent = sectionTitles[sectionName] || 'SnapAlert Monitor';
+            }
+
+            // Store current section
+            currentSection = sectionName;
+        }
+
+        // Custom Alerts Functions
+        function showCreateAlertForm() {
+            document.getElementById('createAlertForm').style.display = 'block';
+            updateAlertForm(); // Initialize form
+        }
+
+        function cancelCreateAlert() {
+            document.getElementById('createAlertForm').style.display = 'none';
+            clearAlertForm();
+        }
+
+        function clearAlertForm() {
+            document.getElementById('alertName').value = '';
+            document.getElementById('alertType').value = 'session_time';
+            document.getElementById('alertCondition').value = 'greater_than';
+            document.getElementById('alertThreshold').value = '';
+            document.getElementById('appFilter').value = '';
+            document.getElementById('alertMessage').value = '';
+            updateAlertForm();
+        }
+
+        function updateAlertForm() {
+            const alertType = document.getElementById('alertType').value;
+            const thresholdLabel = document.getElementById('thresholdLabel');
+            const appFilterGroup = document.getElementById('appFilterGroup');
+            const alertMessage = document.getElementById('alertMessage');
+
+            // Update threshold label and placeholder based on alert type
+            switch (alertType) {
+                case 'session_time':
+                    thresholdLabel.textContent = 'Threshold (minutes)';
+                    appFilterGroup.style.display = 'none';
+                    if (!alertMessage.value) {
+                        alertMessage.placeholder = 'You\'ve been working for {threshold} minutes. Time for a break!';
+                    }
+                    break;
+                case 'app_time':
+                    thresholdLabel.textContent = 'Threshold (minutes)';
+                    appFilterGroup.style.display = 'block';
+                    if (!alertMessage.value) {
+                        alertMessage.placeholder = 'You\'ve been using {app} for {threshold} minutes!';
+                    }
+                    break;
+                case 'keystroke_count':
+                    thresholdLabel.textContent = 'Threshold (keystrokes)';
+                    appFilterGroup.style.display = 'none';
+                    if (!alertMessage.value) {
+                        alertMessage.placeholder = 'You\'ve typed {threshold} keystrokes this session!';
+                    }
+                    break;
+                case 'idle_time':
+                    thresholdLabel.textContent = 'Threshold (minutes)';
+                    appFilterGroup.style.display = 'none';
+                    if (!alertMessage.value) {
+                        alertMessage.placeholder = 'You\'ve been idle for {threshold} minutes. Are you still there?';
+                    }
+                    break;
+            }
+        }
+
+        function createCustomAlert() {
+            const name = document.getElementById('alertName').value.trim();
+            const type = document.getElementById('alertType').value;
+            const condition = document.getElementById('alertCondition').value;
+            const threshold = parseFloat(document.getElementById('alertThreshold').value);
+            const message = document.getElementById('alertMessage').value.trim();
+            const appFilter = document.getElementById('appFilter').value.trim();
+
+            // Validation
+            if (!name || !message || !threshold || threshold <= 0) {
+                showNotificationToast('❌ Please fill in all required fields');
+                return;
+            }
+
+            const alertData = {
+                name,
+                type,
+                condition,
+                threshold,
+                message,
+                app_filter: appFilter
+            };
+
+            fetch('/api/custom-alerts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(alertData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotificationToast('✅ Custom alert created successfully!');
+                        cancelCreateAlert();
+                        updateDashboard(); // Refresh to get new alerts
+                    } else {
+                        showNotificationToast('❌ Failed to create alert: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error creating alert:', error);
+                    showNotificationToast('❌ Error creating alert');
+                });
+        }
+
+        function updateCustomAlertsList(alerts) {
+            const customAlertsList = document.getElementById('customAlertsList');
+
+            if (!alerts || alerts.length === 0) {
+                customAlertsList.innerHTML = '<div class="no-data">No custom alerts created yet</div>';
+                return;
+            }
+
+            customAlertsList.innerHTML = alerts.map(alert => {
+                const typeIcons = {
+                    session_time: '⏰',
+                    app_time: '📱',
+                    keystroke_count: '⌨️',
+                    idle_time: '😴'
+                };
+
+                const conditionText = {
+                    greater_than: 'greater than',
+                    less_than: 'less than',
+                    equal_to: 'equal to'
+                };
+
+                const thresholdUnit = alert.type === 'keystroke_count' ? 'keystrokes' : 'minutes';
+                const statusText = alert.enabled ? 'Enabled' : 'Disabled';
+                const statusColor = alert.enabled ? 'var(--snapdragon-gold)' : 'var(--text-muted)';
+
+                return `
+                    <div class="custom-alert-card ${alert.enabled ? '' : 'disabled'}">
+                        <div class="alert-card-header">
+                            <div class="alert-name">
+                                ${typeIcons[alert.type] || '🔔'} ${alert.name}
+                                <span class="alert-type-badge">${alert.type.replace('_', ' ')}</span>
+                            </div>
+                            <div class="alert-actions">
+                                <button class="btn btn-small btn-primary" onclick="testCustomAlert('${alert.id}')" title="Test this alert">
+                                    🧪 Test
+                                </button>
+                                <button class="btn btn-small btn-secondary" onclick="toggleCustomAlert('${alert.id}')">
+                                    ${alert.enabled ? '⏸️ Disable' : '▶️ Enable'}
+                                </button>
+                                <button class="btn btn-small btn-secondary" onclick="deleteCustomAlert('${alert.id}')">
+                                    🗑️ Delete
+                                </button>
+                            </div>
+                        </div>
+                        <div class="alert-description">
+                            ${conditionText[alert.condition]} ${alert.threshold} ${thresholdUnit}
+                            ${alert.app_filter ? ` (${alert.app_filter})` : ''}
+                        </div>
+                        <div class="alert-description" style="font-style: italic;">
+                            "${alert.message}"
+                        </div>
+                        <div class="alert-stats">
+                            <span style="color: ${statusColor}">Status: ${statusText}</span>
+                            <span>Triggered: ${alert.trigger_count || 0} times</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleCustomAlert(alertId) {
+            fetch(`/api/custom-alerts/${alertId}/toggle`, {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotificationToast('✅ ' + data.message);
+                        updateDashboard(); // Refresh to get updated alerts
+                    } else {
+                        showNotificationToast('❌ Failed to toggle alert: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error toggling alert:', error);
+                    showNotificationToast('❌ Error toggling alert');
+                });
+        }
+
+        function deleteCustomAlert(alertId) {
+            if (!confirm('Are you sure you want to delete this custom alert?')) {
+                return;
+            }
+
+            fetch(`/api/custom-alerts/${alertId}`, {
+                method: 'DELETE'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotificationToast('✅ Alert deleted successfully!');
+                        updateDashboard(); // Refresh to get updated alerts
+                    } else {
+                        showNotificationToast('❌ Failed to delete alert: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting alert:', error);
+                    showNotificationToast('❌ Error deleting alert');
+                });
+        }
+
+        function testCustomAlert(alertId) {
+            fetch(`/api/custom-alerts/${alertId}/test`, {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotificationToast('🧪 Test alert sent! Check your Windows notifications.');
+                        console.log('Test message:', data.test_message);
+                    } else {
+                        showNotificationToast('❌ Failed to send test alert: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error testing alert:', error);
+                    showNotificationToast('❌ Error testing alert');
+                });
+        }
+
+        function testBasicAlert(alertType) {
+            fetch('/api/test-basic-alerts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ type: alertType })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotificationToast('🧪 Test alert sent! Check your Windows notifications.');
+                    } else {
+                        showNotificationToast('❌ Failed to send test alert: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error testing basic alert:', error);
+                    showNotificationToast('❌ Error testing basic alert');
+                });
+        }
+
+        // Update dashboard every 5 seconds (live session timing happens every 1 second)
+        updateDashboard();
+        setInterval(updateDashboard, 5000);
     </script>
 </body>
 

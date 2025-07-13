@@ -3,14 +3,60 @@ import json
 import os
 import time
 from datetime import datetime
+import subprocess
+import winreg
+from pathlib import Path
 
 app = Flask(__name__)
+
+# SnapAlert App ID for Windows notifications
+SNAPALERT_APP_ID = "SnapAlert.ProductivityMonitor"
 
 # File paths
 LOG_FILE = "data/logs.json"
 STATUS_FILE = "data/status.json"
 SESSIONS_FILE = "data/sessions.json"
 ALERT_CONFIG_FILE = "data/alert_config.json"
+CUSTOM_ALERTS_FILE = "data/custom_alerts.json"
+
+
+def ensure_app_id_registered():
+    """Automatically register SnapAlert app ID with Windows on startup"""
+    try:
+        # Check if already registered
+        key_path = f"SOFTWARE\\Classes\\AppUserModelId\\{SNAPALERT_APP_ID}"
+        try:
+            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path):
+                print("[App Registration] SnapAlert app ID already registered")
+                return True
+        except FileNotFoundError:
+            pass  # Not registered yet
+
+        print("[App Registration] Registering SnapAlert app ID...")
+
+        # Get icon path
+        script_dir = Path(__file__).parent.absolute()
+        icon_path = script_dir / "icons" / "snapalert.ico"
+
+        # Register the app ID
+        with winreg.CreateKey(winreg.HKEY_CURRENT_USER, key_path) as key:
+            winreg.SetValueEx(key, "DisplayName", 0, winreg.REG_SZ, "SnapAlert")
+
+            if icon_path.exists():
+                winreg.SetValueEx(key, "IconUri", 0, winreg.REG_SZ, str(icon_path))
+                winreg.SetValueEx(
+                    key, "IconBackgroundColor", 0, winreg.REG_SZ, "#E31E24"
+                )
+                print(f"[App Registration] Icon registered: {icon_path}")
+
+            winreg.SetValueEx(key, "ShowInSettings", 0, winreg.REG_DWORD, 1)
+
+        print("[App Registration] ✅ SnapAlert app ID registered successfully")
+        return True
+
+    except Exception as e:
+        print(f"[App Registration] ⚠️ Registration failed: {e}")
+        return False
 
 
 def read_status():
@@ -123,6 +169,7 @@ def get_stats():
             "sessions": sessions[-10:],  # Last 10 sessions
             "browser_data": status.get("browser_data", {}),
             "alert_config": status.get("alert_config", {}),
+            "custom_alerts": read_custom_alerts(),
         }
     )
 
@@ -170,6 +217,29 @@ def save_alert_config(config):
         return True
     except Exception as e:
         print(f"Error saving alert config: {e}")
+        return False
+
+
+def read_custom_alerts():
+    """Read custom alerts from file"""
+    try:
+        if os.path.exists(CUSTOM_ALERTS_FILE):
+            with open(CUSTOM_ALERTS_FILE, "r") as f:
+                return json.load(f)
+        return []
+    except Exception as e:
+        print(f"Error reading custom alerts: {e}")
+        return []
+
+
+def save_custom_alerts(alerts):
+    """Save custom alerts to file"""
+    try:
+        with open(CUSTOM_ALERTS_FILE, "w") as f:
+            json.dump(alerts, f, indent=2)
+        return True
+    except Exception as e:
+        print(f"Error saving custom alerts: {e}")
         return False
 
 
@@ -296,7 +366,410 @@ def update_break_reminder():
         return jsonify({"success": False, "message": str(e)}), 400
 
 
+@app.route("/api/custom-alerts")
+def get_custom_alerts():
+    """API endpoint to get all custom alerts"""
+    alerts = read_custom_alerts()
+    return jsonify({"alerts": alerts})
+
+
+@app.route("/api/custom-alerts", methods=["POST"])
+def create_custom_alert():
+    """API endpoint to create a new custom alert"""
+    try:
+        data = request.get_json()
+
+        # Validate required fields
+        required_fields = ["name", "type", "condition", "threshold", "message"]
+        for field in required_fields:
+            if field not in data:
+                return jsonify(
+                    {"success": False, "message": f"Missing required field: {field}"}
+                ), 400
+
+        # Create new alert with ID
+        new_alert = {
+            "id": str(int(time.time() * 1000)),  # Use timestamp as ID
+            "name": data["name"],
+            "type": data[
+                "type"
+            ],  # "session_time", "app_time", "keystroke_count", "break_reminder"
+            "condition": data["condition"],  # "greater_than", "less_than", "equal_to"
+            "threshold": data["threshold"],  # numeric value
+            "message": data["message"],
+            "enabled": data.get("enabled", True),
+            "app_filter": data.get("app_filter", ""),  # Optional app name filter
+            "created_at": datetime.now().isoformat(),
+            "last_triggered": None,
+            "trigger_count": 0,
+        }
+
+        # Load existing alerts and add new one
+        alerts = read_custom_alerts()
+        alerts.append(new_alert)
+
+        if save_custom_alerts(alerts):
+            return jsonify(
+                {"success": True, "message": "Custom alert created", "alert": new_alert}
+            )
+        else:
+            return jsonify({"success": False, "message": "Failed to save alert"}), 500
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/custom-alerts/<alert_id>", methods=["PUT"])
+def update_custom_alert(alert_id):
+    """API endpoint to update a custom alert"""
+    try:
+        data = request.get_json()
+        alerts = read_custom_alerts()
+
+        # Find the alert to update
+        alert_index = None
+        for i, alert in enumerate(alerts):
+            if alert["id"] == alert_id:
+                alert_index = i
+                break
+
+        if alert_index is None:
+            return jsonify({"success": False, "message": "Alert not found"}), 404
+
+        # Update the alert
+        updatable_fields = [
+            "name",
+            "type",
+            "condition",
+            "threshold",
+            "message",
+            "enabled",
+            "app_filter",
+        ]
+        for field in updatable_fields:
+            if field in data:
+                alerts[alert_index][field] = data[field]
+
+        if save_custom_alerts(alerts):
+            return jsonify(
+                {
+                    "success": True,
+                    "message": "Custom alert updated",
+                    "alert": alerts[alert_index],
+                }
+            )
+        else:
+            return jsonify({"success": False, "message": "Failed to save alert"}), 500
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/custom-alerts/<alert_id>", methods=["DELETE"])
+def delete_custom_alert(alert_id):
+    """API endpoint to delete a custom alert"""
+    try:
+        alerts = read_custom_alerts()
+
+        # Find and remove the alert
+        original_count = len(alerts)
+        alerts = [alert for alert in alerts if alert["id"] != alert_id]
+
+        if len(alerts) == original_count:
+            return jsonify({"success": False, "message": "Alert not found"}), 404
+
+        if save_custom_alerts(alerts):
+            return jsonify({"success": True, "message": "Custom alert deleted"})
+        else:
+            return jsonify({"success": False, "message": "Failed to save alerts"}), 500
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/custom-alerts/<alert_id>/toggle", methods=["POST"])
+def toggle_custom_alert(alert_id):
+    """API endpoint to toggle a custom alert on/off"""
+    try:
+        alerts = read_custom_alerts()
+
+        # Find the alert to toggle
+        alert_index = None
+        for i, alert in enumerate(alerts):
+            if alert["id"] == alert_id:
+                alert_index = i
+                break
+
+        if alert_index is None:
+            return jsonify({"success": False, "message": "Alert not found"}), 404
+
+        # Toggle the alert
+        alerts[alert_index]["enabled"] = not alerts[alert_index]["enabled"]
+
+        if save_custom_alerts(alerts):
+            status = "enabled" if alerts[alert_index]["enabled"] else "disabled"
+            return jsonify(
+                {
+                    "success": True,
+                    "message": f"Alert {status}",
+                    "alert": alerts[alert_index],
+                }
+            )
+        else:
+            return jsonify({"success": False, "message": "Failed to save alert"}), 500
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+def show_notification_powershell(title, message, duration=8):
+    """Show Windows notification using PowerShell with proper SnapAlert branding"""
+    try:
+        import subprocess
+
+        # Escape quotes in the message
+        escaped_title = title.replace('"', '""').replace("'", "''")
+        escaped_message = message.replace('"', '""').replace("'", "''")
+
+        # PowerShell command using Windows Toast notifications with registered app ID
+        powershell_cmd = f"""
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
+[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
+
+# Create toast XML template
+$template = @"
+<toast>
+    <visual>
+        <binding template="ToastGeneric">
+            <text>{escaped_title}</text>
+            <text>{escaped_message}</text>
+        </binding>
+    </visual>
+</toast>
+"@
+
+# Create XML document and toast notification
+$xml = New-Object Windows.Data.Xml.Dom.XmlDocument
+$xml.LoadXml($template)
+
+# Create toast notification with registered SnapAlert app ID
+$toast = New-Object Windows.UI.Notifications.ToastNotification($xml)
+$notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("{SNAPALERT_APP_ID}")
+$notifier.Show($toast)
+"""
+
+        result = subprocess.run(
+            ["powershell.exe", "-Command", powershell_cmd],
+            capture_output=True,
+            text=True,
+            timeout=10,
+            creationflags=subprocess.CREATE_NO_WINDOW,  # Hide PowerShell window
+        )
+
+        if result.returncode == 0:
+            print(f"[Notification] PowerShell notification sent successfully: {title}")
+            return True
+        else:
+            print(f"[Notification] PowerShell failed: {result.stderr}")
+            return False
+
+    except Exception as e:
+        print(f"[Notification] PowerShell notification error: {e}")
+        return False
+
+
+def show_notification_fallback(title, message, duration=8):
+    """Fallback notification using win10toast_click"""
+    try:
+        from win10toast_click import ToastNotifier
+
+        notifier = ToastNotifier()
+
+        notifier.show_toast(
+            title=title,
+            msg=message,
+            duration=duration,
+            icon_path=None,
+            threaded=True,
+        )
+
+        print(f"[Notification] win10toast_click notification sent: {title}")
+        return True
+
+    except Exception as e:
+        print(f"[Notification] win10toast_click error: {e}")
+        return False
+
+
+def show_windows_notification(title, message, duration=8):
+    """Improved Windows notification function with multiple fallback methods"""
+    try:
+        print(f"[Notification] Attempting to show: {title}")
+
+        # Add SnapAlert branding to title if not already present
+        if not title.startswith("🔺 SnapAlert"):
+            branded_title = f"🔺 SnapAlert: {title}"
+        else:
+            branded_title = title
+
+        # Method 1: Try win10toast_click first (we know this works for you)
+        if show_notification_fallback(branded_title, message, duration):
+            return True
+
+        # Method 2: Try PowerShell method as backup (currently failing for you)
+        print("[Notification] win10toast_click failed, trying PowerShell...")
+        if show_notification_powershell(branded_title, message, duration):
+            return True
+
+        # Method 3: Try plyer as fallback
+        print("[Notification] win10toast_click failed, trying plyer...")
+        try:
+            from plyer import notification
+
+            notification.notify(
+                title=branded_title,
+                message=message,
+                app_name="SnapAlert",
+                timeout=duration,
+            )
+            print(f"[Notification] Plyer notification sent successfully")
+            return True
+        except Exception as e:
+            print(f"[Notification] Plyer notification failed: {e}")
+
+        # Method 4: Try original win10toast as final fallback
+        print("[Notification] Trying original win10toast as final fallback...")
+        try:
+            from win10toast import ToastNotifier
+
+            notifier = ToastNotifier()
+            notifier.show_toast(
+                title=branded_title,
+                msg=message,
+                duration=duration,
+                icon_path=None,
+                threaded=True,
+            )
+            print(f"[Notification] win10toast notification sent successfully")
+            return True
+        except Exception as e:
+            print(f"[Notification] win10toast failed: {e}")
+
+        # If all methods fail, at least log it
+        print(
+            f"[Notification] All notification methods failed. Title: {branded_title}, Message: {message}"
+        )
+        return False
+
+    except Exception as e:
+        print(f"[Notification] System error: {e}")
+        return False
+
+
+@app.route("/api/custom-alerts/<alert_id>/test", methods=["POST"])
+def test_custom_alert(alert_id):
+    """API endpoint to test a custom alert by triggering it immediately"""
+    try:
+        alerts = read_custom_alerts()
+
+        # Find the alert to test
+        alert = None
+        for a in alerts:
+            if a["id"] == alert_id:
+                alert = a
+                break
+
+        if alert is None:
+            return jsonify({"success": False, "message": "Alert not found"}), 404
+
+        # Format the test message
+        test_message = alert["message"]
+
+        # Replace placeholders with test values
+        test_values = {
+            "threshold": str(alert["threshold"]),
+            "app": alert.get("app_filter", "TestApp.exe") or "TestApp.exe",
+        }
+
+        for placeholder, value in test_values.items():
+            test_message = test_message.replace(f"{{{placeholder}}}", value)
+
+        # Show the notification with SnapAlert branding
+        success = show_windows_notification(
+            title=f"Test: {alert['name']}",
+            message=test_message,
+            duration=8,
+        )
+
+        if success:
+            return jsonify(
+                {
+                    "success": True,
+                    "message": f"Test notification sent for '{alert['name']}'",
+                    "test_message": test_message,
+                }
+            )
+        else:
+            return jsonify(
+                {
+                    "success": False,
+                    "message": "Failed to send notification. Check console for details.",
+                }
+            ), 500
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
+@app.route("/api/test-basic-alerts", methods=["POST"])
+def test_basic_alerts():
+    """API endpoint to test basic alert system"""
+    try:
+        alert_type = request.get_json().get("type", "break_reminder")
+
+        success = False
+
+        if alert_type == "break_reminder":
+            success = show_windows_notification(
+                title="Break Reminder",
+                message="💪 Break Time!\nHey! This is a test break reminder.\n• Stand up and stretch\n• Look away from the screen\n• Take a deep breath",
+                duration=10,
+            )
+        elif alert_type == "idle_app":
+            success = show_windows_notification(
+                title="Idle App Alert",
+                message="💡 TestApp.exe has been idle for 5 minutes.\nConsider closing it to save resources.",
+                duration=8,
+            )
+        elif alert_type == "session_end":
+            success = show_windows_notification(
+                title="Session End",
+                message="Session ended after 10 minutes of inactivity.\nSession recorded (25.5 min). Total sessions: 5",
+                duration=5,
+            )
+
+        if success:
+            return jsonify(
+                {"success": True, "message": f"Test {alert_type} notification sent"}
+            )
+        else:
+            return jsonify(
+                {
+                    "success": False,
+                    "message": "Failed to send notification. Check console for details.",
+                }
+            ), 500
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+
+
 if __name__ == "__main__":
     # Ensure data directory exists
     os.makedirs("data", exist_ok=True)
+
+    # Register SnapAlert app ID with Windows automatically
+    print("🔺 Starting SnapAlert...")
+    ensure_app_id_registered()
+
     app.run(debug=True, host="0.0.0.0", port=5000)
