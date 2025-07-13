@@ -246,7 +246,7 @@ Modify the `AIAnalysisScheduler` to add custom triggers or conditions.
 
 ## 📋 TODO
 
-- [ ] Add more analysis models (GPT-4, Claude)
+- [ ] Add more analysis models (Qgenie, etc.)
 - [ ] Implement insight confidence scoring
 - [ ] Add trend analysis over longer periods
 - [ ] Export insights to different formats
