@@ -58,13 +58,13 @@ SnapAlert is a complete productivity monitoring solution that provides:
 
 The SnapAlert notification system provides proper Windows branding and clear messaging:
 
-![Idle App Alert](alerts@screenshots/1.png)
+![Idle App Alert](screenshots/1.png)
 *Idle App Alert: Notifies when applications have been unused for specified periods*
 
-![Keystroke Alert](alerts@screenshots/2.png)  
+![Keystroke Alert](screenshots/2.png)  
 *Keystroke Alert: Tracks typing activity and triggers when thresholds are reached*
 
-![Session Time Alert](3@/screenshots3.png)
+![Session Time Alert](screenshots/3.png)
 *Session Time Alert: Monitors work session duration and provides timely reminders*
 
 ## 📁 File Structure
