@@ -9,6 +9,9 @@ SnapAlert revolutionizes workplace productivity by bringing sophisticated AI cap
 
 SnapAlert addresses the critical challenge that while AI promises to transform productivity, most solutions require cloud connectivity, technical expertise, or compromise user privacy. Our edge AI approach ensures that **everyone** - from remote workers in areas with poor internet to privacy-conscious professionals in sensitive environments - can access personalized productivity intelligence.
 
+![Dashboard](screenshots/main.png)
+
+
 **Real-World Impact in Workplace Productivity:**
 - **Measurable Productivity Gains**: 23% average increase in focused work time through AI-driven insights
 - **Universal Accessibility**: Works offline, requires no technical setup, supports all work environments
@@ -38,6 +41,8 @@ SnapAlert is a complete edge AI productivity monitoring solution that provides:
 - **Accurate Timing**: Uses backend session start time for precision
 - **Status Updates**: Shows progression from "starting..." → "active now" → "🔴 LIVE"
 
+![Dashboard](screenshots/main2.png)
+
 ### ✅ Custom Alerts System
 - **Complete Backend API**: Full CRUD operations for custom alerts
 - **4 Alert Types**: Session time, app usage time, keystroke count, and idle time
@@ -46,6 +51,8 @@ SnapAlert is a complete edge AI productivity monitoring solution that provides:
 - **Custom Messages**: Personalized alert messages with variable placeholders
 - **Easy Management**: Enable/disable, edit, delete alerts from the web interface
 - **Automatic Monitoring**: Tracker checks all enabled alerts every 5 seconds
+
+![Dashboard](screenshots/main3.png)
 
 ### ✅ SnapAlert Test System & Branding
 - **Test Alert Buttons**: Each custom alert has a "🧪 Test" button for instant testing
@@ -221,7 +228,7 @@ After setup:
 ### 1. Automatic Monitoring (tracker.py)
 
 
-- Set up AI Intelligence.[AI Intelligence](ai_analysis/README.md)
+- Set up AI Intelligence. [AI Intelligence](ai_analysis/README.md)
 
 ### 2. Custom Alert Format (data/custom_alerts.json)
 ```json

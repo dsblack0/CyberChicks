@@ -294,7 +294,7 @@ Based on this data, provide your analysis in the specified JSON format. Focus on
                     "model": self.model_name,
                     "prompt": prompt,
                     "stream": False,
-                    "options": {"temperature": 0.7, "top_p": 0.9, "num_predict": 1000},
+                    "options": {"temperature": 0.7, "top_p": 0.9, "num_predict": 400},
                 },
                 timeout=180,  # Increased timeout to 3 minutes for complex analysis
             )
