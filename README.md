@@ -57,7 +57,7 @@ SnapAlert is a complete edge AI productivity monitoring solution that provides:
 ### SnapAlert Test System & Branding
 - **Test Alert Buttons**: Each custom alert has a "Test" button for instant testing
 - **Basic Alert Testing**: Three test buttons for break reminders, idle apps, and session end alerts
-- **🔺 SnapAlert Branding**: Consistent red triangle logo and "SnapAlert" naming throughout
+- **SnapAlert Branding**: Consistent red triangle logo and "SnapAlert" naming throughout
 - **Notification Branding**: All Windows notifications show "SnapAlert:" prefix
 - **Automatic App Registration**: System automatically registers with Windows for proper notification branding
 
