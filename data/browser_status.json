@@ -1,32 +1,6 @@
 {
-  "timestamp": "2025-07-13T18:53:21.356518",
+  "timestamp": "2025-07-13T18:53:51.410680",
   "active_tabs": {
-    "Edge_20m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
-      "browser": "Edge",
-      "title": "20m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
-      "window_title": "20m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
-      "url": "20m 41s",
-      "category": "general",
-      "start_time": 1752457775.9406395,
-      "last_active": 1752457715.9406395,
-      "total_time": 0,
-      "search_query": null,
-      "is_active": false,
-      "visit_count": 1
-    },
-    "Edge_20m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
-      "browser": "Edge",
-      "title": "20m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
-      "window_title": "20m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
-      "url": "20m 56s",
-      "category": "general",
-      "start_time": 1752457790.9578762,
-      "last_active": 1752457730.9578762,
-      "total_time": 0,
-      "search_query": null,
-      "is_active": false,
-      "visit_count": 1
-    },
     "Edge_21m 10s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
       "browser": "Edge",
       "title": "21m 10s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
@@ -208,6 +182,32 @@
       "search_query": null,
       "is_active": false,
       "visit_count": 1
+    },
+    "Edge_24m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+      "browser": "Edge",
+      "title": "24m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+      "window_title": "24m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+      "url": "24m 41s",
+      "category": "general",
+      "start_time": 1752458016.3723934,
+      "last_active": 1752457956.3723934,
+      "total_time": 0,
+      "search_query": null,
+      "is_active": false,
+      "visit_count": 1
+    },
+    "Edge_24m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+      "browser": "Edge",
+      "title": "24m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+      "window_title": "24m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+      "url": "24m 56s",
+      "category": "general",
+      "start_time": 1752458031.4106805,
+      "last_active": 1752457971.4106805,
+      "total_time": 0,
+      "search_query": null,
+      "is_active": false,
+      "visit_count": 1
     }
   },
   "current_browser": "Edge_23m 55s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
@@ -222,15 +222,15 @@
     "search_queries": [],
     "most_active_tab": {
       "browser": "Edge",
-      "title": "20m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
-      "window_title": "20m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
-      "url": "20m 41s",
+      "title": "21m 10s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+      "window_title": "21m 10s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+      "url": "21m 10s",
       "category": "general",
-      "start_time": 1752457775.9406395,
-      "last_active": 1752457715.9406395,
+      "start_time": 1752457805.9857483,
+      "last_active": 1752457805.9857483,
       "total_time": 0,
       "search_query": null,
-      "is_active": false,
+      "is_active": true,
       "visit_count": 1
     },
     "browser_distribution": {
