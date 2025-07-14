@@ -140,22 +140,56 @@ The widget architecture is designed to support advanced AI-driven insights inclu
 
 ```
 CyberChicks/
-├── app.py                   # Main Flask web application
-├── tracker.py              # Background productivity tracker
-├── insights.py             # AI insights generation
+├── ai_analysis/
+|   ├── README.md
+|   ├── __init__.py
+|   ├── analyzer.py
+|   ├── scheduler.py|
+|   ├── system_prompt.txt
+|   └── test_system.py
 ├── alerts/
-│   └── launcher.py          # Manual alert launcher script
+│   └── launcher.py              # Manual alert launcher script
 ├── data/
-│   ├── custom_alerts.json   # Custom alerts from web interface
-│   ├── logs.json           # Activity logs
-│   ├── sessions.json       # Session history
-│   └── status.json         # Current status
+|   ├── ai_analysis_config.json
+|   ├── ai_analysis_log.json
+|   ├── alert_config.json
+|   ├── browser_logs.json
+|   ├── browser_status.json
+|   ├── insights.json
+|   ├── logs.json
+|   ├── session_insights.json
+│   ├── sessions.json            # Session history
+│   └── status.json              # Current status
 ├── icons/
-│   └── snapalert.ico        # SnapAlert icon
+│   └── snapalert.ico            # SnapAlert icon
+├── screenshots/
+|   ├── 1.png
+|   ├── 2.png
+|   ├── 3.png
+|   ├── diagram.png
+|   ├── main.png
+|   ├── main2.png
+|   └── main3.png
 ├── templates/
-│   └── index.html          # Web dashboard
-└── README.md               # This file
-```
+│   └── index.html               # Web dashboard
+├── widgets/
+|   ├── WIDGETS_README.md
+|   ├── desktop_widget.py
+|   └── requirements-widgets.txt
+├── .gitignore
+├── 1.jpg
+├── LICENSE
+├── README.md                    # This file
+├── advanced_desktop_widget.py
+├── app.py                       # Main Flask web application
+├── browser_tracker.py
+├── create_shortcuts.bat
+├── insights.py                  # AI insights generation
+├── register.ps1
+├── register_app_id.py
+├── requirements-flask.txt
+├── requirements.txt
+└── tracker.py                   # Background productivity tracker
 
 ## Setup Instructions
 
