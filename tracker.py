@@ -14,6 +14,7 @@ import winreg
 from pathlib import Path
 from win10toast import ToastNotifier
 from browser_tracker import update_browser_tracking, get_browser_status
+from insights import give_timer_suggestions
 
 LOG_FILE = "data/logs.json"
 STATUS_FILE = "data/status.json"
@@ -808,6 +809,51 @@ def save_sessions():
     except Exception as e:
         print(f"[Tracker] Error saving sessions: {e}")
 
+def save_insights(insights):
+        """Save insights to insights.json"""
+        try:
+            script_dir = Path(__file__).parent.absolute()
+            insights_file = script_dir / "data" / "session_insights.json"
+
+            # Load existing insights
+            existing_insights = []
+            if insights_file.exists():
+                try:
+                    with open(insights_file, "r", encoding="utf-8") as f:
+                        existing_insights = json.load(f)
+                except:
+                    existing_insights = []
+
+            # Add new insight
+            existing_insights.append(insights)
+
+            # Keep only last 100 insights
+            if len(existing_insights) > 100:
+                existing_insights = existing_insights[-100:]
+
+            # Save back to file
+            with open(insights_file, "w", encoding="utf-8") as f:
+                json.dump(existing_insights, f, indent=2, ensure_ascii=False)
+
+            print(f"[AI Analysis] Insights saved to {insights_file}")
+            return True
+
+        except Exception as e:
+            print(f"[AI Analysis] Error saving insights: {e}")
+            return False
+
+def update_alerts(llm_suggestion):
+    print(llm_suggestion)
+    parsed_suggestions = json.loads(llm_suggestion)
+    
+    alert_config["break_reminder_interval"] = parsed_suggestions["break_threshold"] * 60
+    save_alert_config()
+
+    ALERT_LEVELS[0]["minutes"] = parsed_suggestions["idle_app_threshold_1"]
+    ALERT_LEVELS[1]["minutes"] = parsed_suggestions["idle_app_threshold_2"]
+    ALERT_LEVELS[2]["minutes"] = parsed_suggestions["idle_app_threshold_3"]
+
+    save_insights(parsed_suggestions)
 
 def update_status_file(session_time, keystrokes):
     """Update status file with current data"""
@@ -941,6 +987,9 @@ def update_tracker():
                     global session_ended_recently
                     time.sleep(30)
                     session_ended_recently = False
+
+                llm_suggestions = give_timer_suggestions()
+                update_alerts(llm_suggestions)
 
                 threading.Thread(target=reset_session_flag, daemon=True).start()
                 continue

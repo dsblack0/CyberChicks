@@ -1,0 +1,22 @@
+{
+  "enabled": true,
+  "whitelist": [],
+  "snooze_until": {
+    "ClickToDo.exe": 1752459538.270363,
+    "TextInputHost.exe": 1752459538.2994776,
+    "Discord.exe": 1752459538.2935407,
+    "Notepad.exe": 1752459538.2811499,
+    "WindowsTerminal.exe": 1752459538.2864544,
+    "python.exe": 1752459553.2901797,
+    "Copilot.exe": 1752461360.897789
+  },
+  "alert_levels_enabled": [
+    true,
+    true,
+    true
+  ],
+  "show_resource_usage": true,
+  "smart_filtering": true,
+  "break_reminders_enabled": true,
+  "break_reminder_interval": 3600
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "break_threshold": 60,
+    "idle_app_threshold_1": 20,
+    "idle_app_threshold_2": 40,
+    "idle_app_threshold_3": 60,
+    "feedback": "Your most recent session appears to be quite active with many short periods of interaction followed by longer periods. This indicates that you might be switching tasks frequently. However, it is important to note that the overall duration of your activities suggests a high level of productivity during this session. One possible area for improvement could be minimizing task-switching to maintain focus and improve efficiency. Another area could be optimizing breaks based on your rhythm, ensuring you take regular short breaks to avoid burnout.",
+    "improvements": [
+      "Set a schedule for task switching: Try to group similar tasks together and minimize context switching between unrelated tasks.",
+      "Implement the Pomodoro Technique: This time management method uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. The technique can help maintain focus and productivity.",
+      "Use a task manager app: Using a dedicated tool for organizing and tracking tasks can help keep you focused on your priorities and manage your time more effectively."
+    ]
+  },
+  {
+    "break_threshold": 60,
+    "idle_app_threshold_1": 15,
+    "idle_app_threshold_2": 30,
+    "idle_app_threshold_3": 45,
+    "feedback": "Overall, your productivity has been fairly good, with an average session duration of about 3-4 hours. However, in the most recent session, there were several periods where you spent more than an hour on a single task, which could indicate potential opportunities for improvement. It's important to maintain focus and efficiency, but also remember to take regular breaks to avoid burnout.",
+    "improvements": [
+      "Try to break larger tasks into smaller, manageable parts to improve focus and reduce time spent on a single task.",
+      "Use techniques like the Pomodoro Technique to help manage your time effectively and ensure regular breaks.",
+      "Consider using productivity tools or apps to help you track your work and identify areas where you may be spending too much time."
+    ]
+  }
+]

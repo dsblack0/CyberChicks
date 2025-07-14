@@ -1,0 +1,238 @@
+[
+  {
+    "summary": [
+      "User was active for 21.8 minutes per session over 15 sessions in a 24-hour period with an average of 0 app switches.",
+      "Long sessions (>30min) accounted for 4 out of 15 total sessions, suggesting focused work periods."
+    ],
+    "insights": {
+      "productivity_score": "Medium - Could be improved",
+      "focus_quality": "Focused work sessions are present, however, high tab count in browser and numerous open apps may indicate distraction.",
+      "top_distraction": "Browser tabs management and app selection",
+      "recommended_action": "Limit browser tabs to essential information and close unused applications during focused work periods."
+    },
+    "anomalies": [
+      "Long session duration suggests productivity, but high tab count in browser and numerous open apps may indicate multitasking or distraction."
+    ],
+    "trends": {
+      "improving": [
+        "Long sessions (>30min)"
+      ],
+      "concerning": [
+        "Browser tabs management",
+        "App selection"
+      ],
+      "stable": [
+        "Session length",
+        "App switching"
+      ]
+    }
+  },
+  {
+    "summary": [
+      "User was active for a total of 3 hours and 21 minutes across 15 sessions.",
+      "Only one application, Code.exe, was used during the analysis period.",
+      "High tab count in browser (11 tabs) may indicate information overload."
+    ],
+    "insights": {
+      "productivity_score": "Moderate",
+      "focus_quality": "User spent most time in medium sessions (5-30min), suggesting some focus but also potential for distractions.",
+      "top_distraction": "High tab count in browser may lead to information overload and decreased focus.",
+      "recommended_action": "Limit the number of active tabs in the browser to three or fewer, focusing on essential tasks."
+    },
+    "anomalies": [
+      "No app switching was observed during the analysis period.",
+      "Only one application was used within the 24-hour range."
+    ],
+    "trends": {
+      "improving": "Average session length increased slightly compared to previous periods.",
+      "concerning": "High tab count in browser may indicate distraction and decreased productivity.",
+      "stable": "Number of sessions remains consistent."
+    }
+  },
+  {
+    "summary": [
+      "User was active for a total of 21.8 hours across 15 sessions with an average session length of 21.8 minutes.",
+      "Despite having 15 active tabs in one browser, no significant browser activity was recorded during the analyzed period."
+    ],
+    "insights": {
+      "productivity_score": "Moderate",
+      "focus_quality": "The majority of sessions were medium-length with a few long sessions, indicating some focus but also potential distractions.",
+      "top_distraction": "High tab count in the browser may lead to multitasking and decreased focus.",
+      "recommended_action": "Limit the number of active tabs in the browser to reduce distractions and improve focus."
+    },
+    "anomalies": [
+      "No app switching was observed during the analyzed period."
+    ],
+    "trends": {
+      "improving": "Average session length seems to be increasing.",
+      "concerning": "High tab count in browser may lead to decreased focus and multitasking.",
+      "stable": "Number of sessions and overall activity level remain consistent."
+    }
+  },
+  {
+    "summary": [
+      "User was active for a total of 2 hours 43 minutes but spent most time (78%) on unproductive activities.",
+      "The main distraction identified was excessive browser tab management.",
+      "No performance issues were detected."
+    ],
+    "overview": {
+      "productive_hrs": "0 hours",
+      "productivity_score": "30 out of 100",
+      "productive_time": "0h 0m",
+      "distracted_time": "2h 43m"
+    },
+    "insights": {
+      "productivity_score": "Low productivity level",
+      "focus_quality": "Frequent tab management indicates poor focus.",
+      "top_distraction": "Browser tab management",
+      "recommended_action": "Implement a tab management strategy, such as limiting active tabs or using extensions to manage them."
+    },
+    "anomalies": [
+      "High number of open browser tabs (18), which may indicate disorganized workflow."
+    ],
+    "trends": {
+      "improving": "No improving trends observed",
+      "concerning": "Browser tab management habits",
+      "stable": "Session length and app switching"
+    }
+  },
+  {
+    "summary": [
+      "User was mostly idle for the last 24 hours, with occasional short sessions and minimal app usage.",
+      "No significant focus or distraction patterns detected."
+    ],
+    "overview": {
+      "productive_hrs": "N/A",
+      "productivity_score": "30",
+      "productive_time": "0h 0m",
+      "distracted_time": "0h 0m"
+    },
+    "insights": {
+      "productivity_score": "Low productivity levels",
+      "focus_quality": "No clear focus or distraction patterns, likely due to extended idle periods.",
+      "top_distraction": "N/A",
+      "recommended_action": "Encourage structured work sessions and minimize prolonged idleness."
+    },
+    "anomalies": [
+      "Extended idle period of over 24 hours"
+    ],
+    "trends": {
+      "improving": "N/A",
+      "concerning": [
+        "Idle periods"
+      ],
+      "stable": [
+        "Application usage and browser activity"
+      ]
+    }
+  },
+  {
+    "summary": [
+      "User was active for a total of 23 hours with an average session length of 18 minutes",
+      "Only Code.exe was used, with high keystroke activity during the current session",
+      "17 tabs were open in one browser, but no time was spent browsing"
+    ],
+    "overview": {
+      "productive_hrs": "11AM-2PM",
+      "productivity_score": "30",
+      "productive_time": "2h 36m",
+      "distracted_time": "20h 24m"
+    },
+    "insights": {
+      "productivity_score": "Moderate productivity, but significant room for improvement",
+      "focus_quality": "User spent most of the day with short sessions and high keystroke activity, indicating focus but inefficient use of time",
+      "top_distraction": "Browser activity did not lead to distraction as no time was spent browsing",
+      "recommended_action": "Encourage longer, uninterrupted sessions and consider setting specific times for browser usage"
+    },
+    "anomalies": [
+      "No unusual patterns were found in this data set",
+      "The absence of app switching may indicate a single-tasking approach, which could be both a strength and an area for improvement"
+    ],
+    "trends": {
+      "improving": "Consistent session activity despite lack of focused work",
+      "concerning": "Long hours spent with low productivity",
+      "stable": "High keystroke activity during sessions"
+    }
+  },
+  {
+    "summary": [
+      "User was active but had prolonged idle periods and high tab count in browser",
+      "Productivity could be improved by reducing distractions and optimizing browser usage"
+    ],
+    "overview": {
+      "productive_hrs": "No consistent productive hours identified",
+      "productivity_score": "50 out of 100",
+      "productive_time": "3h 24m",
+      "distracted_time": "9h 36m"
+    },
+    "insights": {
+      "productivity_score": "Productivity is average, room for improvement",
+      "focus_quality": "Sessions are short and frequent but with excessive keystrokes",
+      "top_distraction": "High tab count in browser",
+      "recommended_action": "Limit browser tabs to essentials and allocate specific time slots for browsing"
+    },
+    "anomalies": [
+      "Prolonged idle periods"
+    ],
+    "trends": {
+      "improving": "Session length is gradually increasing",
+      "concerning": "High tab count in browser, prolonged idle periods",
+      "stable": "App switching remains low"
+    }
+  },
+  {
+    "summary": [
+      "User was active for a total of 40.4 minutes across 19 sessions, but no productive apps were used.",
+      "High tab count in browser activity suggests information management could be optimized."
+    ],
+    "overview": {
+      "productive_hrs": "N/A",
+      "productivity_score": 0,
+      "productive_time": "0h 0m",
+      "distracted_time": "0h 40.4m"
+    },
+    "insights": {
+      "productivity_score": "No productive time was recorded today.",
+      "focus_quality": "The user may have struggled with maintaining focus on a single task.",
+      "top_distraction": "Web browsing, as indicated by the high tab count and extended session time.",
+      "recommended_action": "Consider setting specific goals for focused work periods, limit browser tabs to essential information, or explore productivity techniques like the Pomodoro Technique."
+    },
+    "anomalies": [
+      "No productive apps were used throughout the day.",
+      "High tab count in browser activity may indicate difficulty managing information."
+    ],
+    "trends": {
+      "improving": "N/A",
+      "concerning": [
+        "Lack of productivity, high distraction levels"
+      ],
+      "stable": "Session patterns, app switching"
+    }
+  },
+  {
+    "summary": [
+      "User was active for a total of 20 sessions over the past 24 hours with an average session length of 19.7 minutes.",
+      "No productive or distracting apps were identified as the user did not use any applications during this period."
+    ],
+    "overview": {
+      "productive_hrs": "",
+      "productivity_score": "0",
+      "productive_time": "0h 0m",
+      "distracted_time": "0h 0m"
+    },
+    "insights": {
+      "productivity_score": "The user's productivity score is very low due to lack of application usage.",
+      "focus_quality": "There were no focused work periods as the user did not use any applications during this period.",
+      "top_distraction": "No top distractions could be identified as the user was inactive.",
+      "recommended_action": "The user should consider incorporating productive application usage into their routine to improve productivity."
+    },
+    "anomalies": [
+      "No unusual patterns were found in this data."
+    ],
+    "trends": {
+      "improving": "",
+      "concerning": "Lack of application usage is concerning as it may indicate a lack of productivity.",
+      "stable": "Browser activity remains stable with an average of 9 active tabs and 1 browser."
+    }
+  }
+]

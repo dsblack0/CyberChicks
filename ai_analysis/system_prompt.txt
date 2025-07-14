@@ -12,6 +12,12 @@ Provide insights as JSON:
 ```json
 {
   "summary": ["2-3 key bullet points about productivity patterns"],
+  "overview": {
+    "productive_hrs": "Most productive hours range based on data for all days in the format: 9AM–11AM. Always return a time range",
+    "productivity_score": "Integer score out of 100 (for example: 30)",
+    "productive_time": "Amount of time productive during today's session in format like 5h 12 m"
+    "distracted_time": "Amount of time distracted during today's sessions in format like 5h 12m"
+  }
   "insights": {
     "productivity_score": "Brief assessment",
     "focus_quality": "Focus pattern analysis", 

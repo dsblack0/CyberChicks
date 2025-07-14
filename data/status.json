@@ -1,599 +1,523 @@
 {
-  "session_time": 10356.41,
-  "session_start_time": "2025-07-12T23:18:54.057343",
-  "keystrokes": 9137,
-  "last_updated": "2025-07-13T02:11:30.575164",
+  "session_time": 1416.61,
+  "session_start_time": "2025-07-13T18:28:54.375825",
+  "keystrokes": 1236,
+  "last_updated": "2025-07-13T18:52:31.019321",
   "open_apps": [
-    "WindowsTerminal.exe",
-    "Cursor.exe",
-    "chrome.exe",
-    "SystemSettings.exe",
-    "ApplicationFrameHost.exe",
+    "ClickToDo.exe",
+    "Code.exe",
+    "Copilot.exe",
+    "msedge.exe",
     "Notepad.exe",
-    "Taskmgr.exe",
-    "Microsoft.Notes.exe",
-    "TextInputHost.exe",
     "explorer.exe",
-    "python.exe",
-    "SnippingTool.exe",
-    "PickerHost.exe",
-    "msedgewebview2.exe",
-    "OllamaSetup.tmp",
-    "ollama app.exe",
-    "python3.10.exe",
-    "Copilot.exe"
+    "WindowsTerminal.exe",
+    "ApplicationFrameHost.exe",
+    "Discord.exe",
+    "TextInputHost.exe",
+    "python.exe"
   ],
   "open_apps_details": {
-    "WindowsTerminal.exe": {
-      "title": "Windows PowerShell",
-      "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 8558.3,
-      "last_used_time": "2025-07-13T02:10:30.672807",
-      "duration_since_used_sec": 59.8,
+    "ClickToDo.exe": {
+      "title": "Click to Do (preview)",
+      "start_time": "2025-07-13T17:38:56.264555",
+      "duration_open_sec": 4414.73,
+      "last_used_time": "2025-07-13T17:38:56.264555",
+      "duration_since_used_sec": 4414.73,
+      "alert_history": [
+        20,
+        40
+      ],
+      "is_current": false,
+      "instance_count": 1,
+      "instances": [
+        {
+          "hwnd": 262474,
+          "title": "Click to Do (preview)",
+          "pid": 3308
+        }
+      ],
+      "resource_usage": null
+    },
+    "Code.exe": {
+      "title": "insights.py - CyberChicks - Visual Studio Code",
+      "start_time": "2025-07-13T17:38:56.264555",
+      "duration_open_sec": 4414.73,
+      "last_used_time": "2025-07-13T18:51:21.125003",
+      "duration_since_used_sec": 69.87,
       "alert_history": [],
       "is_current": false,
       "instance_count": 1,
       "instances": [
         {
-          "hwnd": 262348,
-          "title": "Windows PowerShell",
-          "pid": 3384
-        }
-      ],
-      "resource_usage": null
-    },
-    "Cursor.exe": {
-      "title": "tracker.py - CyberChicks - Cursor",
-      "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 8558.3,
-      "last_used_time": "2025-07-13T02:10:55.872298",
-      "duration_since_used_sec": 34.6,
-      "alert_history": [],
-      "is_current": false,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 198416,
-          "title": "\u25cf README.md - CyberChicks - Cursor",
-          "pid": 24324
-        }
-      ],
-      "resource_usage": null
-    },
-    "chrome.exe": {
-      "title": "29m 57s - SnapAlert Monitor - Google Chrome",
-      "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 8558.3,
-      "last_used_time": "2025-07-13T02:10:35.680345",
-      "duration_since_used_sec": 54.79,
-      "alert_history": [],
-      "is_current": false,
-      "instance_count": 2,
-      "instances": [
-        {
-          "hwnd": 67082,
-          "title": "2h 52m - SnapAlert Monitor - Google Chrome",
-          "pid": 11452
-        },
-        {
-          "hwnd": 1510116,
-          "title": "OffSec | Overview - Google Chrome",
-          "pid": 11452
-        }
-      ],
-      "resource_usage": null
-    },
-    "SystemSettings.exe": {
-      "title": "Settings",
-      "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 8558.3,
-      "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 8558.3,
-      "alert_history": [],
-      "is_current": false,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 725214,
-          "title": "Settings",
-          "pid": 5984
-        }
-      ],
-      "resource_usage": null
-    },
-    "ApplicationFrameHost.exe": {
-      "title": "Settings",
-      "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 8558.3,
-      "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 8558.3,
-      "alert_history": [],
-      "is_current": false,
-      "instance_count": 2,
-      "instances": [
-        {
-          "hwnd": 66368,
-          "title": "Sticky Notes",
-          "pid": 14088
-        },
-        {
-          "hwnd": 5312518,
-          "title": "Settings",
-          "pid": 14088
-        }
-      ],
-      "resource_usage": null
-    },
-    "Notepad.exe": {
-      "title": "*\ud83c\udf89 Both features are now complete! - Notepad",
-      "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 8558.3,
-      "last_used_time": "2025-07-13T01:24:50.180242",
-      "duration_since_used_sec": 2800.29,
-      "alert_history": [
-        3,
-        10,
-        30
-      ],
-      "is_current": false,
-      "instance_count": 2,
-      "instances": [
-        {
-          "hwnd": 1902910,
-          "title": "*!-- AI Insights -- - Notepad",
-          "pid": 22956
-        },
-        {
-          "hwnd": 788876,
-          "title": "byu bugs 2.txt - Notepad",
-          "pid": 22956
-        }
-      ],
-      "resource_usage": null
-    },
-    "Taskmgr.exe": {
-      "title": "Task Manager",
-      "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 8558.3,
-      "last_used_time": "2025-07-12T23:54:47.313094",
-      "duration_since_used_sec": 8203.16,
-      "alert_history": [
-        3,
-        10,
-        30
-      ],
-      "is_current": false,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 2426626,
-          "title": "Task Manager",
-          "pid": 28288
-        }
-      ],
-      "resource_usage": null
-    },
-    "Microsoft.Notes.exe": {
-      "title": "Title",
-      "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 8558.3,
-      "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 8558.3,
-      "alert_history": [
-        3,
-        10,
-        30
-      ],
-      "is_current": false,
-      "instance_count": 2,
-      "instances": [
-        {
-          "hwnd": 66366,
-          "title": "Title",
-          "pid": 14244
-        },
-        {
-          "hwnd": 66250,
-          "title": "Sticky Notes",
-          "pid": 14244
-        }
-      ],
-      "resource_usage": null
-    },
-    "TextInputHost.exe": {
-      "title": "Windows Input Experience",
-      "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 8558.3,
-      "last_used_time": "2025-07-12T23:48:52.164797",
-      "duration_since_used_sec": 8558.3,
-      "alert_history": [
-        3,
-        10,
-        30
-      ],
-      "is_current": false,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 393298,
-          "title": "Windows Input Experience",
-          "pid": 16952
-        }
-      ],
-      "resource_usage": null
-    },
-    "explorer.exe": {
-      "title": "Program Manager",
-      "start_time": "2025-07-12T23:48:52.164797",
-      "duration_open_sec": 8558.3,
-      "last_used_time": "2025-07-13T02:09:40.154472",
-      "duration_since_used_sec": 110.31,
-      "alert_history": [],
-      "is_current": false,
-      "instance_count": 2,
-      "instances": [
-        {
-          "hwnd": 4197372,
-          "title": "Downloads - File Explorer",
-          "pid": 12628
-        },
-        {
-          "hwnd": 66064,
-          "title": "Program Manager",
-          "pid": 12628
-        }
-      ],
-      "resource_usage": null
-    },
-    "python.exe": {
-      "title": "Productivity Monitor - Optimized",
-      "start_time": "2025-07-12T23:49:07.171063",
-      "duration_open_sec": 8543.3,
-      "last_used_time": "2025-07-13T02:05:05.171885",
-      "duration_since_used_sec": 385.3,
-      "alert_history": [
-        3
-      ],
-      "is_current": false,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 3869738,
-          "title": "Productivity Monitor - Optimized",
-          "pid": 19748
-        }
-      ],
-      "resource_usage": null
-    },
-    "SnippingTool.exe": {
-      "title": "Snipping Tool Overlay",
-      "start_time": "2025-07-12T23:52:17.242598",
-      "duration_open_sec": 8353.23,
-      "last_used_time": "2025-07-13T02:11:21.058696",
-      "duration_since_used_sec": 9.41,
-      "alert_history": [],
-      "is_current": false,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 6361052,
-          "title": "Snipping Tool",
-          "pid": 27400
-        }
-      ],
-      "resource_usage": null
-    },
-    "PickerHost.exe": {
-      "title": "Save As",
-      "start_time": "2025-07-12T23:52:47.258518",
-      "duration_open_sec": 8323.21,
-      "last_used_time": "2025-07-13T02:11:26.513052",
-      "duration_since_used_sec": 3.96,
-      "alert_history": [],
-      "is_current": true,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 2559014,
-          "title": "Save As",
-          "pid": 6748
-        }
-      ],
-      "resource_usage": null
-    },
-    "msedgewebview2.exe": {
-      "title": "Widgets",
-      "start_time": "2025-07-12T23:54:27.308591",
-      "duration_open_sec": 8223.16,
-      "last_used_time": "2025-07-12T23:54:27.308591",
-      "duration_since_used_sec": 8223.16,
-      "alert_history": [
-        3,
-        10,
-        30
-      ],
-      "is_current": false,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 66952,
-          "title": "Widgets",
-          "pid": 1756
-        }
-      ],
-      "resource_usage": null
-    },
-    "OllamaSetup.tmp": {
-      "title": "Setup - Ollama version 0.9.6",
-      "start_time": "2025-07-13T00:03:27.555936",
-      "duration_open_sec": 7682.91,
-      "last_used_time": "2025-07-13T00:17:42.891669",
-      "duration_since_used_sec": 6827.58,
-      "alert_history": [
-        3,
-        10,
-        30
-      ],
-      "is_current": false,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 1051574,
-          "title": "Setup - Ollama version 0.9.6",
-          "pid": 25732
-        }
-      ],
-      "resource_usage": null
-    },
-    "ollama app.exe": {
-      "title": "Ollama",
-      "start_time": "2025-07-13T00:20:37.952787",
-      "duration_open_sec": 6652.52,
-      "last_used_time": "2025-07-13T00:30:38.162896",
-      "duration_since_used_sec": 6052.31,
-      "alert_history": [
-        3,
-        10,
-        30
-      ],
-      "is_current": false,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 5967754,
-          "title": "Ollama",
-          "pid": 26284
-        }
-      ],
-      "resource_usage": null
-    },
-    "python3.10.exe": {
-      "title": "\ud83d\udd3a SnapAlert Widget Launcher",
-      "start_time": "2025-07-13T00:32:08.198341",
-      "duration_open_sec": 5962.27,
-      "last_used_time": "2025-07-13T01:00:39.655111",
-      "duration_since_used_sec": 4250.81,
-      "alert_history": [
-        3,
-        10,
-        30
-      ],
-      "is_current": false,
-      "instance_count": 1,
-      "instances": [
-        {
-          "hwnd": 2820996,
-          "title": "SnapAlert Widget",
-          "pid": 11624
+          "hwnd": 591970,
+          "title": "index.html - CyberChicks - Visual Studio Code",
+          "pid": 19632
         }
       ],
       "resource_usage": null
     },
     "Copilot.exe": {
       "title": "Copilot",
-      "start_time": "2025-07-13T01:44:11.810673",
-      "duration_open_sec": 1638.66,
-      "last_used_time": "2025-07-13T01:44:11.810673",
-      "duration_since_used_sec": 1638.66,
+      "start_time": "2025-07-13T17:38:56.264555",
+      "duration_open_sec": 4414.73,
+      "last_used_time": "2025-07-13T18:19:13.278279",
+      "duration_since_used_sec": 1997.71,
       "alert_history": [
-        3,
-        10
+        15,
+        30
       ],
       "is_current": false,
       "instance_count": 1,
       "instances": [
         {
-          "hwnd": 2363196,
+          "hwnd": 329172,
           "title": "Copilot",
-          "pid": 6452
+          "pid": 24252
+        }
+      ],
+      "resource_usage": null
+    },
+    "msedge.exe": {
+      "title": "14s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+      "start_time": "2025-07-13T17:38:56.264555",
+      "duration_open_sec": 4414.73,
+      "last_used_time": "2025-07-13T18:52:26.246226",
+      "duration_since_used_sec": 4.75,
+      "alert_history": [],
+      "is_current": true,
+      "instance_count": 1,
+      "instances": [
+        {
+          "hwnd": 196896,
+          "title": "23m 6s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+          "pid": 18092
+        }
+      ],
+      "resource_usage": null
+    },
+    "Notepad.exe": {
+      "title": "*# tracker.py - Notepad",
+      "start_time": "2025-07-13T17:38:56.264555",
+      "duration_open_sec": 4414.73,
+      "last_used_time": "2025-07-13T17:38:56.264555",
+      "duration_since_used_sec": 4414.73,
+      "alert_history": [
+        20,
+        40
+      ],
+      "is_current": false,
+      "instance_count": 1,
+      "instances": [
+        {
+          "hwnd": 66698,
+          "title": "*# tracker.py - Notepad",
+          "pid": 16836
+        }
+      ],
+      "resource_usage": null
+    },
+    "explorer.exe": {
+      "title": "data - File Explorer",
+      "start_time": "2025-07-13T17:38:56.264555",
+      "duration_open_sec": 4414.73,
+      "last_used_time": "2025-07-13T18:49:30.931977",
+      "duration_since_used_sec": 180.06,
+      "alert_history": [],
+      "is_current": false,
+      "instance_count": 2,
+      "instances": [
+        {
+          "hwnd": 263258,
+          "title": "data - File Explorer",
+          "pid": 2512
+        },
+        {
+          "hwnd": 65966,
+          "title": "Program Manager",
+          "pid": 2512
+        }
+      ],
+      "resource_usage": null
+    },
+    "WindowsTerminal.exe": {
+      "title": "qc_de@QCWorkshop24: /mnt/c/Users/qc_de/Documents/CyberChicks",
+      "start_time": "2025-07-13T17:38:56.264555",
+      "duration_open_sec": 4414.73,
+      "last_used_time": "2025-07-13T17:38:56.264555",
+      "duration_since_used_sec": 4414.73,
+      "alert_history": [
+        20,
+        40
+      ],
+      "is_current": false,
+      "instance_count": 1,
+      "instances": [
+        {
+          "hwnd": 2164702,
+          "title": "qc_de@QCWorkshop24: /mnt/c/Users/qc_de/Documents/CyberChicks",
+          "pid": 28668
+        }
+      ],
+      "resource_usage": null
+    },
+    "ApplicationFrameHost.exe": {
+      "title": "Settings",
+      "start_time": "2025-07-13T17:38:56.264555",
+      "duration_open_sec": 4414.73,
+      "last_used_time": "2025-07-13T17:38:56.264555",
+      "duration_since_used_sec": 4414.73,
+      "alert_history": [],
+      "is_current": false,
+      "instance_count": 1,
+      "instances": [
+        {
+          "hwnd": 66876,
+          "title": "Settings",
+          "pid": 16396
+        }
+      ],
+      "resource_usage": null
+    },
+    "Discord.exe": {
+      "title": "discord.com/app?_=1752382457725 - Discord",
+      "start_time": "2025-07-13T17:38:56.264555",
+      "duration_open_sec": 4414.73,
+      "last_used_time": "2025-07-13T17:38:56.264555",
+      "duration_since_used_sec": 4414.73,
+      "alert_history": [
+        20,
+        40
+      ],
+      "is_current": false,
+      "instance_count": 1,
+      "instances": [
+        {
+          "hwnd": 132592,
+          "title": "discord.com/app?_=1752382457725 - Discord",
+          "pid": 17024
+        }
+      ],
+      "resource_usage": null
+    },
+    "TextInputHost.exe": {
+      "title": "Windows Input Experience",
+      "start_time": "2025-07-13T17:38:56.264555",
+      "duration_open_sec": 4414.73,
+      "last_used_time": "2025-07-13T17:38:56.264555",
+      "duration_since_used_sec": 4414.73,
+      "alert_history": [
+        20,
+        40
+      ],
+      "is_current": false,
+      "instance_count": 1,
+      "instances": [
+        {
+          "hwnd": 131230,
+          "title": "Windows Input Experience",
+          "pid": 15396
+        }
+      ],
+      "resource_usage": null
+    },
+    "python.exe": {
+      "title": "Productivity Monitor - Optimized",
+      "start_time": "2025-07-13T17:39:11.306371",
+      "duration_open_sec": 4399.68,
+      "last_used_time": "2025-07-13T17:39:11.306371",
+      "duration_since_used_sec": 4399.68,
+      "alert_history": [
+        20,
+        40
+      ],
+      "is_current": false,
+      "instance_count": 1,
+      "instances": [
+        {
+          "hwnd": 3606730,
+          "title": "Productivity Monitor - Optimized",
+          "pid": 33796
         }
       ],
       "resource_usage": null
     }
   },
-  "current_app": "PickerHost.exe",
-  "sessions": [],
+  "current_app": "msedge.exe",
+  "sessions": [
+    {
+      "start": "2025-07-13T17:12:45.863393",
+      "end": "2025-07-13T17:18:16.165995",
+      "duration_sec": 330.3
+    },
+    {
+      "start": "2025-07-13T17:18:16.165995",
+      "end": "2025-07-13T17:22:19.118454",
+      "duration_sec": 242.95
+    },
+    {
+      "start": "2025-07-13T17:30:41.461677",
+      "end": "2025-07-13T17:31:51.625049",
+      "duration_sec": 70.16
+    },
+    {
+      "start": "2025-07-13T17:31:51.625049",
+      "end": "2025-07-13T17:40:06.443104",
+      "duration_sec": 494.82
+    },
+    {
+      "start": "2025-07-13T17:40:06.443104",
+      "end": "2025-07-13T18:28:54.375825",
+      "duration_sec": 2927.93
+    }
+  ],
   "browser_data": {
-    "timestamp": "2025-07-13T02:11:26.811025",
+    "timestamp": "2025-07-13T18:52:21.238460",
     "active_tabs": {
-      "Chrome_2h 47m - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "2h 47m - SnapAlert Monitor - Google Chrome",
-        "window_title": "2h 47m - SnapAlert Monitor - Google Chrome",
-        "url": "2h 47m",
+      "Edge_19m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "19m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "19m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "19m 41s",
         "category": "general",
-        "start_time": 1752397566.0073156,
-        "last_active": 1752397596.928907,
-        "total_time": 78.52095913887024,
+        "start_time": 1752457715.8132446,
+        "last_active": 1752457655.8132446,
+        "total_time": 0,
         "search_query": null,
         "is_active": false,
         "visit_count": 1
       },
-      "Chrome_2h 48m - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "2h 48m - SnapAlert Monitor - Google Chrome",
-        "window_title": "2h 48m - SnapAlert Monitor - Google Chrome",
-        "url": "2h 48m",
+      "Edge_19m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "19m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "19m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "19m 56s",
         "category": "general",
-        "start_time": 1752397629.5525656,
-        "last_active": 1752397674.5543199,
-        "total_time": 45.00175428390503,
+        "start_time": 1752457730.8424263,
+        "last_active": 1752457670.8424263,
+        "total_time": 0,
+        "search_query": null,
+        "is_active": false,
+        "visit_count": 1
+      },
+      "Edge_20m 6s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "20m 6s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "20m 6s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "20m 6s",
+        "category": "general",
+        "start_time": 1752457745.8753753,
+        "last_active": 1752457685.8753753,
+        "total_time": 15.030250072479248,
+        "search_query": null,
+        "is_active": false,
+        "visit_count": 1
+      },
+      "Edge_20m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "20m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "20m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "20m 41s",
+        "category": "general",
+        "start_time": 1752457775.9406395,
+        "last_active": 1752457715.9406395,
+        "total_time": 0,
+        "search_query": null,
+        "is_active": false,
+        "visit_count": 1
+      },
+      "Edge_20m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "20m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "20m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "20m 56s",
+        "category": "general",
+        "start_time": 1752457790.9578762,
+        "last_active": 1752457730.9578762,
+        "total_time": 0,
+        "search_query": null,
+        "is_active": false,
+        "visit_count": 1
+      },
+      "Edge_21m 10s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "21m 10s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "21m 10s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "21m 10s",
+        "category": "general",
+        "start_time": 1752457805.9857483,
+        "last_active": 1752457805.9857483,
+        "total_time": 0,
         "search_query": null,
         "is_active": true,
         "visit_count": 1
       },
-      "Chrome_2h 49m - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "2h 49m - SnapAlert Monitor - Google Chrome",
-        "window_title": "2h 49m - SnapAlert Monitor - Google Chrome",
-        "url": "2h 49m",
+      "Edge_21m 26s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "21m 26s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "21m 26s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "21m 26s",
         "category": "general",
-        "start_time": 1752397689.8562138,
-        "last_active": 1752397629.8562138,
-        "total_time": 75.28734230995178,
+        "start_time": 1752457821.0050683,
+        "last_active": 1752457761.0050683,
+        "total_time": 0,
         "search_query": null,
         "is_active": false,
         "visit_count": 1
       },
-      "Chrome_2h 50m - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "2h 50m - SnapAlert Monitor - Google Chrome",
-        "window_title": "2h 50m - SnapAlert Monitor - Google Chrome",
-        "url": "2h 50m",
+      "Edge_21m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "21m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "21m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "21m 41s",
         "category": "general",
-        "start_time": 1752397735.1102328,
-        "last_active": 1752397675.1102328,
-        "total_time": 60.054723262786865,
+        "start_time": 1752457836.0400174,
+        "last_active": 1752457776.0400174,
+        "total_time": 0,
         "search_query": null,
         "is_active": false,
         "visit_count": 1
       },
-      "Chrome_OffSec | Overview - Google Chrome": {
-        "browser": "Chrome",
-        "title": "OffSec | Overview - Google Chrome",
-        "window_title": "OffSec | Overview - Google Chrome",
-        "url": "OffSec | Overview",
+      "Edge_21m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "21m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "21m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "21m 56s",
         "category": "general",
-        "start_time": 1752397765.143556,
-        "last_active": 1752397705.143556,
-        "total_time": 121.42232608795166,
+        "start_time": 1752457851.0750465,
+        "last_active": 1752457791.0750465,
+        "total_time": 0,
         "search_query": null,
         "is_active": false,
         "visit_count": 1
       },
-      "Chrome_2h 51m - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "2h 51m - SnapAlert Monitor - Google Chrome",
-        "window_title": "2h 51m - SnapAlert Monitor - Google Chrome",
-        "url": "2h 51m",
+      "Edge_22m 11s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "22m 11s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "22m 11s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "22m 11s",
         "category": "general",
-        "start_time": 1752397810.426779,
-        "last_active": 1752397841.2036157,
-        "total_time": 30.77683663368225,
+        "start_time": 1752457866.1064508,
+        "last_active": 1752457806.1064508,
+        "total_time": 0,
         "search_query": null,
-        "is_active": true,
+        "is_active": false,
         "visit_count": 1
       },
-      "Chrome_2h 52m - SnapAlert Monitor - Google Chrome": {
-        "browser": "Chrome",
-        "title": "2h 52m - SnapAlert Monitor - Google Chrome",
-        "window_title": "2h 52m - SnapAlert Monitor - Google Chrome",
-        "url": "2h 52m",
+      "Edge_22m 26s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "22m 26s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "22m 26s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "22m 26s",
         "category": "general",
-        "start_time": 1752397855.92268,
-        "last_active": 1752397795.92268,
-        "total_time": 30.643202304840088,
+        "start_time": 1752457881.13324,
+        "last_active": 1752457821.13324,
+        "total_time": 0,
+        "search_query": null,
+        "is_active": false,
+        "visit_count": 1
+      },
+      "Edge_22m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "22m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "22m 41s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "22m 41s",
+        "category": "general",
+        "start_time": 1752457896.1586378,
+        "last_active": 1752457836.1586378,
+        "total_time": 0,
+        "search_query": null,
+        "is_active": false,
+        "visit_count": 1
+      },
+      "Edge_22m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "22m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "22m 56s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "22m 56s",
+        "category": "general",
+        "start_time": 1752457911.1907668,
+        "last_active": 1752457851.1907668,
+        "total_time": 0,
+        "search_query": null,
+        "is_active": false,
+        "visit_count": 1
+      },
+      "Edge_23m 11s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "23m 11s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "23m 11s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "23m 11s",
+        "category": "general",
+        "start_time": 1752457926.2205389,
+        "last_active": 1752457866.2205389,
+        "total_time": 0,
+        "search_query": null,
+        "is_active": false,
+        "visit_count": 1
+      },
+      "Edge_23m 6s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge": {
+        "browser": "Edge",
+        "title": "23m 6s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "23m 6s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "23m 6s",
+        "category": "general",
+        "start_time": 1752457941.238461,
+        "last_active": 1752457881.238461,
+        "total_time": 0,
         "search_query": null,
         "is_active": false,
         "visit_count": 1
       }
     },
-    "current_browser": "Chrome_2h 51m - SnapAlert Monitor - Google Chrome",
+    "current_browser": "Edge_21m 10s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
     "stats": {
-      "total_tabs": 7,
+      "total_tabs": 15,
       "active_browsers": [
-        "Chrome"
+        "Edge"
       ],
       "categories": {
-        "general": 7
+        "general": 15
       },
       "search_queries": [],
       "most_active_tab": {
-        "browser": "Chrome",
-        "title": "OffSec | Overview - Google Chrome",
-        "window_title": "OffSec | Overview - Google Chrome",
-        "url": "OffSec | Overview",
+        "browser": "Edge",
+        "title": "20m 6s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "window_title": "20m 6s - SnapAlert Monitor and 6 more pages - Profile 1 - Microsoft\u200b Edge",
+        "url": "20m 6s",
         "category": "general",
-        "start_time": 1752397765.143556,
-        "last_active": 1752397705.143556,
-        "total_time": 121.42232608795166,
+        "start_time": 1752457745.8753753,
+        "last_active": 1752457685.8753753,
+        "total_time": 15.030250072479248,
         "search_query": null,
         "is_active": false,
         "visit_count": 1
       },
       "browser_distribution": {
-        "Chrome": 7
+        "Edge": 15
       }
     }
   },
   "alert_config": {
     "enabled": true,
+    "whitelist": [],
+    "snooze_until": {
+      "ClickToDo.exe": 1752459538.270363,
+      "TextInputHost.exe": 1752459538.2994776,
+      "Discord.exe": 1752459538.2935407,
+      "Notepad.exe": 1752459538.2811499,
+      "WindowsTerminal.exe": 1752459538.2864544,
+      "python.exe": 1752459553.2901797,
+      "Copilot.exe": 1752461360.897789
+    },
+    "alert_levels_enabled": [
+      true,
+      true,
+      true
+    ],
     "show_resource_usage": true,
     "smart_filtering": true,
-    "break_reminders_enabled": true
+    "break_reminders_enabled": true,
+    "break_reminder_interval": 3600
   },
-  "custom_alerts": [
-    {
-      "id": "test_keystroke_100",
-      "name": "Keystroke Test Alert",
-      "type": "keystroke_count",
-      "condition": "greater_than",
-      "threshold": 100,
-      "message": "You've typed {value} keystrokes! (threshold: {threshold})",
-      "enabled": true,
-      "app_filter": "",
-      "created_at": "2025-07-12T23:42:45.977850",
-      "last_triggered": 1752397684.5286028,
-      "trigger_count": 30
-    },
-    {
-      "id": "test_session_2min",
-      "name": "Session Time Test Alert",
-      "type": "session_time",
-      "condition": "greater_than",
-      "threshold": 2,
-      "message": "You've been working for {value} minutes! (threshold: {threshold})",
-      "enabled": true,
-      "app_filter": "",
-      "created_at": "2025-07-12T23:42:45.977850",
-      "last_triggered": 1752397684.5286028,
-      "trigger_count": 30
-    },
-    {
-      "id": "test_app_time_1min",
-      "name": "App Time Test Alert",
-      "type": "app_time",
-      "condition": "greater_than",
-      "threshold": 1,
-      "message": "You've been using {app} for {value} minutes! (threshold: {threshold})",
-      "enabled": true,
-      "app_filter": "Code.exe",
-      "created_at": "2025-07-12T23:42:45.977850",
-      "last_triggered": null,
-      "trigger_count": 0
-    },
-    {
-      "id": "1752389372889",
-      "name": "testing",
-      "type": "session_time",
-      "condition": "greater_than",
-      "threshold": 1,
-      "message": "testing working",
-      "enabled": true,
-      "app_filter": "",
-      "created_at": "2025-07-12T23:49:32.889173",
-      "last_triggered": 1752397785.1565578,
-      "trigger_count": 29
-    }
-  ]
+  "custom_alerts": []
 }

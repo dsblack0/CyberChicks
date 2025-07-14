@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "analysis_interval_minutes": 20,
+  "ollama_url": "http://localhost:11434",
+  "model_name": "mistral",
+  "data_dir": "data"
+}

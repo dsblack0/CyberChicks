@@ -21,6 +21,7 @@ ALERT_CONFIG_FILE = "data/alert_config.json"
 CUSTOM_ALERTS_FILE = "data/custom_alerts.json"
 AI_ANALYSIS_CONFIG_FILE = "data/ai_analysis_config.json"
 INSIGHTS_FILE = "data/insights.json"
+SESSION_INSIGHTS_FILE = "data/session_insights.json"
 
 
 def ensure_app_id_registered():
@@ -173,7 +174,8 @@ def get_stats():
             "browser_data": status.get("browser_data", {}),
             "alert_config": status.get("alert_config", {}),
             "custom_alerts": read_custom_alerts(),
-            "ai_insights": read_insights()[-10:],  # Last 10 insights
+            "ai_insights": read_insights()[-1],  # Last 10 insights
+            "ai_session_insights": read_session_insights()[-1],
             "ai_analysis_config": read_ai_analysis_config(),
         }
     )
@@ -286,6 +288,17 @@ def read_insights():
         return []
     except Exception as e:
         print(f"Error reading insights: {e}")
+        return []
+    
+def read_session_insights():
+    """Read AI session insights from file"""
+    try:
+        if os.path.exists(SESSION_INSIGHTS_FILE):
+            with open(SESSION_INSIGHTS_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        return []
+    except Exception as e:
+        print(f"Error reading session insights: {e}")
         return []
 
 
@@ -940,6 +953,19 @@ def get_ai_insights():
     """Get AI insights"""
     try:
         insights = read_insights()
+
+        return jsonify(
+            {"success": True, "insights": insights, "total_count": len(insights)}
+        )
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    
+@app.route("/api/ai-analysis/session_insights")
+def get_ai_insights_sessions():
+    """Get AI session insights"""
+    try:
+        insights = read_session_insights()
 
         return jsonify(
             {"success": True, "insights": insights, "total_count": len(insights)}

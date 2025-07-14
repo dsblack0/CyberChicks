@@ -2044,7 +2044,7 @@
                                 <div class="overview-icon">🕒</div>
                                 <div class="overview-content">
                                     <h3>Most Productive Hours</h3>
-                                    <p class="overview-value">9AM–11AM</p>
+                                    <p class="overview-value" id="productive_hrs"></p>
                                     <span class="overview-subtitle">Peak focus time</span>
                                 </div>
                             </div>
@@ -2053,7 +2053,7 @@
                                 <div class="overview-icon">📊</div>
                                 <div class="overview-content">
                                     <h3>Productivity Score</h3>
-                                    <p class="overview-value">82<span class="score-max">/100</span></p>
+                                    <p class="overview-value"><span class="overview-value" id="productivity_score">0</span><span class="score-max">/100</span></p>
                                     <span class="overview-subtitle">+5 from yesterday</span>
                                 </div>
                                 <div class="score-ring">
@@ -2075,11 +2075,11 @@
                                     <div class="time-balance">
                                         <div class="balance-item productive">
                                             <span class="balance-dot"></span>
-                                            <span>5h 12m productive</span>
+                                            <span id="productive_time">5h 12m productive</span>
                                         </div>
                                         <div class="balance-item distracting">
                                             <span class="balance-dot"></span>
-                                            <span>2h 45m distracting</span>
+                                            <span id="distracted_time">2h 45m distracting</span>
                                         </div>
                                     </div>
                                     <div class="balance-bar">
@@ -2189,6 +2189,27 @@
                                 <div class="suggestion-meta">Your longest streak today</div>
                             </div>
                         </div>
+                        <div class="suggestion-card goal">
+                            <div class="suggestion-icon">🎯</div>
+                            <div class="suggestion-content">
+                                <h4>AI Improvement Recommendation</h4>
+                                <p id="improvement-1">${suggestion}</p>
+                            </div>
+                        </div>
+                        <div class="suggestion-card goal">
+                            <div class="suggestion-icon">🎯</div>
+                            <div class="suggestion-content">
+                                <h4>AI Improvement Recommendation</h4>
+                                <p id="improvement-2">${suggestion}</p>
+                            </div>
+                        </div>
+                        <div class="suggestion-card goal">
+                            <div class="suggestion-icon">🎯</div>
+                            <div class="suggestion-content">
+                                <h4>AI Improvement Recommendation</h4>
+                                <p id="improvement-3">${suggestion}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2252,6 +2273,66 @@
                                 <div class="legend-item">
                                     <span class="legend-color low"></span>
                                     <span>Low Hours (8AM, 5PM)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trends-bottom">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <div class="section-icon">🔔</div>
+                            <h2 class="section-title">AI Productivity Insights</h2>
+                        </div>
+
+                        <div class="alerts-list">
+                            <div class="alert-item">
+                                <div class="alert-content">
+                                    <p class="alert-name">Productivity Score</p>
+                                    <p id="prod_score">15 times</p>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-content">
+                                    <p class="alert-name">Focus Quality</p>
+                                    <p id="focus_quality">15 times</p>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-content">
+                                    <p class="alert-name">Top Distraction</p>
+                                    <p id="top_distraction">15 times</p>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-content">
+                                    <p class="alert-name">Recommendation</p>
+                                    <p id="recommended_action">15 times</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <div class="section-icon">🎯</div>
+                            <h2 class="section-title">AI Analyzed Trends</h2>
+                        </div>
+
+                        <div class="goals-progress">
+                            <div class="goals-details">
+                                <div class="goal-item hit">
+                                    <span class="goal-name">Improving:</span>
+                                    <span id="improving"></span>
+                                </div>
+                                <div class="goal-item missed">
+                                    <span class="goal-name">Concerning:</span>
+                                    <span id="concerning"></span>
+                                </div>
+                                <div class="goal-item">
+                                    <span class="goal-name">Stable:</span>
+                                    <span id="stable"></span>
                                 </div>
                             </div>
                         </div>
@@ -2496,6 +2577,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- Settings Section -->
             <div id="settings-section" class="section-content" style="display: none;">
@@ -2940,6 +3022,37 @@
                         }).join('');
                     } else {
                         browserTabsList.innerHTML = '<div class="no-data">No browser activity detected</div>';
+                    }
+
+                    // Update analytics
+                    const latest_insight = data.ai_insights
+                    const latest_session = data.ai_session_insights
+                    if (latest_insight) {
+                        document.getElementById('productive_hrs').textContent = latest_insight.overview.productive_hrs || "N/A"
+                        document.getElementById('productivity_score').textContent = latest_insight.overview.productivity_score
+                        document.getElementById('productive_time').textContent = latest_insight.overview.productive_time + " productive"
+                        document.getElementById('distracted_time').textContent = latest_insight.overview.distracted_time + " distracted"
+                        document.getElementById('prod_score').textContent = latest_insight.insights.productivity_score
+                        document.getElementById('focus_quality').textContent = latest_insight.insights.focus_quality
+                        document.getElementById('top_distraction').textContent = latest_insight.insights.top_distraction
+                        document.getElementById('recommended_action').textContent = latest_insight.insights.recommended_action
+
+                        document.getElementById('improving').textContent = latest_insight.trends.improving
+                        document.getElementById('concerning').textContent = latest_insight.trends.concerning
+                        document.getElementById('stable').textContent = latest_insight.trends.stable
+                    }
+
+                    // document.getElementById('test').textContent = latest_session.improvements
+
+                    if (latest_session) {
+                        latest_session.improvements.forEach((text, index) => {
+                            const element = document.getElementById(`improvement-${index + 1}`);
+                            if (element) {
+                                element.textContent = text;
+                            }
+                        });
+
+
                     }
 
                     // Update alert settings
