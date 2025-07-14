@@ -262,4 +262,4 @@ For issues or questions:
 
 ---
 
-**Built with ❤️ for SnapAlert Productivity Monitor** 
+**Built with ❤️ for CyberChicks Productivity Monitor** 
